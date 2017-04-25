@@ -1,0 +1,112 @@
+[09-Jan-2016 10:27:59 UTC] PHP Fatal error:  Call to undefined method categories_model::get_category() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Categories.php on line 48
+[09-Jan-2016 10:39:59 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Channel_model.php on line 32
+[09-Jan-2016 10:40:48 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Channel_model.php on line 32
+[09-Jan-2016 10:41:28 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Channel_model.php on line 32
+[09-Jan-2016 11:08:35 UTC] PHP Fatal error:  Call to a member function get_channel_users() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Agent.php on line 15
+[09-Jan-2016 11:15:40 UTC] PHP Fatal error:  Call to a member function get_channel_users() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Agent.php on line 17
+[09-Jan-2016 11:15:46 UTC] PHP Fatal error:  Call to a member function get_channel_users() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Agent.php on line 17
+[09-Jan-2016 11:16:25 UTC] PHP Fatal error:  Call to a member function get_channel_users() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Agent.php on line 17
+[09-Jan-2016 11:16:27 UTC] PHP Fatal error:  Call to a member function get_channel_users() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Agent.php on line 17
+[15-Jan-2016 09:27:26 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:30:17 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:30:21 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:32:23 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:32:53 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:33:40 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:34:37 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:35:22 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:36:32 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:36:34 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:37:16 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:44:27 UTC] PHP Fatal error:  Call to a member function get_agent_data() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Agent.php on line 76
+[15-Jan-2016 09:44:50 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:47:46 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 09:47:48 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/models/Agent_model.php on line 36
+[15-Jan-2016 18:45:03 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 139
+[15-Jan-2016 18:45:58 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 139
+[15-Jan-2016 18:46:02 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 139
+[16-Jan-2016 10:57:57 UTC] PHP Fatal error:  Call to undefined method Channel_Model::get_channel_user_edit() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 164
+[17-Jan-2016 03:03:56 UTC] PHP Fatal error:  Call to undefined method Channel_Model::create_channel_partner() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 158
+[24-Jan-2016 02:37:18 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/veerudes/public_html/laabus/adminnew/application/views/operators/index.php on line 23
+[24-Jan-2016 02:46:37 UTC] PHP Parse error:  syntax error, unexpected '{', expecting '(' in /home/veerudes/public_html/laabus/adminnew/application/controllers/Operators.php on line 19
+[24-Jan-2016 05:19:43 UTC] PHP Fatal error:  Call to undefined method Channel_Model::list_service_provider() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 54
+[24-Jan-2016 05:21:26 UTC] PHP Fatal error:  Call to undefined method Channel_Model::list_service_provider() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 55
+[24-Jan-2016 05:21:28 UTC] PHP Fatal error:  Call to undefined method Channel_Model::list_service_provider() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 55
+[24-Jan-2016 05:24:15 UTC] PHP Parse error:  syntax error, unexpected '"<pre>"' (T_CONSTANT_ENCAPSED_STRING) in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Approval_blocks/Service_Provider.php on line 1
+[26-Jan-2016 03:54:19 UTC] PHP Fatal error:  Call to undefined method Channel_Model::create_channel_partner() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 182
+[30-Jan-2016 10:30:15 UTC] PHP Fatal error:  Call to undefined method operators_model::get_operator_data() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Operators.php on line 29
+[12-Feb-2016 18:45:00 UTC] PHP Fatal error:  Call to undefined method Channel_Model::create_channel_partner() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 215
+[12-Feb-2016 18:47:33 UTC] PHP Fatal error:  Call to undefined method Channel_Model::create_channel_partner() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 215
+[12-Feb-2016 18:48:35 UTC] PHP Fatal error:  Call to undefined method Channel_Model::create_channel_partner() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 215
+[12-Feb-2016 18:55:52 UTC] PHP Fatal error:  Call to undefined method Channel_Model::create_channel_partner() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 227
+[12-Feb-2016 20:48:43 UTC] PHP Fatal error:  Unsupported operand types in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Channel_partner/index.php on line 55
+[12-Feb-2016 20:48:52 UTC] PHP Fatal error:  Unsupported operand types in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Channel_partner/index.php on line 55
+[12-Feb-2016 20:48:54 UTC] PHP Fatal error:  Unsupported operand types in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Channel_partner/index.php on line 55
+[12-Feb-2016 20:48:59 UTC] PHP Fatal error:  Unsupported operand types in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Channel_partner/index.php on line 55
+[12-Feb-2016 20:49:01 UTC] PHP Fatal error:  Unsupported operand types in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Channel_partner/index.php on line 55
+[13-Feb-2016 23:11:01 UTC] PHP Warning:  Unterminated comment starting line 238 in /home/veerudes/public_html/laabus/adminnew/application/config/config.php on line 238
+[13-Feb-2016 23:11:01 UTC] PHP Parse error:  syntax error, unexpected '--' (T_DEC) in /home/veerudes/public_html/laabus/adminnew/application/config/config.php on line 241
+[23-Feb-2016 17:33:14 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 561
+[23-Feb-2016 17:33:58 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 561
+[25-Feb-2016 18:38:46 UTC] PHP Fatal error:  Call to undefined method wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:39:00 UTC] PHP Fatal error:  Call to undefined method wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:40:23 UTC] PHP Fatal error:  Call to a member function get_wallet_details() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:40:42 UTC] PHP Fatal error:  Call to a member function get_wallet_details() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:41:07 UTC] PHP Fatal error:  Call to undefined method wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:41:42 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:42:06 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:42:09 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:42:14 UTC] PHP Fatal error:  Call to a member function get_wallet_details() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:42:46 UTC] PHP Fatal error:  Call to a member function get_wallet_details() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:43:24 UTC] PHP Fatal error:  Call to undefined method wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:43:29 UTC] PHP Fatal error:  Call to undefined method wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 16
+[25-Feb-2016 18:46:01 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 15
+[25-Feb-2016 18:46:57 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 14
+[25-Feb-2016 18:47:32 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 14
+[25-Feb-2016 18:52:18 UTC] PHP Parse error:  syntax error, unexpected ''' (T_ENCAPSED_AND_WHITESPACE) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 605
+[08-Mar-2016 12:50:59 UTC] PHP Parse error:  syntax error, unexpected ''' (T_ENCAPSED_AND_WHITESPACE) in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 605
+[08-Mar-2016 13:06:37 UTC] PHP Fatal error:  Call to undefined method operators_model::list_category_operators() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 951
+[08-Mar-2016 13:06:48 UTC] PHP Fatal error:  Call to undefined method operators_model::list_category_operators() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 951
+[08-Mar-2016 13:07:37 UTC] PHP Fatal error:  Call to undefined method operators_model::list_category_operators() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 951
+[08-Mar-2016 13:07:40 UTC] PHP Fatal error:  Call to undefined method operators_model::list_category_operators() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 951
+[15-Mar-2016 20:19:42 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/veerudes/public_html/laabus/adminnew/application/models/Va_Commisions_model.php on line 21
+[15-Mar-2016 20:23:11 UTC] PHP Parse error:  syntax error, unexpected '.' in /home/veerudes/public_html/laabus/adminnew/application/models/Va_Commisions_model.php on line 35
+[20-Mar-2016 19:09:12 UTC] PHP Fatal error:  Cannot redeclare Dashboard::Add_categories() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 83
+[20-Mar-2016 21:09:14 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Commission_categories.php on line 137
+[21-Mar-2016 19:51:11 UTC] PHP Fatal error:  Call to a member function get_subcategory() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 103
+[21-Mar-2016 19:51:56 UTC] PHP Fatal error:  Call to undefined function pr() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 105
+[21-Mar-2016 21:55:06 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Commission.php on line 343
+[24-Mar-2016 22:17:26 UTC] PHP Fatal error:  Call to a member function insert() on a non-object in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 306
+[24-Mar-2016 22:42:50 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 151
+[30-Mar-2016 18:41:26 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Orders.php on line 153
+[30-Mar-2016 20:04:28 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Orders.php on line 45
+[30-Mar-2016 20:04:30 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home/veerudes/public_html/laabus/adminnew/application/views/dashboard/Orders.php on line 45
+[01-Apr-2016 19:56:55 UTC] PHP Parse error:  syntax error, unexpected '$query' (T_VARIABLE) in /home/veerudes/public_html/laabus/adminnew/application/models/Va_Commisions_model.php on line 39
+[01-Apr-2016 20:07:20 UTC] PHP Fatal error:  Cannot redeclare Dashboard::Orders() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Dashboard.php on line 137
+[12-Apr-2016 21:46:05 UTC] PHP Fatal error:  Call to undefined method Wallet_history::get_wallet_request_details() in /home/veerudes/public_html/laabus/adminnew/application/controllers/Wallet.php on line 26
+[23-Apr-2016 19:40:07 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 23
+[23-Apr-2016 19:41:58 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:42:39 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:42:43 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:42:43 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:42:44 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:43:04 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:43:05 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 24
+[23-Apr-2016 19:44:21 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 25
+[23-Apr-2016 19:49:37 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 67
+[23-Apr-2016 19:50:15 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 74
+[23-Apr-2016 19:50:41 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 80
+[23-Apr-2016 19:51:07 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 85
+[23-Apr-2016 19:51:38 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/models/Va_Commisions_model.php on line 150
+[23-Apr-2016 19:52:08 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/views/admin_template/Side_Menu_bar.php on line 21
+[23-Apr-2016 19:54:20 Etc/GMT] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home/laabus/public_html/adminnew/application/views/admin_template/Side_Menu_bar.php on line 21
+[23-Apr-2016 19:54:53 Etc/GMT] PHP Fatal error:  Can't use method return value in write context in /home/laabus/public_html/adminnew/application/views/admin_template/Side_Menu_bar.php on line 37
+[09-May-2016 18:35:55 Etc/GMT] PHP Fatal error:  Call to a member function get_lockamount() on a non-object in /home/laabus/public_html/adminnew/application/controllers/Lockamount.php on line 56
+[09-May-2016 20:46:41 Etc/GMT] PHP Parse error:  syntax error, unexpected ';' in /home/laabus/public_html/adminnew/application/views/dashboard/agents/view.php on line 93
+[09-May-2016 20:46:59 Etc/GMT] PHP Parse error:  syntax error, unexpected ';' in /home/laabus/public_html/adminnew/application/views/dashboard/agents/view.php on line 93
+[09-May-2016 20:50:20 Etc/GMT] PHP Fatal error:  Cannot use object of type CI_DB_mysqli_result as array in /home/laabus/public_html/adminnew/application/views/dashboard/agents/view.php on line 101
+[09-May-2016 20:52:52 Etc/GMT] PHP Parse error:  syntax error, unexpected ')' in /home/laabus/public_html/adminnew/application/views/dashboard/agents/view.php on line 92
+[23-Jun-2016 22:35:31 Etc/GMT] PHP Fatal error:  Call to a member function get_offer() on a non-object in /home/laabusj/public_html/adminnew/application/controllers/Offer.php on line 71
+[26-Jun-2016 22:09:17 Etc/GMT] PHP Fatal error:  Call to undefined method offer_model::update_offertablenew() in /home/laabusj/public_html/adminnew/application/controllers/Offer.php on line 129
+[01-Jul-2016 23:09:17 Etc/GMT] PHP Fatal error:  Cannot redeclare offer_model::update_offertable() in /home/laabusj/public_html/adminnew/application/models/Offer_model.php on line 52
+[03-Jul-2016 18:54:16 Etc/GMT] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/laabusj/public_html/adminnew/application/views/index.php on line 19

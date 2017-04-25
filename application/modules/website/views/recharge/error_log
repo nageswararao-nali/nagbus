@@ -1,0 +1,1 @@
+[03-Sep-2016 05:36:51 Etc/GMT] PHP Fatal error:  Using $this when not in object context in /home/laabusj/public_html/application/modules/website/views/recharge/index.php on line 4

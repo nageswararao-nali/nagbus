@@ -1,0 +1,50 @@
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Notice:  Undefined variable: travelsList in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Warning:  array_unique() expects parameter 1 to be array, null given in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:25:28 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Notice:  Undefined variable: travelsList in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Warning:  array_unique() expects parameter 1 to be array, null given in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:26:19 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Notice:  Undefined variable: travelsList in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Warning:  array_unique() expects parameter 1 to be array, null given in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:28:01 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Notice:  Undefined variable: travelsList in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Warning:  array_unique() expects parameter 1 to be array, null given in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[30-Jul-2016 17:28:07 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 17
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Notice:  Undefined variable: travelsList in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Warning:  array_unique() expects parameter 1 to be array, null given in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 38
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 120
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 153
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Notice:  Undefined variable: jsonresult in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266
+[31-Jul-2016 03:42:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/application/modules/website/views/buses/bus_search.php on line 266

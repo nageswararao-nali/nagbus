@@ -1,0 +1,200 @@
+[03-Aug-2016 09:33:42 Etc/GMT] PHP Notice:  Undefined variable: cityval in /home/laabusj/public_html/android/apitest/source.php on line 106
+[03-Aug-2016 09:33:49 Etc/GMT] PHP Notice:  Undefined variable: cityval in /home/laabusj/public_html/android/apitest/source.php on line 106
+[03-Aug-2016 09:37:42 Etc/GMT] PHP Warning:  Illegal offset type in /home/laabusj/public_html/android/apitest/source.php on line 107
+[03-Aug-2016 09:39:59 Etc/GMT] PHP Notice:  Undefined variable: cityval in /home/laabusj/public_html/android/apitest/source.php on line 107
+[03-Aug-2016 09:40:01 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/source.php on line 87
+[03-Aug-2016 09:40:01 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/source.php on line 105
+[03-Aug-2016 09:40:01 Etc/GMT] PHP Notice:  Undefined variable: cityval in /home/laabusj/public_html/android/apitest/source.php on line 107
+[03-Aug-2016 09:40:04 Etc/GMT] PHP Notice:  Undefined variable: cityval in /home/laabusj/public_html/android/apitest/source.php on line 107
+[03-Aug-2016 09:40:36 Etc/GMT] PHP Notice:  Undefined variable: cityval in /home/laabusj/public_html/android/apitest/source.php on line 107
+[03-Aug-2016 16:43:02 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:43:02 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:46:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:46:21 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:55:46 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:55:46 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:57:25 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:57:25 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:57:45 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:57:49 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:57:49 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:58:11 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:58:11 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 16:58:48 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 16:58:48 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 17:03:19 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 17:03:19 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 17:09:24 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 17:09:24 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[03-Aug-2016 17:35:21 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[03-Aug-2016 17:35:21 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[06-Aug-2016 11:52:45 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[06-Aug-2016 11:52:45 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[06-Aug-2016 11:53:34 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[06-Aug-2016 11:53:34 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[21-Aug-2016 15:39:44 Etc/GMT] PHP Notice:  Undefined index: sourceList in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 9
+[21-Aug-2016 15:39:44 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 10
+[21-Aug-2016 15:39:44 Etc/GMT] PHP Notice:  Undefined index: datepicker in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 11
+[21-Aug-2016 17:20:14 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[24-Aug-2016 12:32:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[24-Aug-2016 12:32:00 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[24-Aug-2016 12:32:08 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[24-Aug-2016 12:32:08 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[24-Aug-2016 18:46:26 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/source.php on line 17
+[24-Aug-2016 18:46:26 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/source.php on line 35
+[01-Sep-2016 18:17:41 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[01-Sep-2016 18:17:41 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[01-Sep-2016 18:17:47 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[01-Sep-2016 18:17:47 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[06-Sep-2016 07:35:09 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destinationList.php on line 52
+[06-Sep-2016 07:35:12 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 50
+[06-Sep-2016 07:35:13 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[06-Sep-2016 07:35:13 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[06-Sep-2016 07:35:13 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[06-Sep-2016 07:35:13 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[06-Sep-2016 07:35:13 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:35:13 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:35:19 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destinationList.php on line 52
+[06-Sep-2016 07:36:11 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[06-Sep-2016 07:36:11 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[06-Sep-2016 07:36:11 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[06-Sep-2016 07:36:11 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[06-Sep-2016 07:36:11 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:11 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[06-Sep-2016 07:36:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[06-Sep-2016 07:36:25 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[06-Sep-2016 07:36:25 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[06-Sep-2016 07:36:25 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:25 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Notice:  Undefined index: sourceList in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 49
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 50
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Notice:  Undefined index: datepicker in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 51
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:54 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:59 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[06-Sep-2016 07:36:59 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[06-Sep-2016 07:36:59 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[06-Sep-2016 07:36:59 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[06-Sep-2016 07:36:59 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:36:59 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:37:00 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[06-Sep-2016 07:37:00 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[06-Sep-2016 07:37:00 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[06-Sep-2016 07:37:00 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[06-Sep-2016 07:37:00 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:37:00 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[06-Sep-2016 07:37:07 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destinationList.php on line 52
+[06-Sep-2016 07:55:07 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destinationList.php on line 52
+[06-Sep-2016 07:56:01 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destinationList.php on line 52
+[08-Sep-2016 15:20:08 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 106
+[08-Sep-2016 15:20:08 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 227
+[08-Sep-2016 15:20:08 Etc/GMT] PHP Warning:  Invalid argument supplied for foreach() in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 438
+[08-Sep-2016 15:20:08 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 672
+[08-Sep-2016 15:20:08 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[08-Sep-2016 15:20:08 Etc/GMT] PHP Notice:  Undefined variable: countkeys in /home/laabusj/public_html/android/apitest/BusServiceList.php on line 677
+[07-Oct-2016 17:02:01 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[07-Oct-2016 17:02:01 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[28-Oct-2016 08:32:23 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Oct-2016 08:32:45 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Oct-2016 08:33:01 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Oct-2016 08:41:00 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[28-Oct-2016 08:41:00 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[28-Oct-2016 10:01:02 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[01-Nov-2016 11:37:23 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[01-Nov-2016 11:37:36 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[01-Nov-2016 11:37:36 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[28-Dec-2016 15:48:14 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Dec-2016 15:48:14 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 10
+[28-Dec-2016 15:48:14 Etc/GMT] PHP Notice:  Undefined index: datepicker in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 11
+[28-Dec-2016 16:57:30 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/bussList.php on line 9
+[28-Dec-2016 16:57:30 Etc/GMT] PHP Notice:  Undefined index: datepicker in /home/laabusj/public_html/android/apitest/bussList.php on line 10
+[28-Dec-2016 17:06:09 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Dec-2016 17:06:13 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Dec-2016 17:06:16 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[28-Dec-2016 17:06:20 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[04-Jan-2017 17:32:04 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[04-Jan-2017 17:32:09 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[06-Jan-2017 11:42:32 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bus_seats_layout.php on line 8
+[11-Jan-2017 05:49:26 Etc/GMT] PHP Notice:  Undefined index: sourceList in /home/laabusj/public_html/android/apitest/bpoints.php on line 8
+[11-Jan-2017 05:49:26 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/bpoints.php on line 9
+[11-Jan-2017 05:49:26 Etc/GMT] PHP Notice:  Undefined index: datepicker in /home/laabusj/public_html/android/apitest/bpoints.php on line 10
+[11-Jan-2017 05:49:26 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[11-Jan-2017 05:49:27 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/bpoints.php on line 18
+[11-Jan-2017 05:49:27 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[11-Jan-2017 05:50:39 Etc/GMT] PHP Notice:  Undefined index: sourceList in /home/laabusj/public_html/android/apitest/bpoints.php on line 8
+[11-Jan-2017 05:50:39 Etc/GMT] PHP Notice:  Undefined index: destinationList in /home/laabusj/public_html/android/apitest/bpoints.php on line 9
+[11-Jan-2017 05:50:39 Etc/GMT] PHP Notice:  Undefined index: datepicker in /home/laabusj/public_html/android/apitest/bpoints.php on line 10
+[11-Jan-2017 05:50:39 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[11-Jan-2017 05:50:39 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/bpoints.php on line 18
+[11-Jan-2017 05:50:39 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 05:22:53 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[27-Jan-2017 05:22:54 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/bpoints.php on line 18
+[27-Jan-2017 05:22:54 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 05:23:07 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[27-Jan-2017 05:23:07 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 05:25:15 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[27-Jan-2017 05:25:16 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 05:25:24 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[27-Jan-2017 05:25:24 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 05:25:28 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 11
+[27-Jan-2017 05:25:28 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 14:53:31 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/bpoints.php on line 18
+[27-Jan-2017 14:53:31 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 14:53:54 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 14:54:00 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 29
+[27-Jan-2017 18:06:08 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[27-Jan-2017 18:13:31 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 10
+[27-Jan-2017 18:13:32 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[27-Jan-2017 18:13:40 Etc/GMT] PHP Notice:  Undefined index: chosenone in /home/laabusj/public_html/android/apitest/bpoints.php on line 10
+[27-Jan-2017 18:13:41 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[28-Jan-2017 11:36:39 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[28-Jan-2017 11:39:09 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[28-Jan-2017 11:39:18 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[28-Jan-2017 15:48:59 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, object given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[29-Jan-2017 05:46:13 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[29-Jan-2017 05:47:14 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[23-Feb-2017 17:24:43 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/bpoints.php on line 17
+[23-Feb-2017 17:24:43 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[25-Feb-2017 13:16:43 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/bpoints.php on line 17
+[25-Feb-2017 13:16:43 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[05-Mar-2017 16:05:32 Etc/GMT] PHP Notice:  Undefined variable: res4 in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 16:06:17 Etc/GMT] PHP Notice:  Undefined variable: res4 in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 16:07:17 Etc/GMT] PHP Notice:  Undefined variable: res4 in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 16:07:46 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 20
+[05-Mar-2017 16:07:49 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 20
+[05-Mar-2017 16:08:50 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 20
+[05-Mar-2017 16:55:10 Etc/GMT] PHP Notice:  Undefined variable: res4 in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 16:56:00 Etc/GMT] PHP Notice:  Undefined variable: res4 in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 16:56:41 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 20
+[05-Mar-2017 16:57:09 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 16:57:34 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:00:05 Etc/GMT] PHP Notice:  Undefined variable: res4 in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 17:01:56 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:02:32 Etc/GMT] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 17:02:34 Etc/GMT] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/laabusj/public_html/android/apitest/bussList.php on line 16
+[05-Mar-2017 17:02:49 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:03:16 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:03:17 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:03:48 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:03:53 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:04:18 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[05-Mar-2017 17:05:19 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/laabusj/public_html/android/apitest/bussList.php on line 19
+[16-Mar-2017 01:51:10 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[16-Mar-2017 18:35:15 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[16-Mar-2017 18:35:44 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[18-Mar-2017 13:24:28 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[18-Mar-2017 13:25:53 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[18-Mar-2017 13:26:10 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[20-Mar-2017 18:19:23 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[20-Mar-2017 18:19:39 Etc/GMT] PHP Notice:  Undefined variable: bpints in /home/laabusj/public_html/android/apitest/bpoints.php on line 28
+[22-Mar-2017 17:25:56 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[22-Mar-2017 17:25:57 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[02-Apr-2017 02:28:18 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[02-Apr-2017 02:28:18 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
+[02-Apr-2017 02:28:29 Etc/GMT] PHP Notice:  Trying to get property of non-object in /home/laabusj/public_html/android/apitest/destination.php on line 13
+[02-Apr-2017 02:28:29 Etc/GMT] PHP Warning:  usort() expects parameter 1 to be array, null given in /home/laabusj/public_html/android/apitest/destination.php on line 36
