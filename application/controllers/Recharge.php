@@ -1,25 +1,26 @@
-<?php 
+<?php
 require_once APPPATH.'controllers/Template.php';
 class Recharge extends Template{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Category_Model', 'Cat', TRUE );
 		$this->load->model('users_model', 'users', TRUE );
+//		$this->load->model('cashback_model' );
                 $this->load->model('Sale/Salemodel');
                 $this->load->model(array('common_model'));
 	}
-        
+
 	private $key='hanisoft';
-        
+
 	function index(){
             //print_r($this->session->userdata());
-			
+
 			$data['offers'] = $this->users->getoffers();
 		$data['offerswallet'] = $this->users->getofferswallet();
-		
-				
-				
-				
+
+
+
+
 				// print_r($usertypes);
 				$role_id = $this->session->userdata('role_id');
 				if($this->session->userdata('user_id') && $role_id ==4  )
@@ -34,10 +35,10 @@ class Recharge extends Template{
 					{
 						$role_id =44;
 					}
-				}		
+				}
 		$data['offers'] = $this->users->getalloffers($role_id);
 		$data["offerswallet"] = $this->users->getallofferswallet($role_id);
-		
+
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
                 if(!$this->input->is_ajax_request()) {
@@ -48,8 +49,8 @@ class Recharge extends Template{
                     $this->load->view('website/recharge/index', $data);
                 }
 	}
-        
-        
+
+
 	function proceed(){
 //            echo "<pre>";
            //print_r($this->session->userdata());
@@ -58,7 +59,7 @@ class Recharge extends Template{
               $data['category'] = $this->Cat->get_category();
             $data['roles'] = $this->users->get_roles();
 			$data["recharge_flag"] = 1;
-            
+
 					   $user_id=$this->session->userdata('user_id');
 					   $role_id=$this->session->userdata('role_id');
 					   $userlist = $this->users->get_users_list($user_id);
@@ -72,7 +73,7 @@ class Recharge extends Template{
 			}else if(!$this->input->is_ajax_request()){
                                 $this->load->library('encrypt');
 				$msg = $_POST['operator_name'].$_POST['mobile_no'];
-				
+
 				$encrypted_string = $this->encrypt->encode($msg, $this->key);
 				if(!isset($_POST["mark_as_credit_user"]))
 				{
@@ -83,7 +84,7 @@ class Recharge extends Template{
 					$_POST["mark_as_credit_user"] = 0;
 				}
 				$_POST['operator_name'] = str_ireplace(array("\r","\n",'\r','\n'),'', $_POST['operator_name']);
-				
+
 				if(empty($_POST['operator_name']))
 				{
 					//$_POST['operator_name'] = str_ireplace(array("\r","\n",'\r','\n'),'', $_POST['operator']);
@@ -112,36 +113,36 @@ class Recharge extends Template{
 			}
 		}else{
             //redirect('Recharge/
-            
-            //Buses...       
+
+            //Buses...
 			//This method will have the credentials validation
 			$this->load->library('form_validation');
 			$this->load->helper('security');
-			
+
 			$this->form_validation->set_rules('recharge_type', 'Recharge type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('mobile_no', 'Mobile number', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('operator', 'Mobile operator', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('rcAmount', 'Recharge amount', 'trim|required|xss_clean');
-		
+
 			if($this->form_validation->run() == FALSE)
 			{
-                           
+
 				//Field validation failed.  User redirected to login page
 				if(!$this->input->is_ajax_request()){
                                         $this->load->view('website_template/header', $data);
-										
+
 										if( $wallet_amount < 0 )
 										{
-										$this->load->view('website/recharge/unproceed');	
+										$this->load->view('website/recharge/unproceed');
 										}
 										else
 										{
 											  //echo "123454543435";
 											  				$this->load->library('encrypt');
 				$msg = $_POST['operator_name'].$_POST['mobile_no'];
-				
+
 				$encrypted_string = $this->encrypt->encode($msg, $this->key);
-				
+
 				if(!isset($_POST["mark_as_credit_user"]))
 				{
 					$_POST["mark_as_credit_user"] = 0;
@@ -150,7 +151,7 @@ class Recharge extends Template{
 				{
 					$_POST["mark_as_credit_user"] = 0;
 				}
-				
+
 				if(!isset($_POST["mark_as_credit_comments"]))
 				{
 					$_POST["mark_as_credit_comments"] = '';
@@ -160,7 +161,7 @@ class Recharge extends Template{
 					$_POST["mark_as_credit_comments"] = '';
 				}
 				//print_r($_POST);
-				
+
 				if(empty($_POST['operator_name']))
 				{
 					//$_POST['operator_name'] = str_ireplace(array("\r","\n",'\r','\n'),'', $_POST['operator']);
@@ -185,16 +186,16 @@ class Recharge extends Template{
 //						$_POST['operator_name'] = "Tata Sky DTH";
 //					}
 				}
-				
-				
+
+
 				$this->session->set_userdata("onword","");
 				$_POST['operator_name'] = str_ireplace(array("\r","\n",'\r','\n'),'', $_POST['operator_name']);
-				$this->session->set_userdata($_POST);                                
-                            
+				$this->session->set_userdata($_POST);
+
 				$this->session->set_userdata('recharge_session_key',$encrypted_string);
-										$this->load->view('website/recharge/proceed',$data);	
+										$this->load->view('website/recharge/proceed',$data);
 										}
-                                        
+
                                         $this->load->view('website_template/footer');
 					//$this->index();
 				}else{
@@ -210,9 +211,9 @@ class Recharge extends Template{
                                 //echo "helo11111";
 				$this->load->library('encrypt');
 				$msg = $_POST['operator_name'].$_POST['mobile_no'];
-				
+
 				$encrypted_string = $this->encrypt->encode($msg, $this->key);
-				
+
 				if(!isset($_POST["mark_as_credit_user"]))
 				{
 					$_POST["mark_as_credit_user"] = 0;
@@ -221,7 +222,7 @@ class Recharge extends Template{
 				{
 					$_POST["mark_as_credit_user"] = 0;
 				}
-				
+
 				if(!isset($_POST["mark_as_credit_comments"]))
 				{
 					$_POST["mark_as_credit_comments"] = '';
@@ -231,7 +232,7 @@ class Recharge extends Template{
 					$_POST["mark_as_credit_comments"] = '';
 				}
 				//print_r($_POST);
-				
+
 				if(empty($_POST['operator_name']))
 				{
 					//$_POST['operator_name'] = str_ireplace(array("\r","\n",'\r','\n'),'', $_POST['operator']);
@@ -256,12 +257,12 @@ class Recharge extends Template{
 //						$_POST['operator_name'] = "Tata Sky DTH";
 //					}
 				}
-				
-				
+
+
 				$this->session->set_userdata("onword","");
 				$_POST['operator_name'] = str_ireplace(array("\r","\n",'\r','\n'),'', $_POST['operator_name']);
-				$this->session->set_userdata($_POST);                                
-                            
+				$this->session->set_userdata($_POST);
+
 				$this->session->set_userdata('recharge_session_key',$encrypted_string);
 				if($this->input->is_ajax_request()){
                                     //echo "helo";
@@ -273,22 +274,22 @@ class Recharge extends Template{
                                         //$this->load->view('website/recharge/proceed');
                                         if( $wallet_amount < 0 )
                                         {
-                                            $this->load->view('website/recharge/unproceed');	
+                                            $this->load->view('website/recharge/unproceed');
                                         }
                                         else
                                         {
-                                           
-											$this->load->view('website/recharge/proceed',$data);	
+
+											$this->load->view('website/recharge/proceed',$data);
                                         }
                                         $this->load->view('website_template/footer');
 				}
 
 			}
 		}
-		  
+
 	}
-        
-            
+
+
 	public function paymenttype(){
             //print_r($_POST);exit;
 		$data['category'] = $this->Cat->get_category();
@@ -296,9 +297,9 @@ class Recharge extends Template{
 //		print("<pre>");
 //		print_r($this->session->userdata());exit;
 		if(check_login_status()){
-			
+
 			if($this->encrypt->decode($this->session->userdata('recharge_session_key'),$this->key)==$this->encrypt->decode($this->input->get_post('recharge_proceed'),$this->key) ){  //true added for Buses
-			
+
 				$arr = array(
 					'mobile_no' => $this->input->post_get('mobile_no'),
 					'recharge_type' => $this->input->post_get('recharge_type'),
@@ -311,9 +312,11 @@ class Recharge extends Template{
 					'purchase_value' => $this->input->post_get('rcAmount'),
 					'mark_credit' => $this->input->post_get('mark_credit_user'),
 					'mark_credit_text' => $this->input->post_get('mark_as_credit_comments'),
-					'operator_circle' =>$this->input->post_get('operator_circle')
+					'operator_circle' =>$this->input->post_get('operator_circle'),
+					'couponCode' =>$this->input->post_get('couponCode'),
+					'iscashback' =>$this->input->post_get('iscashback')
 				);
-				
+
 				$this->session->set_userdata($arr);
 				if($this->input->is_ajax_request()){
 				   redirect('website/recharge/paymentmode');
@@ -321,26 +324,26 @@ class Recharge extends Template{
 					// print("<pre>");
 					// print_r($this->session->userdata());
 					// exit;
-					
+
 					//Net wallet amount
 			//Net wallet amount 20052016
-			
-					
-		 $commision_amt = $this->users->get_AgentCommisionAmountBySubCat($this->session->userdata('operator_name'));			
+
+
+		 $commision_amt = $this->users->get_AgentCommisionAmountBySubCat($this->session->userdata('operator_name'));
 //			 echo "DEBUGGING...";
 //			 print("<pre>");
 //                         print_r($this->session->userdata);
 //			 print_r($commision_amt);
 //			 exit;
 
-			//save Our Comminisssion values into Sessions.			
+			//save Our Comminisssion values into Sessions.
 			$our_comm_type = $commision_amt[0]->our_comm_type;
 			$our_comm_value = $commision_amt[0]->our_comm_value;
 			$this->session->set_userdata('our_comm_type', $our_comm_type);
 			$this->session->set_userdata('our_comm_value', $our_comm_value);
 			//End save Our Commission value into database.
 			$netcomm = 0;
-			$agent_comm = $commision_amt[0]->agent_comm_value;			
+			$agent_comm = $commision_amt[0]->agent_comm_value;
 			$agent_ref_comm = $commision_amt[0]->agent_ref_comm_value;
 			$netcomm = 0;
 			$markup = 0;
@@ -348,7 +351,7 @@ class Recharge extends Template{
 			if( $this->session->userdata('role_id') == 6 )
 			{
 				//$netcomm = $this->session->userdata('rcAmount')*$agent_comm/100;
-				
+
 				if( $commision_amt[0]->mark_comm_type == "INR" )
 				{
 					$markup = $commision_amt[0]->mark_comm_value;
@@ -357,9 +360,9 @@ class Recharge extends Template{
 				{
 					$markup = $this->session->userdata('rcAmount')*$commision_amt[0]->mark_comm_value/100;
 				}
-				
+
 				//print_r($commision_amt[0]);exit;
-				
+
 				if( $commision_amt[0]->dis_type == "INR" )
 				{
 					$dis = $commision_amt[0]->dis_value;
@@ -368,7 +371,7 @@ class Recharge extends Template{
 				{
 					$dis = $this->session->userdata('rcAmount')*$commision_amt[0]->dis_value/100;
 				}
-				
+
 				if( $commision_amt[0]->agent_comm_type == "INR" )
 				{
 					$netcomm = $commision_amt[0]->agent_comm_value;
@@ -380,20 +383,20 @@ class Recharge extends Template{
 					//$netcomm =( $this->session->userdata('rcAmount') + $markup - $dis )*$commision_amt[0]->agent_comm_value/100;
 					$rc = $this->session->userdata('rcAmount');
 					//var_dump($markup);
-					//var_dump($dis);					
+					//var_dump($dis);
 					$rc = $rc+$markup-$dis;
-					
+
 					$this->session->set_userdata('rcAmount',$rc);
-					
+
 					$netcomm = $this->session->userdata('rcAmount')*$commision_amt[0]->agent_comm_value/100;
-					
+
 				}
-				
-				
+
+
 				//print_r($this->session->userdata());exit;
-				
-				
-				
+
+
+
 			}
 			else
 			{
@@ -404,29 +407,29 @@ class Recharge extends Template{
 			$data["netcomm"] = number_format($netcomm,2);
 			$data["markup"] = $markup;
 			$data["dis"] = $dis;
-			
+
 			if( $this->session->userdata('role_id') == 4 && $this->session->userdata('agent_id') == 0 )
 			{
 				$this->session->set_userdata('netcomm',0);
 			}
 			else{
-			$this->session->set_userdata('netcomm',$sess_net_comm);	
+			$this->session->set_userdata('netcomm',$sess_net_comm);
 			}
-			
-			
+
+
 //			print_r($this->session->userdata());exit;
 //			exit;
-			
+
 			//exit("123455555");
-			
+
 					$this->load->view('website_template/header', $data);
 					$this->load->view('website/recharge/paymentmode',$data);
 					$this->load->view('website_template/footer');
 				}
 			}else if($this->session->userdata('user_id')!='' && $this->session->userdata('onword')!=''){
 				$arr = array(
-					'totalAmount' => $this->input->post_get('totalAmount'),				
-					'rcAmount' => $this->input->post_get('totalAmount')					
+					'totalAmount' => $this->input->post_get('totalAmount'),
+					'rcAmount' => $this->input->post_get('totalAmount')
 				);
 				$this->session->set_userdata($arr);
 				if($this->input->is_ajax_request()){
@@ -435,28 +438,28 @@ class Recharge extends Template{
 					// print("<pre>");
 					// print_r($this->session->userdata());
 					// exit;
-					
+
 					//Net wallet amount
 			//Net wallet amount 20052016
-			
-						
-		 $commision_amt = $this->users->get_AgentCommisionAmountBySubCat($this->session->userdata('operator_name'));			
+
+
+		 $commision_amt = $this->users->get_AgentCommisionAmountBySubCat($this->session->userdata('operator_name'));
 			 //echo "DEBUGGING...";
 			 //print("<pre>");
 			 //print_r($commision_amt);
 			 //exit;
-			 
-			//save Our Comminisssion values (Total Profit inclusing Agent SMS LAABUS CHANLE PARTNER) into Sessions.			
+
+			//save Our Comminisssion values (Total Profit inclusing Agent SMS LAABUS CHANLE PARTNER) into Sessions.
 			$our_comm_type = $commision_amt[0]->our_comm_type;
 			$our_comm_value = $commision_amt[0]->our_comm_value;
 			$this->session->set_userdata('our_comm_type', $our_comm_type);
 			$this->session->set_userdata('our_comm_value', $our_comm_value);
 			//End save Our Commission value into database.
-			
-			
-			
+
+
+
 			$netcomm = 0;
-			$agent_comm = $commision_amt[0]->agent_comm_value;			
+			$agent_comm = $commision_amt[0]->agent_comm_value;
 			$agent_ref_comm = $commision_amt[0]->agent_ref_comm_value;
 			$netcomm = 0;
 			$markup = 0;
@@ -464,7 +467,7 @@ class Recharge extends Template{
 			if( $this->session->userdata('role_id') == 6 )
 			{
 				//$netcomm = $this->session->userdata('rcAmount')*$agent_comm/100;
-				
+
 				if( $commision_amt[0]->mark_comm_type == "INR" )
 				{
 					$markup = $commision_amt[0]->mark_comm_value;
@@ -473,9 +476,9 @@ class Recharge extends Template{
 				{
 					$markup = $this->session->userdata('rcAmount')*$commision_amt[0]->mark_comm_value/100;
 				}
-				
+
 				//print_r($commision_amt[0]);exit;
-				
+
 				if( $commision_amt[0]->dis_type == "INR" )
 				{
 					$dis = $commision_amt[0]->dis_value;
@@ -484,7 +487,7 @@ class Recharge extends Template{
 				{
 					$dis = $this->session->userdata('rcAmount')*$commision_amt[0]->dis_value/100;
 				}
-				
+
 				if( $commision_amt[0]->agent_comm_type == "INR" )
 				{
 					$netcomm = $commision_amt[0]->agent_comm_value;
@@ -496,20 +499,20 @@ class Recharge extends Template{
 					//$netcomm =( $this->session->userdata('rcAmount') + $markup - $dis )*$commision_amt[0]->agent_comm_value/100;
 					$rc = $this->session->userdata('rcAmount');
 					//var_dump($markup);
-					//var_dump($dis);					
+					//var_dump($dis);
 					$rc = $rc+$markup-$dis;
-					
+
 					$this->session->set_userdata('rcAmount',$rc);
-					
+
 					$netcomm = $this->session->userdata('rcAmount')*$commision_amt[0]->agent_comm_value/100;
-					
+
 				}
-				
-				
+
+
 				//print_r($this->session->userdata());exit;
-				
-				
-				
+
+
+
 			}
 			else
 			{
@@ -520,41 +523,41 @@ class Recharge extends Template{
 			$data["netcomm"] = number_format($netcomm,2);
 			$data["markup"] = $markup;
 			$data["dis"] = $dis;
-			
-			
-			
+
+
+
 			$this->session->set_userdata('netcomm',$sess_net_comm);
-			
-			
+
+
 			if( $this->session->userdata('role_id') == 4 && $this->session->userdata('agent_id') == 0 )
 			{
 				$this->session->set_userdata('netcomm',0);
 			}
-			
-			
-			
-			
+
+
+
+
 			//print_r($this->session->userdata());exit;
 			//exit;
-			
+
 			//exit("123455555");
-			
+
 					$this->load->view('website_template/header', $data);
 					$this->load->view('website/recharge/paymentmode',$data);
 					$this->load->view('website_template/footer');
 				}
-				
+
 			}else{ redirect('recharge');}
 		}else { redirect('login');}
 	}
-        
+
 	function proceedtopay(){
-            
+
 		if(check_login_status()){
 			if($this->encrypt->decode($this->session->userdata('recharge_session_key'),$this->key)==$this->encrypt->decode($this->input->get_post('recharge_proceed'),$this->key)){
 				//create sale to database
 				if($this->input->post_get('payment')){
-					
+
 					$user_id=$this->session->userdata('user_id');
 					$role_id=$this->session->userdata('role_id');
 					$wallet_amount = $this->users->get_wallet_amount($user_id,$role_id);
@@ -617,44 +620,44 @@ class Recharge extends Template{
 
 <INPUT TYPE="hidden" NAME="ru" value="http://laabus.com/merchant/service_response.php">
 <input type="hidden" name="bookingid" value="100001"/>
- 
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
  <tr>
-        <td>* Name</td> 
+        <td>* Name</td>
         <td>:</td>
         <td><input name="udf1" type="text" value="Venkat" /></td>
         <td><span style="color:Red;visibility:hidden;">Client Name is mandatory.</span></td>
 
     </tr>
     <tr>
-        <td>* Email ID</td> 
+        <td>* Email ID</td>
         <td>:</td>
        <td><input name="udf2" type="text" value="'.$this->session->userdata('email_id').'" /></td>
         <td><span style="color:Red;visibility:hidden;">Email is mandatory.</span></td>
     </tr>
     <tr>
 
-        <td>* Mobile No</td> 
+        <td>* Mobile No</td>
         <td>:</td>
         <td><input name="udf3" type="text" value="'.$this->session->userdata('Mobile').'" /></td>
         <td><span style="color:Red;visibility:hidden;">Mobile No</span></td>
     </tr>
     <tr>
-        <td>* Billing Address</td> 
+        <td>* Billing Address</td>
         <td>:</td>
 
         <td><input name="udf4" type="text" value="HYD"  /></td>
         <td><span style="color:Red;visibility:hidden;">Billing Address is mandatory.</span></td>
     </tr>
    <!--  <tr>
-        <td>* Bank Name</td> 
+        <td>* Bank Name</td>
         <td>:</td>
         <td><input name="udf5" type="text" value="bank1" /></td>
         <td><span style="color:Red;visibility:hidden;">Bank Name is mandatory.</span></td>
 
     </tr> -->
 
-    
+
 
 
 <tr>
@@ -667,7 +670,7 @@ Amount
 </td>
 </tr>
 
-  
+
 <tr>
 <td>
 </td>
@@ -688,17 +691,17 @@ Amount
 	}
 	function success(){
                  $sales_id=base64_decode($this->uri->segment(3));
-            
+
 		#echo file_get_contents("http://recharge.cyberdeer.com/api/recharge.php?uid=766172696e69696e666f73797374656d73&pin=0ccbc48aecdc342960c932d2d416e837&number=".$this->session->userdata('mobile_no')."&operator=".$this->session->userdata('operator')."&circle=".$this->session->userdata('operator_circle')."&amount=".$this->session->userdata('rcAmount')."&usertx=".$_POST['txnid']."&format=json&version=4");
 		#print_r($_POST);
                 $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
-		
-		
+
+
 		$data['rechargeOrder'] = $this->Salemodel->get_recharge_order($sales_id);
-		
-		
-		
+
+
+
 		//channel partner commision updating to database
 		$userdetailsC = $this->users->get_user_details($this->session->userdata('channel_part_userid'),2);
 		//print_r($userdetailsC);
@@ -708,8 +711,8 @@ Amount
 		$updateArrayDataC=array('wallet'=>$wamtC);
 		$this->common_model->commonUpdate('users',$updateArrayDataC,$whereConditionC1);
 		//
-		
-		
+
+
                 if(!$this->input->is_ajax_request()) {
                     $this->load->view('website_template/header', $data);
                     $this->load->view('website/recharge/receipt');
@@ -718,16 +721,16 @@ Amount
                     $this->load->view('website/recharge/index');
                 }
 	}
-	
+
 	function failure(){
             #print_r($this->session->userdata());
             $sales_id=base64_decode($this->uri->segment(3));
-            
+
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
-                
+
                 $data['rechargeOrder'] = $this->Salemodel->get_recharge_order($sales_id);
-                
+
                 if(!$this->input->is_ajax_request()) {
                     $this->load->view('website_template/header', $data);
                     $this->load->view('website/recharge/failure');
@@ -736,16 +739,16 @@ Amount
                     $this->load->view('website/recharge/index');
                 }
 	}
-        
+
         function cancel(){
             #print_r($this->session->userdata());
             $sales_id=base64_decode($this->uri->segment(3));
-            
+
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
-                
+
                 $data['rechargeOrder'] = $this->Salemodel->get_recharge_order($sales_id);
-                
+
                 if(!$this->input->is_ajax_request()) {
                     $this->load->view('website_template/header', $data);
                     $this->load->view('website/recharge/cancel');
@@ -754,7 +757,7 @@ Amount
                     $this->load->view('website/recharge/index');
                 }
 	}
-        
+
         function DTH(){
             $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
@@ -766,7 +769,7 @@ Amount
                     $this->load->view('website/recharge/DTH');
                 }
         }
-        
+
         function datacard(){
             $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
@@ -778,7 +781,7 @@ Amount
                     $this->load->view('website/recharge/datacard');
                 }
         }
-        
+
         function landline(){
             $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
@@ -790,7 +793,7 @@ Amount
                     $this->load->view('website/recharge/landline');
                 }
         }
-        
+
         function electricity(){
             $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
@@ -813,7 +816,7 @@ Amount
 				echo "General Plan";
 			die;
 		}
-		
+
 		public function getOffers()
 		{
 			//print_r($_REQUEST);
@@ -841,15 +844,15 @@ Amount
 			}
 			if(!empty($cat) )
 			{
-				
+
 			}
 			else
 			{
-				
+
 			}*/
 			//$url = "https://joloapi.com/api/findplan.php?userid=piridi&key=178153319187538&opt=".$op."&cir=5&typ=".$cat."&amt=&max=&type=json";
-			
-			
+
+
 			if($op == 3 )
 			{
 				$op = 6;  //BSNL
@@ -882,7 +885,7 @@ Amount
 			{
 				$op = 1; //AIRTEL
 			}
-			$txnid = uniqid();			
+			$txnid = uniqid();
 			$apisecret = "kQeDheLqeeQXU6cAGhbdbyfyFVMpVCs4MF2ZaXqdTFmpdgDH";
 			$api_user_id= "YGRZ2egUHLBk5FfNTBvPDPU3K5Lcfk27fGYv2FGebGw6c64Y";
 			$concat = $txnid."|".$apisecret;
@@ -890,35 +893,35 @@ Amount
 			//echo "<br>";
 $url ="https://api.komparify.com/carriers.json?unique_provider_id=".$op."&securehash=".$hash."&txnid=".$txnid."&type=prepaid&region_id=2";
 $url .="&number_of_packs=100&typeofplan=mobile&api_user_id=".$api_user_id;
-			$ch = curl_init();  
- 
+			$ch = curl_init();
 
- 
-    
+
+
+
 	curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-//  curl_setopt($ch,CURLOPT_HEADER, false); 
+//  curl_setopt($ch,CURLOPT_HEADER, false);
 
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
- 
+
     $output=curl_exec($ch);
-	
+
 	 if($output === false)
     {
         echo "Error Number:".curl_errno($ch)."<br>";
         echo "Error String:".curl_error($ch);
 		exit;
     }
- 
+
     curl_close($ch);
     //return $output;
 	//header("Content-type: text/xml");
 	//print("<pre>");
-	
+
 	//echo $output;//exit;
 	$data = json_decode($output);
-	
+
 	$str = "";
 	if(!empty($data))
 	{
@@ -937,7 +940,7 @@ $url .="&number_of_packs=100&typeofplan=mobile&api_user_id=".$api_user_id;
 		$str .= "<table class='data-table' width='100%' cellspacing='6' cellpadding='7' border='1' >";
 		$str .= "<tr><td width='60%'><b>Detail</b></td><td width='25%'><b>Validity</b></td><td width='15%'><b>Amount</b></td></tr>";
 
-		$i =0;		
+		$i =0;
 		foreach($data as $key => $valuem)
 		{
 			$i++;
@@ -974,6 +977,17 @@ $url .="&number_of_packs=100&typeofplan=mobile&api_user_id=".$api_user_id;
 	//print("<pre>");
 	//print_r($data);exit;
 	echo $str;exit;
-			
-		}
+
+		}/*
+
+	public function isCachBackCodeAvailable()
+	{
+		$cashback_code = $this->input->post('cachback_code');
+		$role_id = $this->session->userdata('role_id');
+		$role_name = $this->cashback_model->getRoleNameByRoleId($role_id);
+		$details = $this->cashback_model->getCashBackCodeDetails($cashback_code);
+		$filed = 'cbk_is'.$role_name;
+		echo $details[0]->$filed;
+		exit;
+	}*/
 }

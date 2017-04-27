@@ -4,13 +4,13 @@
     <div class="panel panel-default panel-hovered panel-stacked mb30">
       <div class="panel-body">
         <div class="row">
-          <?php		 
-		 
+          <?php
+
 			$lock_amt = $this->users->get_locking_amount();
-			
+
 			//  print_r($lock_amt);
 			   $wallet_amount = $this->users->get_wallet_amount($this->session->userdata('user_id'),$this->session->userdata('role_id'));
-			 
+
 			   if( $this->session->userdata('role_id') == 6 )
 			   {
 				   $netamt = $wallet_amount - $lock_amt["agent"];
@@ -24,7 +24,7 @@
 				   $netamt = $wallet_amount - $lock_amt["smd"];
 			   }
 			   $netamt1 = number_format($netamt,2);
-			  
+
 			   if( $this->session->userdata('rcAmount') >  $netamt && false )
 			   {
 				?>
@@ -32,7 +32,7 @@
 				Sorry, You can not recharge INR <?php echo $this->session->userdata('rcAmount')?><br>
 				You can recharge maximum  of INR <?php echo $netamt1?>
 				</div
-				<?php				
+				<?php
 			   }
 			   else
 			   {
@@ -62,25 +62,28 @@
                                    }else{
             ?>
             <p class="well-sm">Recharge of <b>
-              <?=$this->session->userdata('operator_name')?> 
+              <?=$this->session->userdata('operator_name')?>
               </b>
               <?=$this->session->userdata('recharge_type')?>
               mobile <b>
               <?=$this->session->userdata('mobile_no')?>
               </b> for <b>RS.
               <?=$this->session->userdata('rcAmount');
-			 
-			  //print_r($this->session->userdata());   
+
+			  //print_r($this->session->userdata());
 			  ?>
               </b></p>
-            <?php   
+            <?php
                                    }
             ?>
             </div>
             <div class="text-center col-md-3">
-              <input type="text" class="form-control" name="couponCode" placeholder="Have a Promo code">
+              <input type="text" class="form-control" name="couponCode" id="couponCode" placeholder="Have a Promo code">
+              <input type="hidden" class="form-control" name="iscashback" id="iscashback" value="0" >
 			  <div id='promo_error' style="color:red; display:none">Invalid Promo Code</div>
-              <p style="z-index:99999999999999; position:absolute; top:08px; left:75%; cursor:pointer" id="apply" onclick="javascript:$('#promo_error').show()">Apply</p>
+			  <div id='promo_success' style="color:green; display:none">Promo Code Apply Successfully!</div>
+<!--              <p style="z-index:99999999999999; position:absolute; top:08px; left:75%; cursor:pointer" id="apply" onclick="javascript:$('#promo_error').show()">Apply</p>-->
+              <p style="z-index:99999999999999; position:absolute; top:08px; left:75%; cursor:pointer" id="apply" onclick="javascript:checkCachbackCode()">Apply</p>
             </div>
             <div class="col-md-3 text-right">
             	<button type="submit" class="btn btn-info" id="proceed">Proceed to pay Rs. <?=$this->session->userdata('rcAmount')?></button>
@@ -94,10 +97,10 @@
                                         <input type="checkbox" value="1" name="mark_credit_user" class="credit">
                                         <label for="cabselect">Mark as credit</label>
                                     </div>
-                                    
+
                                     <div class="col-md-3">
-                                   
-             
+
+
                                     <input type="text" class="form-control Comments"  name="mark_as_credit_comments" style="display:none" placeholder="Enter Your Comments">
                                     </div>
                                 </div>
@@ -106,17 +109,17 @@
                                 ?>
           </form>
 			   <?php }else if($this->session->userdata("onword")!=''){
-				     $onword = $this->session->userdata("onword");                     
-                     $return = $this->session->userdata("return"); 
+				     $onword = $this->session->userdata("onword");
+                     $return = $this->session->userdata("return");
 					 $totalAmount = $onword['amount'] + $return['amount'];
 					 $this->session->set_userdata("totalAmount",$totalAmount);
 				    echo form_open('Recharge/paymenttype','method="post"')?>
             <div class="text-left col-md-6">
-          
+
             <input type="hidden"  name="totalAmount" value="<?=$totalAmount?>" />
-          
+
             <p class="well-sm">Total Amount :<b>
-             
+
 			 <?php
 			  echo $totalAmount."/-";
 			  ?>
@@ -129,7 +132,7 @@
             	<button type="submit" class="btn btn-info" id="proceed">Proceed to pay Rs. <?=$totalAmount?>/-</button>
             </div>
           </form>
-				<?php   
+				<?php
 			   }
 			   }
 			   ?>
@@ -145,6 +148,45 @@ $('.credit').click(function(){
 	} else {
 		$(".Comments").hide()
 	};
-		
+
 });
+function checkCachbackCode(){
+	$('#promo_error').hide();
+	$('#promo_success').hide();
+	//var testurl = 'nag/laabus/';
+//	alert($("#couponCode").val());
+	var couponCode= $("#couponCode").val();
+	var qData = {
+		cachback_code : couponCode
+	}
+	if(couponCode != '') {
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo base_url(); ?>' + 'Common/isCachBackCodeAvailable',
+			data: qData,
+			dataType: "text",
+			success: function (resultData) {
+//				alert(resultData);
+				console.log(resultData)
+				if(resultData)
+				{
+					console.log("ok");
+					$('#promo_success').show();
+					$('#iscashback').val(1);
+				}
+				else
+				{
+					console.log("not ok");
+					$('#promo_error').show();
+				}
+			}
+		});
+	}
+	else
+	{
+		$('#promo_error').show();
+	}
+};
+
+
 </script>
