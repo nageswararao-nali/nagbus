@@ -33,5 +33,25 @@ class cashback_model extends CI_Model {
         $query = $this->db->get('va_cashback_usage', 0, 10);
         return $query->result_array();
     }
-    
+    public function activateCashbackOfer($data) {
+        $this->db->where('cbk_id', $data['cbk_id']);
+        $cbk_status = trim($data['cbk_isActive']) === 'Active' ? 1 : 0;
+        $updData = array("cbk_status" => $cbk_status);
+        $query = $this->db->update('va_cashback_offers', $updData);
+        return $cbk_status ? 'InActive' : 'Active';
+    }
+    public function get_cashback_offer_usage($cbk_usg_id) {
+        $query = $this->db->get_where('va_cashback_usage', array("cbk_usg_id" => $cbk_usg_id));
+        return $query->result_array();
+    }
+    public function save_usage($data) {
+        $this->db->insert('va_cashback_usage', $data);  
+        return $this->db->insert_id();
+    }
+    public function update_usage($data) {
+        $this->db->where('cbk_usg_id', $data['cbk_usg_id']);
+        $query = $this->db->update('va_cashback_usage', $data);
+        //$query->result_array();
+        return $data['cbk_usg_id'];
+    }
 }

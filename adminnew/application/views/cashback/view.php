@@ -27,22 +27,29 @@
 					   			<?php echo $cashback_offer['cbk_amount_percentage']; ?>
 							</div>
 							<div class="form-group col-lg-4">
-								<?php echo $cashback_offer['cbk_min_purchase']; ?>
-							</div>
-					 		<div class="form-group col-lg-4">
 					 			<?php echo $cashback_offer['cbk_mode']; ?>
 	                        </div>
+							<div class="form-group col-lg-4">
+								<?php echo $cashback_offer['cbk_min_purchase']; ?>
+							</div>
+					 		
                         </div>
                     </div>
 					<div class="form-group" style="margin-top:16px">
                         <label class="col-lg-4 control-label">Cashback to</label>
                         <div class="col-lg-8">
-						<?php 
-						$users = array(0);
-						?>
                            	<input type="checkbox" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent']) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
 						    <input type="checkbox" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser']) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" value="1" name="cbk_isAgentUSer" <?php if($cashback_offer['cbk_isAgentUSer']) echo "checked";?>> User Under Agent 
+                        </div>
+                    </div>
+		            <hr>
+		            <div class="form-group" style="margin-top:16px">
+                        <label class="col-lg-4 control-label">Services</label>
+                        <div class="col-lg-8">
+                           	<input type="checkbox" value="1" name="cbk_isBus" <?php if($cashback_offer['cbk_isBus']) echo "checked";?>> Bus &nbsp;&nbsp;&nbsp;&nbsp;
+						    <input type="checkbox" value="1" name="cbk_isRecharge" <?php if($cashback_offer['cbk_isRecharge']) echo "checked";?>> Recharge &nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" value="1" name="cbk_isProduct" <?php if($cashback_offer['cbk_isProduct']) echo "checked";?>> Product 
                         </div>
                     </div>
 		            <hr>
@@ -85,7 +92,7 @@
 		 			<div class="form-group">
 			 			<div  class="col-lg-4" ></div>
             			<div class="col-lg-8">
-            				<a class="btn btn-primary btn-xs dim" type="button" id="activate_offer"><?php echo $cashback_offer['cbk_status'] ? '' : 'Activate'; ?></a>
+            				<a class="activate_cashback_offer btn btn-primary btn-xs dim" custisActive="<?php echo $cashback_offer['cbk_status'] ? 'InActive' : 'Active'; ?>" custdata="<?php echo $cashback_offer["cbk_id"]?>" type="button" id="activate_offer"><?php echo $cashback_offer['cbk_status'] ? 'InActive' : 'Active'; ?></a>
             				<a class="btn btn-primary btn-xs dim" id="edit_offer" href="../create/<?php echo $cashback_offer['cbk_id']; ?>">Edit</a>
               			</div>	
 					</div>

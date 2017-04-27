@@ -99,7 +99,7 @@
                     <li <?= $this->uri->segment($this->uri->total_segments()) == "distribute" ? 'class="active"' : ''; ?>><a href="<?= base_url() ?>Offer/Edit_wallet">Wallet</a></li>
 					
                     <li <?= $this->uri->segment($this->uri->total_segments()) == "distribute" ? 'class="active"' : ''; ?>><a href="#">Other Offers & Promos</a></li>
-                    <li <?= $this->uri->segment($this->uri->total_segments()) == "cashback" ? 'class="active"' : ''; ?>><a href="<?= base_url() ?>Cashback/list">Cashback</a></li>
+                    <li <?= $this->uri->segment($this->uri->total_segments()) == "cashback" ? 'class="active"' : ''; ?>><a href="<?= base_url() ?>Cashback/offers_list">Cashback</a></li>
 					<li <?= $this->uri->segment($this->uri->total_segments()) == "cashback-use" ? 'class="active"' : ''; ?>><a href="<?= base_url() ?>Cashback/usage_list">Cashback Usage</a></li>
 
                 </ul>

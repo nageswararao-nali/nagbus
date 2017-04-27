@@ -12,50 +12,38 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Users Cashback Offers</h5>
-                    <!-- <div class="ibox-tools"> <a class="close-link"> <i class="fa fa-times"></i> </a> </div> -->
+                    <h5>Users Cashback Usage</h5>
+                    <div class="ibox-tools"> <a class="close-link"> <i class="fa fa-times"></i> </a> </div>
                 </div>
-			   	<div class="ibox-content">
-			   		<div style="float:right;margin-right:5%;">
-			   			<a class="btn btn-primary btn-xs dim" href="../create">Add</a>
-			   		</div>
-			   		<table class="table table-hover">
-			            <thead>
-			              	<tr>
-						  		<th>Service</th>
-							    <th>Amount/Percentage</th>
-				                <th>Min Purchase</th>
-				                <th>Actions</th>
-			              	</tr>
-			            </thead>
-            			<tbody class="tblCategories2" >
-							<?php
-							if (!empty($cashback_offers))
-							{
-								foreach ($cashback_offers as $key=>$cbOffer)
-								{
-								?> 
-								<tr id="a<?php echo $cbOffer["cbk_usg_id"]?>" >
-					   				<td ><a href='javascript:;' data-content='<?php echo $cbOffer["cbk_usg_service"]?>' class='descclass'><?php echo $cbOffer["cbk_usg_service"]?></a></td>
-									<td><?php echo $cbOffer["cbk_usg_amount_percentage"] . $cbOffer["cbk_usg_mode"]; ?></td>
-					                <td><?php echo $cbOffer["cbk_usg_min_amount"]; ?></td>     
-					                <td>
-					                	<a href='javascript:;' custdata="<?php echo $cbOffer["cbk_id"]?>" class="btn btn-primary btn-xs dim"><?php echo $cbOffer['cbk_usg_status'] ? 'InActive' : 'Active'; ?></a>
-					                	<a href='./view/<?php echo $cbOffer["cbk_usg_id"]; ?>' custdata="<?php echo $cbOffer["cbk_usg_id"]?>" class="btn btn-primary btn-xs dim">View</a>
-				                	</td>
-		             			</tr>
-								<?php 
-								}
-							} else { ?>
-							<tr><td colspan=7>No data found.</td></tr>
-							<?php 
-							}
-							?>
-						</tbody>
-					</table>
+			   <div class="ibox-content">	
+			   		<?php $attributes = array('class' => 'form-horizontal', 'id' => 'update_category');
+								 // echo form_open('Offer/update_offeramountnew',$attributes);
+						echo form_open('Cashback/add_cashback_usage',$attributes);						 
+					?>
+						<input type="hidden" name="cbk_usg_id" value="<?php echo $cashback_offer_usage['cbk_usg_id']; ?>">
+						<div class="form-group" style="margin-top:16px">
+	                        <label class="col-lg-4 control-label">Add Cashback Amount to <?php echo $cashback_offer_usage['cbk_usg_service']; ?> Service</label>
+	                        <div class="col-lg-8">
+							 	<div class="form-group col-lg-4">
+						   			<label class="control-label">Amount</label> <?php echo $cashback_offer_usage['cbk_usg_amount_percentage']; ?>
+								</div>
+								<div class="form-group col-lg-4">
+						 			<label class="control-label">Cashback mode</label> <?php echo $cashback_offer_usage['cbk_usg_mode']; ?>
+		                        </div>
+								<div class="form-group col-lg-4">
+						   			<label class="control-label">Min Amount </label> <?php echo $cashback_offer_usage['cbk_usg_min_amount']; ?>
+								</div>
+	                        </div>
+	                    </div>
+			 			<div class="form-group">
+				 			<div  class="col-lg-4" ></div>
+	            			<div class="col-lg-8">
+	            				<a class="btn btn-primary btn-xs dim" type="submit" href="../usage_create/<?php echo $cashback_offer_usage['cbk_usg_id']; ?>" >Edit</a>
+	              			</div>	
+						</div>
+					</form>			
                 </div>
             </div>
         </div>
     </div>
 </div>
-

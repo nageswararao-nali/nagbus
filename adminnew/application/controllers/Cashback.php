@@ -35,21 +35,28 @@ class Cashback extends CI_Controller {
 
 	public function add_cashback() {
 		$data = $this->input->post();
-		print_r($data);
 		$data['cbk_create_date'] = date('Y-m-d H:i:s');
 		$data['cbk_st_date'] = date('Y-m-d', strtotime($this->input->post('cbk_st_date')));
 		$data['cbk_end_date'] = date('Y-m-d', strtotime($this->input->post('cbk_end_date')));
+		if(!empty($_FILES['cbk_image']['name']))
+		{
+			$upload_path = 'web_assets/';
+			if( move_uploaded_file( $_FILES['cbk_image'][ 'tmp_name' ], $upload_path . $_FILES[ 'cbk_image' ][ 'name' ] ) )
+			{
+				$data['cbk_image'] = $upload_path . $data['cbk_promo_code'] . '_' . $_FILES[ 'cbk_image' ][ 'name' ];
+			}
+		}
 		if($data['cbk_id']) {
 			$cbk_id = $this->cashback_model->update($data);
 		}else {
 			$cbk_id = $this->cashback_model->save($data);
 		}
 		if($cbk_id){
-			redirect('/cashback/list', 'refresh');
+			redirect('/cashback/offers_list', 'refresh');
 		}
 	}
 	
-	public function list() {
+	public function offers_list() {
 		$data['cashback_offers'] = $this->cashback_model->get_cashback_offers();		
 		$this->load->view('admin_template/Header');
 		
@@ -67,23 +74,56 @@ class Cashback extends CI_Controller {
 			
 	        $this->load->view('admin_template/Footer');
 		}else {
-			redirect('/cashback/list', 'refresh');
+			redirect('/cashback/offers_list', 'refresh');
 		}
 	}
 	public function usage_list() {
 		$data['cashback_offers'] = $this->cashback_model->get_cashback_usage_offers();		
 		$this->load->view('admin_template/Header');
 		
-		$this->load->view('cashback/usage_view',$data);
+		$this->load->view('cashback/usage_list',$data);
 		
         $this->load->view('admin_template/Footer');
 	}
-	public function usage_create() {
-		$data['cashback_offers'] = $this->cashback_model->get_cashback_offers();		
+	public function usage_create($cbk_usg_id = 0) {
+		if($cbk_usg_id) {
+			$cashback_offer_usage = $this->cashback_model->get_cashback_offer_usage($cbk_usg_id);		
+			$data['cashback_offer_usage'] = $cashback_offer_usage[0];
+		}
 		$this->load->view('admin_template/Header');
 		
 		$this->load->view('cashback/usage_create',$data);
 		
         $this->load->view('admin_template/Footer');
+	}
+	public function usage_view($cbk_usg_id=0) {
+		if($cbk_usg_id) {
+			$cashback_offer_usage = $this->cashback_model->get_cashback_offer_usage($cbk_usg_id);		
+			$data['cashback_offer_usage'] = $cashback_offer_usage[0];
+			$this->load->view('admin_template/Header');
+			
+			$this->load->view('cashback/usage_view',$data);
+			
+	        $this->load->view('admin_template/Footer');
+		}else {
+			redirect('/cashback/offers_list', 'refresh');
+		}
+	}
+	public function add_cashback_usage() {
+		$data = $this->input->post();
+		$data['cbk_usg_create_date'] = date('Y-m-d H:i:s');
+		if($data['cbk_usg_id']) {
+			$cbk_id = $this->cashback_model->update_usage($data);
+		}else {
+			$cbk_id = $this->cashback_model->save_usage($data);
+		}
+		if($cbk_id){
+			redirect('/cashback/usage_list', 'refresh');
+		}
+	}
+	public function activateCashbackOfer() {
+		$data = $this->input->post();
+		$isActive = $this->cashback_model->activateCashbackOfer($data);
+		echo $isActive;
 	}
 }

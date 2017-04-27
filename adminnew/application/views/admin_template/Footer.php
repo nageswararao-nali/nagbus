@@ -149,6 +149,6 @@
         });
     });
 </script>
-
+<script src="<?= base_url() ?>admin_assets/js/cashback.js"></script>
 </body>
 </html>

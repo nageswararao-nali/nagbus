@@ -22,7 +22,7 @@
 				
 				<?php	  $attributes = array('class' => 'form-horizontal', 'id' => 'update_category');
 						 // echo form_open('Offer/update_offeramountnew',$attributes);
-					echo form_open('Cashback/add_cashback',$attributes);						 
+					echo form_open_multipart('Cashback/add_cashback',$attributes);						 
 				?>
 					
 
@@ -43,26 +43,35 @@
 						   			<input type="text"  placeholder="Amount or Percentage"  name="cbk_amount_percentage"  value='<?php echo $cashback_offer['cbk_amount_percentage']; ?>' >
 								</div>
 								<div class="form-group col-lg-4">
-						   			<input type="text"  placeholder="Minimum purchase"  name="cbk_min_purchase"  value='<?php echo $cashback_offer['cbk_min_purchase']; ?>' >
-								</div>
-						 		<div class="form-group col-lg-4">
 						 			<select class="input-sm" name="cbk_mode" >
 					                    <option value="">Select</option>
 					                    <option value="INR" <?php if($cashback_offer['cbk_mode'] == 'INR') { echo "selected"; } ?>>Rs</option>
 					                    <option value="PEC" <?php if($cashback_offer['cbk_mode'] == 'PEC') {echo "selected"; } ?>>%</option>
 					                </select>
 		                        </div>
+								<div class="form-group col-lg-4">
+						   			<input type="text"  placeholder="Minimum purchase"  name="cbk_min_purchase"  value='<?php echo $cashback_offer['cbk_min_purchase']; ?>' >
+								</div>
+						 		
                             </div>
                         </div>
 						<div class="form-group" style="margin-top:16px">
                             <label class="col-lg-4 control-label">Cashback to</label>
                             <div class="col-lg-8">
-							<?php 
-							$users = array(0);
-							?>
+							
                                	<input type="checkbox" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent']) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
 							    <input type="checkbox" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser']) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="checkbox" value="1" name="cbk_isAgentUSer" <?php if($cashback_offer['cbk_isAgentUSer']) echo "checked";?>> User Under Agent 
+                            </div>
+                        </div>
+			            <hr>
+			            <div class="form-group" style="margin-top:16px">
+                            <label class="col-lg-4 control-label">Services</label>
+                            <div class="col-lg-8">
+							
+                               	<input type="checkbox" value="1" name="cbk_isBus" <?php if($cashback_offer['cbk_isBus']) echo "checked";?>> Bus &nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="checkbox" value="1" name="cbk_isRecharge" <?php if($cashback_offer['cbk_isRecharge']) echo "checked";?>> Recharge &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" value="1" name="cbk_isProduct" <?php if($cashback_offer['cbk_isProduct']) echo "checked";?>> Product 
                             </div>
                         </div>
 			            <hr>
