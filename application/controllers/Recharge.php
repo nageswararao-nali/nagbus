@@ -615,7 +615,7 @@ class Recharge extends Template{
 <INPUT TYPE="hidden" NAME="clientcode" value="007">
 <INPUT TYPE="hidden" NAME="AccountNo" value="1234567890">
 
-<INPUT TYPE="hidden" NAME="ru" value="http://laabus.com/merchant/service_response.php">
+<INPUT TYPE="hidden" NAME="ru" value="http://laabus.com/nag/laabus/merchant/service_response.php">
 <input type="hidden" name="bookingid" value="100001"/>
  
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

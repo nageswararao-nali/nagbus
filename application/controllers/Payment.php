@@ -316,6 +316,9 @@ $tot_W_a = $wallet_amount+$totamount;
 		$obj->update_transaction_status();
 		//print_r($_POST);
 		//echo "Failed";
+		echo "Failed";
+		print_r($this->session->userdata());
+		die();
 		redirect('/');
 	}
 	function subscription_failure(){
@@ -342,8 +345,10 @@ $tot_W_a = $wallet_amount+$totamount;
 		//$obj->update_transaction_finished($_POST['txnid']);
 		$obj->update_transaction_finished($this->session->userdata('txnid'));
                // $this->recharge_success($_POST);
-			   
+			print_r($this->session->userdata());
+			die();   
 			   $this->recharge_success_new($_POST);
+
 		#print_r($_POST);exit;
 		#echo "Success";
 	}

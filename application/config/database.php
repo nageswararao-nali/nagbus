@@ -75,12 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	/*'hostname' =>'199.79.62.108',
+	'hostname' =>'199.79.62.108',
 	'username' => 'laabusj_laabus',
-	'password' => 'laabus',*/
-	'hostname' =>'localhost',
+	'password' => 'laabus',
+	/*'hostname' =>'localhost',
 	'username' => 'root',
-	'password' => '',
+	'password' => '',*/
 	'database' => 'laabusj_laabus',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
