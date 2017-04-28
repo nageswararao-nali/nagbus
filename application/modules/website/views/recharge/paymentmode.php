@@ -3,16 +3,16 @@
   <div class="col-md-12">
     <div class="panel panel-default panel-hovered panel-stacked mb30">
       <div class="panel-body">
-        <div class="row">		
-	
+        <div class="row">
+
           <?php
 			if($this->session->userdata('onword')!=''){
 		  echo form_open('/buses/paymenttopay','method="post"');
-			}else{				
+			}else{
 		  echo form_open('Recharge/proceedtopay','method="post"');
 			}
 		 // echo form_open('buses/booking_ticket_process','method="post"');
-		  
+
 		  ///
 		   $lock_amt = $this->users->get_locking_amount();
 			//  print_r($lock_amt);
@@ -34,17 +34,17 @@
 				   $netamt = $wallet_amount - $lock_amt["smd"];
 			   }
 			   $netamt1 = number_format($netamt,2);
-				
+
 				$user_id=$this->session->userdata('user_id');
 				$role_id=$this->session->userdata('role_id');
 				$wallet_amount = $this->users->get_wallet_amount($user_id,$role_id);
-				
+
 				if($this->session->userdata('rcAmount')!=''){
 				$amount = $this->session->userdata('rcAmount');
 				}else if($this->session->userdata('totalAmount')!=''){
-				$amount = $this->session->userdata('totalAmount');	
+				$amount = $this->session->userdata('totalAmount');
 				}
-				
+
                 $waldiv = "";
 				if($wallet_amount>=$amount &&  $this->session->userdata('rcAmount') <  $netamt ){
 					$waldis = "";
@@ -55,19 +55,19 @@
 					$waldis = "";
 					$payudis = "disabled";
 					$walchk = "checked='checked'";
-					$payuchk = "disabled";					
+					$payuchk = "disabled";
 				}
 				else if($wallet_amount==0){
 					$waldis = "disabled";
 					$payudis = "";
 					$walchk = "disabled";
-					$payuchk = "checked='checked'";	
-                    $waldiv = "display:none;";				
+					$payuchk = "checked='checked'";
+                    $waldiv = "display:none;";
 				}else{
 					$waldis = "disabled";
 					$payudis = "";
 					$walchk = ($amount>$wallet_amount)?"checked='checked'":"disabled";
-					$payuchk = "checked='checked'";					
+					$payuchk = "checked='checked'";
 				}
 			?>
             <input type="hidden" value="<?=$this->session->userdata('recharge_session_key')?>" name="recharge_proceed" />
@@ -85,20 +85,20 @@
                         if($this->session->userdata('role_id') == 6){
 			if($this->session->userdata('rcAmount')!=''){
 			?>
-			<p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision 	)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
+			<p class="well-sm">aaaaaaaTotal Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision 	)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
 			<?php
 			}else if($this->session->userdata('totalAmount')!=''){
-			?>	
+			?>
 				<?php /*?><p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."/-"?></b></p><?php */?>
-                <p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
-			<?php	
+                <p class="well-sm">bbbbbbbbbTotal Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
+			<?php
 			}
                         }else{
                             ?>
-                            <p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount; ?></b></p>
+                            <p class="well-sm">cccccccccccTotal Payment to be made : <b>RS. <?php echo $amount; ?></b></p>
                             <?php
                         }
-			?>			
+			?>
 			<input type="hidden" name="payamount" id="payamount" value="<?php echo ($amount>$wallet_amount)?($amount-$wallet_amount):($amount);?>">
 			<input type="hidden" name="walamount" id="walamount" value="1">
 			</div>
@@ -107,10 +107,10 @@
 				<p class="well-sm"><input type="checkbox" <?php echo $walchk;?> name="payment" onclick="showpaymodes('walletMode')" id="walletpay" value="Wallet">&emsp;Use LAABUS Wallet(<?php echo $wallet_amount;?>)</p>
 				</div>
 				<div id="walletMode" style="<?php echo $waldiv;?>">
-				<p class="well-sm"><?php 
+				<p class="well-sm"><?php
 				if( $waldis != 'disabled' )
 				{
-				if($amount>$wallet_amount ){ 
+				if($amount>$wallet_amount ){
 				echo $amount."&nbsp;-&nbsp;".$wallet_amount."&nbsp;-&nbsp;".$netcomm."&emsp;=&nbsp;".($amount-$wallet_amount);
 				}else{
 					echo $wallet_amount."&nbsp;-&nbsp;".$amount.(($this->session->userdata('role_id') == 6) ? "&nbsp;+&nbsp;".$netcomm : '');
@@ -136,8 +136,8 @@
 				</div>
 			</div>
 			<div class="text-left col-md-12" style="display:block" >
-				<div style=""  id="payuMode">				
-					<p class="well-sm"><input type="checkbox" <?php echo $payuchk;?> name="payment" id="payupay" value="Payu">&emsp;<button <?php echo $payudis;?> type="submit" class="btn btn-info" id="payuproceed">&emsp;<!--<img src="<?php echo base_url();?>images/payu.jpg" title="Payu" alt="Payu">-->PAY BY ATOM</button></p>
+				<div style=""  id="payuMode">
+					<p class="well-sm"><input type="checkbox" <?php echo $payuchk;?> name="payment" id="payupay" value="Payu">&emsp;<button <?php echo $payudis;?> type="submit" class="btn btn-info" id="payuproceed">&emsp;<!--<img src="<?php echo base_url();?>images/payu.jpg" title="Payu" alt="Payu">-->PAY BY ATOMaaaaaaaaaa</button></p>
 				</div>
 			</div>
           </form>
@@ -156,7 +156,7 @@ function showpaymodes(id){
 		$("#payupay").prop("disabled", false);
 		$("#walletpay").prop("checked", true);
 		$("#payupay").prop("checked", true);
-		$("#payuproceed").prop("disabled", false);		
+		$("#payuproceed").prop("disabled", false);
 		<?php }else{?>
 		$("#payamount").val("<?php echo ($amount);?>");
 		$("#payupay").prop("disabled", true);
@@ -176,5 +176,5 @@ function showpaymodes(id){
 		$("#payuproceed").prop("disabled", false);
 		$("#walamount").val("0");
 	}
-} 
+}
 </script>
