@@ -47,7 +47,13 @@
 			  {
 				  if($amount >= $cbk_usg_service_obj['cbk_usg_min_amount'])
 				  {
-					  $useable_promo_wallet = $promo_wallet_amount*$cbk_usg_service_obj['cbk_usg_amount_percentage']/100;
+					  //check promotional wallet is through percentage or rupees
+					  if($cbk_usg_service_obj['cbk_usg_mode'] == 'PEC')
+					  {
+						  $useable_promo_wallet = $promo_wallet_amount * $cbk_usg_service_obj[ 'cbk_usg_amount_percentage' ] / 100;
+					  }else{
+						  $useable_promo_wallet = $cbk_usg_service_obj[ 'cbk_usg_amount_percentage' ];
+					  }
 					  $is_promo_wallet = true;
 				  }
 			  }
@@ -85,7 +91,7 @@
 			<input type="hidden" name="rcAmount" value="<?=$this->session->userdata('totalAmount')?>"/>
 			<input type="hidden" name="couponCode" value="<?=$this->session->userdata('couponCode')?>"/>
 			<input type="hidden" name="iscashback" value="<?=$this->session->userdata('iscashback')?>"/>
-			<span class="paydata" style="dispaly:none;" userType="<?php echo $this->session->userdata('role_id'); ?>" amount="<?php echo $amount; ?>" wallet_amount="<?php echo $wallet_amount; ?>" netcomm="<?php echo $netcomm; ?>" useable_promo_wallet="<?php echo $useable_promo_wallet; ?>" ></span>
+			<span class="paydata" style="dispaly:none;" userType="<?php echo $this->session->userdata('role_id'); ?>" amount="<?php echo round($amount,2); ?>" wallet_amount="<?php echo round($wallet_amount,2); ?>" netcomm="<?php echo round($netcomm,2); ?>" useable_promo_wallet="<?php echo round($useable_promo_wallet,2); ?>" ></span>
 			<div  class="text-left col-md-12">
 			<?php
                         //print_r($this->session->userdata);

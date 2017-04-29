@@ -105,7 +105,7 @@
 			<input type="hidden" name="totalAmount" value="<?=$this->session->userdata('totalAmount')?>"/>
 			<input type="hidden" name="couponCode" value="<?=$this->session->userdata('couponCode')?>"/>
 			<input type="hidden" name="iscashback" value="<?=$this->session->userdata('iscashback')?>"/>
-			<span class="paydata" style="dispaly:none;" userType="<?php echo $this->session->userdata('role_id'); ?>" amount="<?php echo $amount; ?>" wallet_amount="<?php echo $wallet_amount; ?>" netcomm="<?php echo $netcomm; ?>" useable_promo_wallet="<?php echo $useable_promo_wallet; ?>" ></span>
+			<span class="paydata" style="dispaly:none;" userType="<?php echo $this->session->userdata('role_id'); ?>" amount="<?php echo round($amount,2); ?>" wallet_amount="<?php echo round($wallet_amount,2); ?>" netcomm="<?php echo round($netcomm,2); ?>" useable_promo_wallet="<?php echo round($useable_promo_wallet,2); ?>" ></span>
 			<div  class="text-left col-md-12">
 			<?php
                         if($this->session->userdata('role_id') == 6){
