@@ -16,6 +16,7 @@ class Buses extends Template {
 
         $this->load->library('session');
         $this->load->model('users_model', 'users', TRUE );
+        $this->load->model('cashback_model');
         $this->load->model('Bus_booking', 'Booking_model', TRUE );
         $this->load->model('Category_Model', 'Cat', TRUE );
 		$this->load->model('Sale/Salemodel');
@@ -733,7 +734,7 @@ class Buses extends Template {
 					$this->db->where('id', $this->session->userdata('trans_id'));
                     $this->db->update('transaction', $data1);
 					//end update transaction
-
+                    $this->update_cashback_success();
                 }
 				$this->sendtktSMS();
                 //redirect('user/Orders#menu1');
@@ -933,6 +934,46 @@ $role_id=$this->session->userdata('role_id');
 	//end traveelwe
 	//var_dump($return_val);
    }
-
+   function update_cashback_success() {
+        if($this->session->userdata('useable_promo_wallet')){
+            $user_array1 = array(
+                'cbk_his_user_id' => $userId,
+                'cbk_his_txnid' => $this->session->userdata('txnid'),
+                'cbk_his_name' => $this->session->userdata('name'),
+                'cbk_his_mobile' => $this->session->userdata('mobile_no'),
+                'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
+                'cbk_his_service' => 'Recharge',
+                'cbk_his_info' => 'promotional walet usage',
+                'cbk_his_cbk_amount' => $this->session->userdata('useable_promo_wallet')
+            );
+            $amt = $this->session->userdata('useable_promo_wallet');
+            $this->users->saveCashbackHistory($user_array1);
+            $this->users->updatePromotionalWallet($userId, $amt,"sub");
+        }
+        $couponCode = $this->session->userdata('couponCode')
+        if($couponCode){
+            $cashback_offers = $this->cashback_model->getCashbackOffer($couponCode);
+            $cbk_offer = $cashback_offers[0];
+            $totalAmount_paid = $this->session->userdata('rcAmount');
+            if($cbk_offer["cbk_mode"] == "PER") {
+                $amount = round(($cbk_offer['cbk_amount_percentage']/$totalAmount_paid) * 100);
+            }else {
+                $amount = $cbk_offer['cbk_amount_percentage'];
+            }
+            $userId = $this->session->userdata('user_id');
+            $user_array = array(
+                    'cbk_his_user_id' => $userId,
+                    'cbk_his_txnid' => $this->session->userdata('txnid'),
+                    'cbk_his_name' => $this->session->userdata('name'),
+                    'cbk_his_mobile' => $this->session->userdata('mobile_no'),
+                    'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
+                    'cbk_his_service' => 'Recharge',
+                    'cbk_his_info' => 'Cashback',
+                    'cbk_his_cbk_amount' => $amount
+                );
+            $this->users->saveCashbackHistory($user_array);
+            $this->users->updatePromotionalWallet($userId, $amount,"add");
+        }
+    }
 }
 ?>

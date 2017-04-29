@@ -168,7 +168,7 @@ function checkCachbackCode(){
 			success: function (resultData) {
 //				alert(resultData);
 				console.log(resultData)
-				if(resultData)
+				if(resultData == "success")
 				{
 					console.log("ok");
 					$('#promo_success').show();
