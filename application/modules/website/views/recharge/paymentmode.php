@@ -58,7 +58,13 @@
 			  {
 				  if($amount >= $cbk_usg_service_obj['cbk_usg_min_amount'])
 				  {
-					$useable_promo_wallet = $promo_wallet_amount*$cbk_usg_service_obj['cbk_usg_amount_percentage']/100;
+					  //check promotional wallet is through percentage or rupees
+					  if($cbk_usg_service_obj['cbk_usg_mode'] == 'PEC')
+					  {
+						  $useable_promo_wallet = $promo_wallet_amount * $cbk_usg_service_obj[ 'cbk_usg_amount_percentage' ] / 100;
+					  }else{
+						  $useable_promo_wallet = $cbk_usg_service_obj[ 'cbk_usg_amount_percentage' ];
+					  }
 					$is_promo_wallet = true;
 				  }
 			  }
