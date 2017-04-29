@@ -238,7 +238,7 @@ $("#promoWallet").click(function()
 	console.log(paydataString);
 	$(".paydatares").html(paydataString);
 	$(".paynow_bal").html(paynow_bal);
-	$(".remaining_bal_str").html("Remaining Balance&emsp;"+remaining_bal_str);
+	$(".remaining_bal_str").html("Remaining Balance&emsp;"+remaining_bal_str.toFixed(2));
 
 });
 </script>
