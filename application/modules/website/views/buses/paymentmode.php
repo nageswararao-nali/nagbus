@@ -142,6 +142,9 @@
   </div>
 </div>
 <script>
+$(document).ready(function() {
+	alert("")
+})
 function showpaymodes(id){
 	if($("#walletpay").is(":checked")){
 		//$("#"+id).show();

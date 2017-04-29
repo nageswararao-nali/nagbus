@@ -41,6 +41,10 @@ class cashback_model extends CI_Model {
 		$results = $query->result();
 		return $results[0]->role_name;
 	}
+	public function getCashbackOffer($couponCode) {
+        $query = $this->db->get_where('va_cashback_offers', array("cbk_promo_code" => $couponCode));
+        return $query->result_array();
+	}
 
 
 }

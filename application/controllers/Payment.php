@@ -6,7 +6,8 @@ class Payment extends CI_Controller{
 		if($callParent){
 			parent::__construct();
 			$this->load->model('users_model', 'users', TRUE);
-	                $this->load->model(array('common_model'));
+            $this->load->model(array('common_model'));
+            $this->load->model('cashback_model');
 		}
 		
 	}
@@ -311,15 +312,22 @@ $tot_W_a = $wallet_amount+$totamount;
                 
 	}
 	function payment_failure(){
-		$obj = new Transaction_stages();
+		/*$obj = new Transaction_stages();
 		$obj->eighth_stage();
 		$obj->update_transaction_status();
 		//print_r($_POST);
 		//echo "Failed";
-		echo "Failed";
-		print_r($this->session->userdata());
-		die();
-		redirect('/');
+		redirect('/');*/
+
+		$obj = new Transaction_stages();
+		$obj->tenth_stage();
+		//$obj->update_transaction_finished($_POST['txnid']);
+		$obj->update_transaction_finished($this->session->userdata('txnid'));
+		if($this->session->userdata('iscashback')) {
+			$this->update_cashback_success();
+		}
+               // $this->recharge_success($_POST);
+			   $this->recharge_success_new($_POST);
 	}
 	function subscription_failure(){
 		$obj = new Transaction_stages();
@@ -345,13 +353,36 @@ $tot_W_a = $wallet_amount+$totamount;
 		//$obj->update_transaction_finished($_POST['txnid']);
 		$obj->update_transaction_finished($this->session->userdata('txnid'));
                // $this->recharge_success($_POST);
-			print_r($this->session->userdata());
-			die();   
-			   $this->recharge_success_new($_POST);
+		
+	    $this->recharge_success_new($_POST);
 
 		#print_r($_POST);exit;
 		#echo "Success";
 	}
+	function update_cashback_success() {
+		$couponCode = $this->session->userdata('couponCode') ? $this->session->userdata('couponCode') : 'LCB1741';
+		$cashback_offers = $this->cashback_model->getCashbackOffer($couponCode);
+		$cbk_offer = $cashback_offers[0];
+		$totalAmount_paid = $this->session->userdata('rcAmount');
+		if($cbk_offer["cbk_mode"] == "PER") {
+			$amount = round(($cbk_offer['cbk_amount_percentage']/$totalAmount_paid) * 100);
+		}else {
+			$amount = $cbk_offer['cbk_amount_percentage'];
+		}
+		$userId = $this->session->userdata('user_id');
+		$user_array = array(
+				'cbk_his_user_id' => $userId,
+				'cbk_his_txnid' => $this->session->userdata('txnid'),
+				'cbk_his_name' => $this->session->userdata('name'),
+				'cbk_his_mobile' => $this->session->userdata('mobile_no'),
+				'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
+				'cbk_his_service' => 'Recharge',
+				'cbk_his_cbk_amount' => $amount
+			);
+		$this->users->saveCashbackHistory($user_array);
+		$this->users->updatePromotionalWallet($userId, $amount);
+	}
+
         function wallet_recharge($txn_id, $redirection = true){
 //			echo "Debugging...";
 //			print_r($this->session->userdata());
@@ -888,376 +919,353 @@ $method="POST";
 			echo "<br>";
 			exit;*/
 				//$txn_id = $postVal['txnid'];
-				$txn_id = $this->session->userdata('txnid');
-                $uid=_UID;
-                $pin=_PIN;
-                $domain=_DOMAIN;
-		if(!$redirection){
-			$ci = get_instance();
-			$ci->load->model('users_model', 'users', TRUE);
-	                $ci->load->model(array('common_model'));
-		}else{
-			$ci = $this;
-		}
-		$mobile=$ci->session->userdata('mobile_no');
-                $amount=$ci->session->userdata('rcAmount');
-                $txnid=base64_encode($txn_id);
-                $operator=$ci->session->userdata('operator');
-                
-				$usertx  = rand(10000,99999)."_".time();
-				//$pin = "7109";	
+			$txn_id = $this->session->userdata('txnid');
+            $uid=_UID;
+            $pin=_PIN;
+            $domain=_DOMAIN;
+			if(!$redirection){
+				$ci = get_instance();
+				$ci->load->model('users_model', 'users', TRUE);
+		                $ci->load->model(array('common_model'));
+			}else{
+				$ci = $this;
+			}
+			$mobile=$ci->session->userdata('mobile_no');
+            $amount=$ci->session->userdata('rcAmount');
+            $txnid=base64_encode($txn_id);
+            $operator=$ci->session->userdata('operator');
+            
+			$usertx  = rand(10000,99999)."_".time();
+			//$pin = "7109";	
+			
+			//echo "PIN:".$pin;
+			
+			//$temp_var = rand(1000000,9999999);
+			//$uid = $uid.$temp_var;
+			
+			$uid = "766172696e69696e666f";
+			
+			$pin_array[1] = "e3564cdb9877b9ac1b87c74bc41d41c2";
+			$pin_array[2] = "dc4a5ba7e2d23d82c5d772e893d3c859";
+			$pin_array[3] = "d488df20cc13eb1c78598e1f4590781e";
+			$pin_array[4] = "c0443ab7d99cf1d6f9f62c552afc0ec2";
+			$pin_array[5] = "bcb5a3ff2d293b86bbabdd8acc516cc4";
+			$pin_array[6] = "2239aef41613bac36954531fb6153d5a";
 				
-				//echo "PIN:".$pin;
-				
-				//$temp_var = rand(1000000,9999999);
-				//$uid = $uid.$temp_var;
-				
-				$uid = "766172696e69696e666f";
-				
-				$pin_array[1] = "e3564cdb9877b9ac1b87c74bc41d41c2";
-				$pin_array[2] = "dc4a5ba7e2d23d82c5d772e893d3c859";
-				$pin_array[3] = "d488df20cc13eb1c78598e1f4590781e";
-				$pin_array[4] = "c0443ab7d99cf1d6f9f62c552afc0ec2";
-				$pin_array[5] = "bcb5a3ff2d293b86bbabdd8acc516cc4";
-				$pin_array[6] = "2239aef41613bac36954531fb6153d5a";
-				
-				if(!isset($_SESSION["recharge_frequency"]))
-				{
-					$_SESSION["recharge_frequency"] = 1;
-				}
-				else
-				{
-					$_SESSION["recharge_frequency"]++;
-				}	
+			if(!isset($_SESSION["recharge_frequency"]))
+			{
+				$_SESSION["recharge_frequency"] = 1;
+			}
+			else
+			{
+				$_SESSION["recharge_frequency"]++;
+			}	
 
-				$recharge_type_sess = $ci->session->userdata('recharge_type');
-				$acc_no_sess = $ci->session->userdata('postpaid_acc_no');			
-				
-				$pin = $pin_array[$_SESSION["recharge_frequency"]];
-				if($recharge_type_sess == "Mobile postpaid")
-				{
-					$parameters="uid=$uid&pin=$pin&number=$mobile&operator=$operator&circle=1&account=$acc_no_sess&amount=$amount&usertx=$usertx&format=json&version=4";
-				}
-				else
-				{
-					$parameters="uid=$uid&pin=$pin&number=$mobile&operator=$operator&circle=1&amount=$amount&usertx=$usertx&format=json&version=4";
-				}
+			$recharge_type_sess = $ci->session->userdata('recharge_type');
+			$acc_no_sess = $ci->session->userdata('postpaid_acc_no');			
+			
+			$pin = $pin_array[$_SESSION["recharge_frequency"]];
+			if($recharge_type_sess == "Mobile postpaid")
+			{
+				$parameters="uid=$uid&pin=$pin&number=$mobile&operator=$operator&circle=1&account=$acc_no_sess&amount=$amount&usertx=$usertx&format=json&version=4";
+			}
+			else
+			{
+				$parameters="uid=$uid&pin=$pin&number=$mobile&operator=$operator&circle=1&amount=$amount&usertx=$usertx&format=json&version=4";
+			}
 
-                $url="http://$domain/api/recharge.php";
+            $url="http://$domain/api/recharge.php";
 
 				/*echo "URL:".$url;
 				echo "<br>";
 				echo "parameters:".$parameters;*/
 				
-                $ch = curl_init($url);
+            $ch = curl_init($url);
 
-           
-                $get_url=$url."?".$parameters;
+       
+            $get_url=$url."?".$parameters;
 
-                curl_setopt($ch, CURLOPT_POST,0);
-                curl_setopt($ch, CURLOPT_URL, $get_url);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-                curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
-                $curl_return = curl_exec($ch);
-                $return_val=json_decode($curl_return);
-		$rechargeMessage = $return_val->message;		
+            curl_setopt($ch, CURLOPT_POST,0);
+            curl_setopt($ch, CURLOPT_URL, $get_url);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
+            curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+            $curl_return = curl_exec($ch);
+            $return_val=json_decode($curl_return);
+			$rechargeMessage = $return_val->message;		
 				//var_dump($return_val);
 				//exit;
-                $user_id=$ci->session->userdata('user_id');
-				$mark_as_credit_user=$ci->session->userdata('mark_credit');
-		$wamt = $ci->session->userdata('wallet_amount');
-                if($return_val->status=='SUCCESS'){
-                    $whereCondition=array('transaction_id'=>$txn_id);
-		    $updateArrayData=array('status'=>1);
-		    $ci->common_model->commonUpdate('orders',$updateArrayData,$whereCondition);
-			
-			$whereConditionT=array('sales_id'=>$txn_id);
-		    $updateArrayDataT=array('transaction_status'=>1,'mark_as_credit_user'=>$mark_as_credit_user);			
-			$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
-			
-			
-			
-			
-		    $whereCondition1=array('user_id'=>$user_id);
-			
-			//Net wallet amount
-			//Net wallet amount 20052016
-			$commision_amt = $ci->users->get_AgentCommisionAmount($txn_id);
-			/*echo "DEBUGGING...";
-			print("<pre>");
-			print_r($commision_amt);
-			exit;*/
-			$netcomm = 0;
-			$agent_comm = $commision_amt[0]->agent_comm;
-			$agent_ref_comm = $commision_amt[0]->agent_ref_comm;
-			if( $agent_comm > $agent_ref_comm)
-			{
-				$netcomm = $agent_comm;
-			}
-			else
-			{
-				$netcomm = $agent_ref_comm;
-			}
-			$netcomm = $ci->session->userdata('netcomm');
-			$wamt = $wamt + $netcomm;
-			//echo $wam = $wam + $netcomm;exit;
-			//Net Wallet Amount 20052016
-			//Net Wallet Amount
-		    $updateArrayData1=array('wallet'=>$wamt);
-			
-			$extra['op'] = $ci->session->userdata('operator');
-			$extra['role'] = $ci->session->userdata('role_id');
-		    //$this->common_model->commonUpdate('users',$updateArrayData1,$whereCondition1,$extra);
-			////$this->common_model->commonUpdate('users',$updateArrayData1,$whereCondition1); Wallet amount should not be updated.
-			$whereConditionT=array('sales_id'=>$txn_id);
-		    $updateArrayDataT=array('transaction_status'=>1);
-			$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
-			
-			
-			
-			//SMS
-								
-//Code using curl
-
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
-
-//Change your configurations here.
-//---------------------------------
-$uid="766172696e69696e666f"; //your uid
-$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
-$sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
-$route="5";// 0-Normal,1-Priority
-$method="POST";
-//---------------------------------
-
-
-
-	//$mobile = $this->input->post('mobile',TRUE);
-	$name = $ci->session->userdata('name');
-	$mobile=$ci->session->userdata('mobile_no');
-    $amount=$ci->session->userdata('rcAmount');
-	
-	//echo $mobile;exit;
-
-	//$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
-	$message = 'Dear '.$name.', You have successfully  recharges  INR '.$amount.'. with www.laabus.com download  app @ https://goo.gl/QWUiJB';
-
-	//$uid=urlencode($uid);
-	//$pin=urlencode($pin);
-	//$sender=urlencode($sender);
-	$message=urlencode($message);
-	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
-	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
-
-	$url="http://$domain/api/sms.php";
-
-	$ch = curl_init($url);
-
-	if($method=="POST")
-	{
-		curl_setopt($ch, CURLOPT_POST,1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
-	}
-	else
-	{
-		$get_url=$url."?".$parameters;
-
-		curl_setopt($ch, CURLOPT_POST,0);
-		curl_setopt($ch, CURLOPT_URL, $get_url);
-	}
-
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
-	$return_val = curl_exec($ch);
-
-								//SMD
-			if($redirection){
-			    redirect('recharge/success/'.$txnid);
-			}else{
-			    return array('status'=>'success', 'txnid' => $postVal['txnid'], 'msg' => $rechargeMessage);
-			}
-                }elseif($return_val->status=='FAILURE'){
-                    $whereCondition=array('transaction_id'=>$txn_id);
-		    $updateArrayData=array('status'=>0);
-		    $ci->common_model->commonUpdate('orders',$updateArrayData,$whereCondition);
-			
-			$whereConditionT=array('sales_id'=>$txn_id);
-		    $updateArrayDataT=array('transaction_status'=>2);			
-			$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
-			
-			
-			//Net wallet amount
-			//Net wallet amount 20052016
-			$commision_amt = $ci->users->get_AgentCommisionAmount($txn_id);
-			/*echo "DEBUGGING...";
-			print("<pre>");
-			print_r($commision_amt);
-			exit;*/
-			$netcomm = 0;
-			$agent_comm = $commision_amt[0]->agent_comm;
-			$agent_ref_comm = $commision_amt[0]->agent_ref_comm;
-			if( $agent_comm > $agent_ref_comm)
-			{
-				$netcomm = $agent_comm;
-			}
-			else
-			{
-				$netcomm = $agent_ref_comm;
-			}
-			$wamt = $wamt + $netcomm;//exit;
-			
-			
-			
-			//SMS
-								
-//Code using curl
-
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
-
-//Change your configurations here.
-//---------------------------------
-$uid="766172696e69696e666f"; //your uid
-$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
-$sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
-$route="5";// 0-Normal,1-Priority
-$method="POST";
-//---------------------------------
-
-
-
-	//$mobile = $this->input->post('mobile',TRUE);
-	$name = $ci->session->userdata('name');
-	$mobile=$ci->session->userdata('mobile_no');
-    $amount=$ci->session->userdata('rcAmount');
-	
-	//echo $mobile;exit;
-
-	//$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
-	$message = 'Dear '.$name.', Your recharges for INR '.$amount.'. with www.laabus.com failed. download app @ https://goo.gl/QWUiJB';
-
-	//$uid=urlencode($uid);
-	//$pin=urlencode($pin);
-	//$sender=urlencode($sender);
-	$message=urlencode($message);
-	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
-	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
-
-	$url="http://$domain/api/sms.php";
-
-	$ch = curl_init($url);
-
-	if($method=="POST")
-	{
-		curl_setopt($ch, CURLOPT_POST,1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
-	}
-	else
-	{
-		$get_url=$url."?".$parameters;
-
-		curl_setopt($ch, CURLOPT_POST,0);
-		curl_setopt($ch, CURLOPT_URL, $get_url);
-	}
-
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
-	$return_val = curl_exec($ch);
-
-								//SMD
-			
-			
-			if($redirection){
-			    redirect('recharge/failure/'.$txnid);
-			}else{
-			    return array('status'=>'failure', 'txnid' => $postVal['txnid'], 'msg' => $rechargeMessage);
-			}
-			
-                    
-                }elseif($return_val->status=='CANCEL'){
-                    $whereCondition=array('transaction_id'=>$txn_id);
-		    $updateArrayData=array('status'=>0);
-		    $ci->common_model->commonUpdate('orders',$updateArrayData,$whereCondition);
-			
-			$whereConditionT=array('sales_id'=>$txn_id);
-		    $updateArrayDataT=array('transaction_status'=>3);			
-			$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
-			
-                    
-					//SMS
-								
-//Code using curl
-
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
-
-//Change your configurations here.
-//---------------------------------
-$uid="766172696e69696e666f"; //your uid
-$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
-$sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
-$route="5";// 0-Normal,1-Priority
-$method="POST";
-//---------------------------------
-
-
-
-	//$mobile = $this->input->post('mobile',TRUE);
-	$name = $ci->session->userdata('name');
-	$mobile=$ci->session->userdata('mobile_no');
-    $amount=$ci->session->userdata('rcAmount');
-	
-	//echo $mobile;exit;
-
-	//$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
-	$message = 'Dear '.$name.', Your recharges for INR '.$amount.'. with www.laabus.com failed. download app @ https://goo.gl/QWUiJB';
-
-	//$uid=urlencode($uid);
-	//$pin=urlencode($pin);
-	//$sender=urlencode($sender);
-	$message=urlencode($message);
-	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
-	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
-
-	$url="http://$domain/api/sms.php";
-
-	$ch = curl_init($url);
-
-	if($method=="POST")
-	{
-		curl_setopt($ch, CURLOPT_POST,1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
-	}
-	else
-	{
-		$get_url=$url."?".$parameters;
-
-		curl_setopt($ch, CURLOPT_POST,0);
-		curl_setopt($ch, CURLOPT_URL, $get_url);
-	}
-
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
-	$return_val = curl_exec($ch);
-
-								//SMD
-	if($redirection){
-	    redirect('recharge/cancel/'.$txnid); 
-	}else{
-	    return array('status'=>'cancel', 'txnid' => $postVal['txnid'], 'msg' => $rechargeMessage);	
-	}					
-
-                }              
+            $user_id=$ci->session->userdata('user_id');
+			$mark_as_credit_user=$ci->session->userdata('mark_credit');
+			$wamt = $ci->session->userdata('wallet_amount');
+            if($return_val->status=='SUCCESS'){
+                $whereCondition=array('transaction_id'=>$txn_id);
+			    $updateArrayData=array('status'=>1);
+			    $ci->common_model->commonUpdate('orders',$updateArrayData,$whereCondition);
+				$whereConditionT=array('sales_id'=>$txn_id);
+			    $updateArrayDataT=array('transaction_status'=>1,'mark_as_credit_user'=>$mark_as_credit_user);			
+				$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
+			    $whereCondition1=array('user_id'=>$user_id);
+				//Net wallet amount
+				//Net wallet amount 20052016
+				$commision_amt = $ci->users->get_AgentCommisionAmount($txn_id);
+				/*echo "DEBUGGING...";
+				print("<pre>");
+				print_r($commision_amt);
+				exit;*/
+				$netcomm = 0;
+				$agent_comm = $commision_amt[0]->agent_comm;
+				$agent_ref_comm = $commision_amt[0]->agent_ref_comm;
+				if( $agent_comm > $agent_ref_comm)
+				{
+					$netcomm = $agent_comm;
+				}
+				else
+				{
+					$netcomm = $agent_ref_comm;
+				}
+				$netcomm = $ci->session->userdata('netcomm');
+				$wamt = $wamt + $netcomm;
+				//echo $wam = $wam + $netcomm;exit;
+				//Net Wallet Amount 20052016
+				//Net Wallet Amount
+			    $updateArrayData1=array('wallet'=>$wamt);
 				
+				$extra['op'] = $ci->session->userdata('operator');
+				$extra['role'] = $ci->session->userdata('role_id');
+			    //$this->common_model->commonUpdate('users',$updateArrayData1,$whereCondition1,$extra);
+				////$this->common_model->commonUpdate('users',$updateArrayData1,$whereCondition1); Wallet amount should not be updated.
+				$whereConditionT=array('sales_id'=>$txn_id);
+			    $updateArrayDataT=array('transaction_status'=>1);
+				$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
+			//SMS
+								
+//Code using curl
 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+
+				//Change your configurations here.
+				//---------------------------------
+				$uid="766172696e69696e666f"; //your uid
+				$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
+				$sender="LAABUS"; // approved sender id
+				$domain="smsalertbox.com"; // connecting url 
+				$route="5";// 0-Normal,1-Priority
+				$method="POST";
+				//---------------------------------
+				//$mobile = $this->input->post('mobile',TRUE);
+				$name = $ci->session->userdata('name');
+				$mobile=$ci->session->userdata('mobile_no');
+			    $amount=$ci->session->userdata('rcAmount');
+	
+				//echo $mobile;exit;
+
+				//$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
+				$message = 'Dear '.$name.', You have successfully  recharges  INR '.$amount.'. with www.laabus.com download  app @ https://goo.gl/QWUiJB';
+
+				//$uid=urlencode($uid);
+				//$pin=urlencode($pin);
+				//$sender=urlencode($sender);
+				$message=urlencode($message);
+				//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+				
+				$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+				$url="http://$domain/api/sms.php";
+
+				$ch = curl_init($url);
+
+				if($method=="POST")
+				{
+					curl_setopt($ch, CURLOPT_POST,1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+				}
+				else
+				{
+					$get_url=$url."?".$parameters;
+
+					curl_setopt($ch, CURLOPT_POST,0);
+					curl_setopt($ch, CURLOPT_URL, $get_url);
+				}
+
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
+				curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+				$return_val = curl_exec($ch);
+				if($this->session->userdata('iscashback')) {
+					$this->update_cashback_success();
+				}
+											//SMD
+				if($redirection){
+				    redirect('recharge/success/'.$txnid);
+				}else{
+				    return array('status'=>'success', 'txnid' => $postVal['txnid'], 'msg' => $rechargeMessage);
+				}
+            }elseif($return_val->status=='FAILURE'){
+                $whereCondition=array('transaction_id'=>$txn_id);
+			    $updateArrayData=array('status'=>0);
+			    $ci->common_model->commonUpdate('orders',$updateArrayData,$whereCondition);
+				
+				$whereConditionT=array('sales_id'=>$txn_id);
+			    $updateArrayDataT=array('transaction_status'=>2);			
+				$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
+				
+				
+				//Net wallet amount
+				//Net wallet amount 20052016
+				$commision_amt = $ci->users->get_AgentCommisionAmount($txn_id);
+				/*echo "DEBUGGING...";
+				print("<pre>");
+				print_r($commision_amt);
+				exit;*/
+				$netcomm = 0;
+				$agent_comm = $commision_amt[0]->agent_comm;
+				$agent_ref_comm = $commision_amt[0]->agent_ref_comm;
+				if( $agent_comm > $agent_ref_comm)
+				{
+					$netcomm = $agent_comm;
+				}
+				else
+				{
+					$netcomm = $agent_ref_comm;
+				}
+				$wamt = $wamt + $netcomm;//exit;
+							//SMS
+												
+				//Code using curl
+
+				//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+
+				//Change your configurations here.
+				//---------------------------------
+				$uid="766172696e69696e666f"; //your uid
+				$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
+				$sender="LAABUS"; // approved sender id
+				$domain="smsalertbox.com"; // connecting url 
+				$route="5";// 0-Normal,1-Priority
+				$method="POST";
+				//---------------------------------
+				//$mobile = $this->input->post('mobile',TRUE);
+				$name = $ci->session->userdata('name');
+				$mobile=$ci->session->userdata('mobile_no');
+			    $amount=$ci->session->userdata('rcAmount');
+	
+				//echo $mobile;exit;
+
+				//$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
+				$message = 'Dear '.$name.', Your recharges for INR '.$amount.'. with www.laabus.com failed. download app @ https://goo.gl/QWUiJB';
+
+				//$uid=urlencode($uid);
+				//$pin=urlencode($pin);
+				//$sender=urlencode($sender);
+				$message=urlencode($message);
+				//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+				
+				$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+				$url="http://$domain/api/sms.php";
+
+				$ch = curl_init($url);
+
+				if($method=="POST")
+				{
+					curl_setopt($ch, CURLOPT_POST,1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+				}
+				else
+				{
+					$get_url=$url."?".$parameters;
+
+					curl_setopt($ch, CURLOPT_POST,0);
+					curl_setopt($ch, CURLOPT_URL, $get_url);
+				}
+
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
+				curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+				$return_val = curl_exec($ch);
+
+								//SMD
+			
+			
+				if($redirection){
+				    redirect('recharge/failure/'.$txnid);
+				}else{
+				    return array('status'=>'failure', 'txnid' => $postVal['txnid'], 'msg' => $rechargeMessage);
+				}
+			
+                    
+            }elseif($return_val->status=='CANCEL'){
+                $whereCondition=array('transaction_id'=>$txn_id);
+			    $updateArrayData=array('status'=>0);
+			    $ci->common_model->commonUpdate('orders',$updateArrayData,$whereCondition);
+				
+				$whereConditionT=array('sales_id'=>$txn_id);
+			    $updateArrayDataT=array('transaction_status'=>3);			
+				$ci->common_model->commonUpdateTransaction('transaction',$updateArrayDataT,$whereConditionT);
+					//SMS
+				//Code using curl
+
+				//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+
+				//Change your configurations here.
+				//---------------------------------
+				$uid="766172696e69696e666f"; //your uid
+				$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
+				$sender="LAABUS"; // approved sender id
+				$domain="smsalertbox.com"; // connecting url 
+				$route="5";// 0-Normal,1-Priority
+				$method="POST";
+				//---------------------------------
+
+				//$mobile = $this->input->post('mobile',TRUE);
+				$name = $ci->session->userdata('name');
+				$mobile=$ci->session->userdata('mobile_no');
+			    $amount=$ci->session->userdata('rcAmount');
+	
+				//echo $mobile;exit;
+
+				//$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
+				$message = 'Dear '.$name.', Your recharges for INR '.$amount.'. with www.laabus.com failed. download app @ https://goo.gl/QWUiJB';
+
+				//$uid=urlencode($uid);
+				//$pin=urlencode($pin);
+				//$sender=urlencode($sender);
+				$message=urlencode($message);
+				//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+				
+				$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+				$url="http://$domain/api/sms.php";
+
+				$ch = curl_init($url);
+
+				if($method=="POST")
+				{
+					curl_setopt($ch, CURLOPT_POST,1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+				}
+				else
+				{
+					$get_url=$url."?".$parameters;
+
+					curl_setopt($ch, CURLOPT_POST,0);
+					curl_setopt($ch, CURLOPT_URL, $get_url);
+				}
+
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
+				curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+				$return_val = curl_exec($ch);
+
+											//SMD
+				if($redirection){
+				    redirect('recharge/cancel/'.$txnid); 
+				}else{
+				    return array('status'=>'cancel', 'txnid' => $postVal['txnid'], 'msg' => $rechargeMessage);	
+				}					
+
+            }              
         }
 	function recharge_success($postVal){
             
