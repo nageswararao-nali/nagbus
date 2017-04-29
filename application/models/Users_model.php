@@ -8,11 +8,11 @@ class Users_Model extends CI_Model {
 		parent::__construct();
 		$this->load->library('session');
 	}
-	
+
 	public function get_roles() {
 		$this->db->select('*');
 		$this->db->from('roles');
-		
+
 
 		$where = "role_id in(2,4,6)";
 
@@ -30,9 +30,9 @@ class Users_Model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
+
 	public function getOffersplan($operator,$amount){
-		
+
 		$this->db->select('benifits as validity');
 		$this->db->from('va_recharge_offers_test');
 		if($operator == 1 )
@@ -56,7 +56,7 @@ class Users_Model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
-	
+
 	public function get_supportmatrix() {
 		$this->db->select('*');
 		$this->db->from('support_matrix');
@@ -72,7 +72,7 @@ class Users_Model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function getstatearray($country_id) {
 		// echo "<pre>"; print_r($country_id);
 	 	$this->db->select('*');
@@ -81,9 +81,9 @@ class Users_Model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
 	}
-	
-	
-	
+
+
+
 
 	public function getdistrict($state_id) {
 		// echo "<pre>"; print_r($country_id);
@@ -109,43 +109,43 @@ class Users_Model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function getoffers() {
 		$this->db->select('*');
 	 	$this->db->from('joining_offers');
-		$where = "FIND_IN_SET('1', users)";  
-		$this->db->where( $where ); 
-		$this->db->order_by("id", "desc");		
+		$where = "FIND_IN_SET('1', users)";
+		$this->db->where( $where );
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
         return $query->result();
 	}
-	
-	
+
+
 	public function getoffersusers($role_id) {
 		$this->db->select('*');
 	 	$this->db->from('joining_offers');
-		//$where = "FIND_IN_SET('1', users)";  
+		//$where = "FIND_IN_SET('1', users)";
 		if($role_id == 4)
-			$where = "FIND_IN_SET('2', users)"; 
+			$where = "FIND_IN_SET('2', users)";
 		if($role_id == 44 )
-			$where = "FIND_IN_SET('3', users)"; 
-		$this->db->where( $where ); 
-		$this->db->order_by("id", "desc");		
+			$where = "FIND_IN_SET('3', users)";
+		$this->db->where( $where );
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function getsubscription() {
 		$this->db->select('*');
-	 	$this->db->from('agent_subscription_offers');		
-		$where3 = "NOW() BETWEEN start_date AND end_date";  
-		$this->db->where( $where3 ); 
-		$this->db->order_by("id", "desc");		
+	 	$this->db->from('agent_subscription_offers');
+		$where3 = "NOW() BETWEEN start_date AND end_date";
+		$this->db->where( $where3 );
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
         return $query->result();
 	}
-	
-	
+
+
 	public function getjoiningoffers($role_id,$promo_code) {
 		if($role_id == 4 )
 		{
@@ -159,26 +159,26 @@ class Users_Model extends CI_Model {
 		{
 			$usertype = 3;
 		}
-		
+
 		$this->db->select('*');
 	 	$this->db->from('joining_offers');
-		
-		$where = "FIND_IN_SET($usertype, users)";  
-		$this->db->where( $where ); 
-		
-		$where2 = "FIND_IN_SET('2', avl_options)";  
+
+		$where = "FIND_IN_SET($usertype, users)";
+		$this->db->where( $where );
+
+		$where2 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where2 );
-		
+
 		//$this->db->where('promo_code', $promo_code);
 
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
-		$this->db->order_by("id", "desc");		
+
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	////////
 	public function getjoiningoffersWalletDetails($role_id,$promo_code) {
 		if($role_id == 4 )
@@ -193,53 +193,53 @@ class Users_Model extends CI_Model {
 		{
 			$usertype = 3;
 		}
-		
+
 		$this->db->select('*');
 	 	$this->db->from('joining_offers');
-		
-		$where = "FIND_IN_SET($usertype, users)";  
-		$this->db->where( $where ); 
-		
-		$where2 = "FIND_IN_SET('1', avl_options)";  
-		$this->db->where( $where2 );
-		
-		//$this->db->where('promo_code', $promo_code);
-		
 
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where = "FIND_IN_SET($usertype, users)";
+		$this->db->where( $where );
+
+		$where2 = "FIND_IN_SET('1', avl_options)";
+		$this->db->where( $where2 );
+
+		//$this->db->where('promo_code', $promo_code);
+
+
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
-		$this->db->order_by("id", "desc");		
+
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
 		$result = $query->result();
-		
-		
-		
+
+
+
 		$this->db->select('*');
-	 	$this->db->from('users');		
+	 	$this->db->from('users');
 		$this->db->where('joining_offfer_wallet_amount_status', 0);
 		$this->db->where("user_id", $this->session->userdata('user_id'));
 		$query = $this->db->get();
 		$result2 = $query->result();
 		if(!empty($result2))
 			return $result;
-		else  
+		else
 			return array();
-		
-		
-        
+
+
+
 	}
 	/////
-	
+
 	public function check_promocode($promo_code,$amount='',$role_id='')
 	{
-		
+
 		//check if user used the promo code
 		$this->db->select('*');
-	 	$this->db->from('users');	
-		$where = "FIND_IN_SET('$promo_code', promo_code)";  
+	 	$this->db->from('users');
+		$where = "FIND_IN_SET('$promo_code', promo_code)";
 		$this->db->where( $where );
-		$this->db->where("user_id", $this->session->userdata('user_id'));				
+		$this->db->where("user_id", $this->session->userdata('user_id'));
         $query = $this->db->get();
 		$result = $query->result();
 		if(!empty($result))
@@ -247,17 +247,17 @@ class Users_Model extends CI_Model {
 			return "1";
 		}
 		else
-		{			
-			//check promo code in joining 
+		{
+			//check promo code in joining
 			$exists = 1;
 			$exists2 = 1;
 			$exists3 = 1;
-			
+
 			$this->db->select('*');
-			$this->db->from('joining_offers');	
+			$this->db->from('joining_offers');
 			$this->db->where('promo_code', $promo_code);
-			$where3 = "NOW() BETWEEN st_date AND end_date";  
-			$this->db->where( $where3 );			
+			$where3 = "NOW() BETWEEN st_date AND end_date";
+			$this->db->where( $where3 );
 			$query = $this->db->get();
 			$result = $query->result();
 			if(empty($result))
@@ -265,15 +265,15 @@ class Users_Model extends CI_Model {
 				//return "0";
 				$exists =0;
 			}
-			
+
 			//check promo code in wallet with exact amount type.
 			$this->db->select('*');
-			$this->db->from('joining_wallet_offers');	
+			$this->db->from('joining_wallet_offers');
 			$this->db->where('promo_code', $promo_code);
 			$this->db->where('org_amount', $amount);
-			$where3 = "NOW() BETWEEN start_date AND end_date";  
+			$where3 = "NOW() BETWEEN start_date AND end_date";
 			$this->db->where( $where3 );
-			
+
 			if($role_id == 4 )
 			{
 				$usertype = 2;
@@ -287,8 +287,8 @@ class Users_Model extends CI_Model {
 				$usertype = 3;
 			}
 
-			$where = "FIND_IN_SET('$usertype', users_type_ids)";  
-			$this->db->where( $where );			
+			$where = "FIND_IN_SET('$usertype', users_type_ids)";
+			$this->db->where( $where );
 			$query = $this->db->get();
 			$result = $query->result();
 			if(empty($result))
@@ -296,20 +296,20 @@ class Users_Model extends CI_Model {
 				//return "0";
 				$exists2 =0;
 			}
-			
+
 			//check promo code in wallet with UPTO amount type.
 			$this->db->select('*');
-			$this->db->from('joining_wallet_offers');	
+			$this->db->from('joining_wallet_offers');
 			$this->db->where('promo_code', $promo_code);
 			//$this->db->where('org_amount', $amount);
-			
-			$where5 = "$amount BETWEEN org_amount AND org_amount_max";  
+
+			$where5 = "$amount BETWEEN org_amount AND org_amount_max";
 			$this->db->where( $where5 );
-			
-			
-			$where3 = "NOW() BETWEEN start_date AND end_date";  
+
+
+			$where3 = "NOW() BETWEEN start_date AND end_date";
 			$this->db->where( $where3 );
-			
+
 			if($role_id == 4 )
 			{
 				$usertype = 2;
@@ -323,15 +323,15 @@ class Users_Model extends CI_Model {
 				$usertype = 3;
 			}
 
-			$where = "FIND_IN_SET('$usertype', users_type_ids)";  
-			$this->db->where( $where );			
+			$where = "FIND_IN_SET('$usertype', users_type_ids)";
+			$this->db->where( $where );
 			$query = $this->db->get();
 			$result = $query->result();
 			if(empty($result))
 			{
 				//return "0";
 				$exists3 =0;
-			}			
+			}
 			if($exists == 0 && $exists2 == 0 && $exists3 ==0   )
 			{
 				return "0";
@@ -340,33 +340,33 @@ class Users_Model extends CI_Model {
 			{
 				return "OK";
 			}
-			
+
 			//return $exists;
-				
-		}	
-		
+
+		}
+
 	}
-	
-	
+
+
 	////////
 	public function getjoiningoffersTotalAmount() {
-		
+
 		$this->db->select('SUM(amount) as tot');
 	 	$this->db->from('user_used_offers');
 		$this->db->where('user_id', $this->session->userdata('user_id'));
 		$this->db->where('offer_type', 2);
-		$this->db->group_by('user_id');		
+		$this->db->group_by('user_id');
         $query = $this->db->get();
 		$result = $query->result();
 		return $result;
 	}
 	public function getwalletoffersTotalAmount() {
-		
+
 		$this->db->select('SUM(amount) as tot');
 	 	$this->db->from('user_used_offers');
 		$this->db->where('user_id', $this->session->userdata('user_id'));
 		$this->db->where('offer_type', 1);
-		$this->db->group_by('user_id');		
+		$this->db->group_by('user_id');
         $query = $this->db->get();
 		$result = $query->result();
 		return $result;
@@ -384,53 +384,53 @@ class Users_Model extends CI_Model {
 		{
 			$usertype = 3;
 		}
-		
+
 		$this->db->select('*');
 	 	$this->db->from('joining_offers');
-		
-		$where = "FIND_IN_SET($usertype, users)";  
-		$this->db->where( $where ); 
-		
-		$where2 = "FIND_IN_SET('1', avl_options)";  
-		$this->db->where( $where2 );
-		
-		$this->db->where('promo_code', $promo_code);
-		
 
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where = "FIND_IN_SET($usertype, users)";
+		$this->db->where( $where );
+
+		$where2 = "FIND_IN_SET('1', avl_options)";
+		$this->db->where( $where2 );
+
+		$this->db->where('promo_code', $promo_code);
+
+
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
-		$this->db->order_by("id", "desc");		
+
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
 		$result = $query->result();
-		
-		
-		
+
+
+
 		$this->db->select('*');
-	 	$this->db->from('users');		
+	 	$this->db->from('users');
 		$this->db->where('joining_offfer_wallet_amount_status', 0);
 		$this->db->where("user_id", $this->session->userdata('user_id'));
 		$query = $this->db->get();
 		$result2 = $query->result();
 		if(!empty($result2))
 			return $result;
-		else  
+		else
 			return array();
-		
-		
-        
+
+
+
 	}
-	
+
 	public function checkUserTypeLaabus($user_id='')
 	{
 		$this->db->select('*');
-	 	$this->db->from('users');		
+	 	$this->db->from('users');
 		$this->db->where('user_id', $user_id);
 		$query = $this->db->get();
-		$result = $query->result();	
+		$result = $query->result();
 		return $result;
 	}
-	
+
 	public function getwalletoffersWalletDetailsPromoCode($role_id,$promo_code,$amount='',$exact_upto='') {
 		if($role_id == 4 )
 		{
@@ -444,47 +444,47 @@ class Users_Model extends CI_Model {
 		{
 			$usertype = 3;
 		}
-		
+
 		$this->db->select('*');
 	 	$this->db->from('joining_wallet_offers');
-		
-		$where = "FIND_IN_SET($usertype, users_type_ids)";  
-		$this->db->where( $where ); 		
-		
-		$this->db->where('promo_code', $promo_code);
-		
 
-		$where3 = "NOW() BETWEEN start_date AND end_date";  
+		$where = "FIND_IN_SET($usertype, users_type_ids)";
+		$this->db->where( $where );
+
+		$this->db->where('promo_code', $promo_code);
+
+
+		$where3 = "NOW() BETWEEN start_date AND end_date";
 		$this->db->where( $where3 );
 		if( $exact_upto == "upto")
 		{
-		$where4 = "$amount BETWEEN org_amount AND org_amount_max"; 
+		$where4 = "$amount BETWEEN org_amount AND org_amount_max";
 		$this->db->where( $where4 );
 		}
 		else
 		{
 			$this->db->where('org_amount', $amount);
-				
+
 		}
-		$this->db->order_by("id", "desc");		
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
 		$result = $query->result();
-		
+
 		return $result;
 		/*$this->db->select('*');
-	 	$this->db->from('users');		
+	 	$this->db->from('users');
 		$this->db->where('joining_offfer_wallet_amount_status', 0);
 		$this->db->where("user_id", $this->session->userdata('user_id'));
 		$query = $this->db->get();
 		$result2 = $query->result();
 		if(!empty($result2))
 			return $result;
-		else  
+		else
 			return array();
-		*/	
-        
+		*/
+
 	}
-	
+
 	public function update_wallet_bus($amount,$user_id)
 	{
 		//$array_cust["xxx"] = 1;
@@ -497,118 +497,118 @@ class Users_Model extends CI_Model {
 		$array_cust["joining_offfer_wallet_amount_status"] = 1;
 		//$promo_code = ",".$promo_code;
 		//$array_cust["promo_code"] = "if(promo_code is null, $promo_code, concat(promo_code, $promo_code));"	;
-		
-		$this->db->set('promo_code', "if(promo_code is null, '".$promo_code."', CONCAT(promo_code,',','".$promo_code."'))", FALSE); 
-	
-		$this->db->where('user_id', $user_id);								
+
+		$this->db->set('promo_code', "if(promo_code is null, '".$promo_code."', CONCAT(promo_code,',','".$promo_code."'))", FALSE);
+
+		$this->db->where('user_id', $user_id);
 		$query = $this->db->update('users',$array_cust);
-		
+
 		//add offer data to db
 		$insert_offer = array(
 				"promo_code" => $promo_code,
 				"user_id" => $user_id,
 				"offer_type" => $offer_type,
-				"amount" => $offer_amt,				
+				"amount" => $offer_amt,
 				"created_at" => date('Y-m-d H:i:s')
 			);
-		$this->db->insert("user_used_offers", $insert_offer);		
+		$this->db->insert("user_used_offers", $insert_offer);
 		return true;
 	}
-	
+
 	public function update_wallet_offer_min_wallet($user_id,$promo_code='',$offer_amt='',$offer_type='')
 	{
 		$array_cust["user_id"] = $user_id;
 		//$promo_code = ",".$promo_code;
 		//$array_cust["promo_code"] = "if(promo_code is null, $promo_code, concat(promo_code, $promo_code));"	;
-		
-		$this->db->set('promo_code', "if(promo_code is null, '".$promo_code."', CONCAT(promo_code,',','".$promo_code."'))", FALSE); 
-	
-		$this->db->where('user_id', $user_id);								
+
+		$this->db->set('promo_code', "if(promo_code is null, '".$promo_code."', CONCAT(promo_code,',','".$promo_code."'))", FALSE);
+
+		$this->db->where('user_id', $user_id);
 		$query = $this->db->update('users',$array_cust);
-		
+
 		//add offer data to db
 		$insert_offer = array(
 				"promo_code" => $promo_code,
 				"user_id" => $user_id,
 				"offer_type" => $offer_type,
-				"amount" => $offer_amt,				
+				"amount" => $offer_amt,
 				"created_at" => date('Y-m-d H:i:s')
 			);
-		$this->db->insert("user_used_offers", $insert_offer);		
+		$this->db->insert("user_used_offers", $insert_offer);
 		return true;
 	}
-	
+
 	/////
-	
-	
-	
+
+
+
 	public function getofferswallet() {
 		$this->db->select('*');
 	 	$this->db->from('joining_wallet_offers');
-		$where = "FIND_IN_SET('1', users_type_ids)";  
-		$this->db->where( $where ); 
-		$this->db->order_by("id", "desc");		
+		$where = "FIND_IN_SET('1', users_type_ids)";
+		$this->db->where( $where );
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function getofferswalletusers($role_id) {
 		$this->db->select('*');
 	 	$this->db->from('joining_wallet_offers');
 		if($role_id == 4)
-			$where = "FIND_IN_SET('2', users_type_ids)"; 
+			$where = "FIND_IN_SET('2', users_type_ids)";
 		if($role_id == 44 )
-			$where = "FIND_IN_SET('3', users_type_ids)"; 
-		$this->db->where( $where ); 
-		$this->db->order_by("id", "desc");		
+			$where = "FIND_IN_SET('3', users_type_ids)";
+		$this->db->where( $where );
+		$this->db->order_by("id", "desc");
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function getalloffers($role_id) {
 		$this->db->select('*');
 	 	$this->db->from('joining_offers');
-		//$where = "FIND_IN_SET('1', users)";  
-		//$this->db->where( $where ); 
+		//$where = "FIND_IN_SET('1', users)";
+		//$this->db->where( $where );
 		$where = '';
 		if($role_id == 4)
-			$where = "FIND_IN_SET('2', users)"; 
+			$where = "FIND_IN_SET('2', users)";
 		else if($role_id == 44 )
-			$where = "FIND_IN_SET('3', users)"; 
+			$where = "FIND_IN_SET('3', users)";
 		else if($role_id == 6 )
-			$where = "FIND_IN_SET('1', users)"; 
-		
+			$where = "FIND_IN_SET('1', users)";
+
 		if(!empty($where))
 		$this->db->where( $where );
-	
+
 		$this->db->order_by("id", "desc");
-		$this->db->limit(2);		
+		$this->db->limit(2);
         $query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function getallofferswallet($role_id) {
 		$this->db->select('*');
 	 	$this->db->from('joining_wallet_offers');
 		$where = '';
 		if($role_id == 4)
-			$where = "FIND_IN_SET('2', users_type_ids)"; 
+			$where = "FIND_IN_SET('2', users_type_ids)";
 		else if($role_id == 44 )
-			$where = "FIND_IN_SET('3', users_type_ids)"; 
+			$where = "FIND_IN_SET('3', users_type_ids)";
 		else if($role_id == 6 )
-			$where = "FIND_IN_SET('1', users_type_ids)"; 
-		
+			$where = "FIND_IN_SET('1', users_type_ids)";
+
 		if(!empty($where))
 		$this->db->where( $where );
-		
+
 		$this->db->order_by("id", "desc");
-		$this->db->limit(2);		
+		$this->db->limit(2);
         $query = $this->db->get();
         return $query->result();
 	}
-	
-	
-	
+
+
+
 
 	//Channel Partner creating here
 	public function addChannelPartner($district) {
@@ -668,7 +668,7 @@ class Users_Model extends CI_Model {
 		$query = $this->db->get();
                 return $query->result();
 	}
-	
+
 	public function get_AgentCommisionAmount($txn_id) {
 		$this->db->select('agent_comm,agent_ref_comm');
 		$this->db->from('transaction');
@@ -676,10 +676,10 @@ class Users_Model extends CI_Model {
 		$query = $this->db->get();
         return $query->result();
 	}
-	
+
 	public function get_AgentCommisionAmountBySubCat($subcatid) {
 		//print_r($this->session->userdata());
-	  
+
 		//echo $subcatid =  $this->session->userdata('operator_name');
 		//echo "SUB CAT:".$subcatid;
 		$this->db->select('agent_comm_type,agent_ref_comm_type,agent_comm_value,agent_ref_comm_value,mark_comm_type,mark_comm_value,dis_type,dis_value,our_comm_type,our_comm_value');
@@ -706,9 +706,9 @@ class Users_Model extends CI_Model {
                 //echo $this->db->last_query();
                 return $query->result();
 	}
-	
+
 	public function get_AgentCommisionAmountBySubCatOffers($subcatid) {
-		
+
 			$this->db->select('agent_comm_type,agent_ref_comm_type,agent_comm_value,agent_ref_comm_value,mark_comm_type,mark_comm_value,dis_type,dis_value,our_comm_type,our_comm_value');
 		$this->db->from('va_commissions_all');
 		$this->db->where('subcategory_id', $subcatid);
@@ -717,10 +717,10 @@ class Users_Model extends CI_Model {
 		//print_r($query->result());
                 //echo $this->db->last_query();
         return $query->result();
-		
+
 	}
-	
-	
+
+
 
 	public function getAgentChannelRole($agr) {
 		foreach ($agr as $ag) {
@@ -799,14 +799,14 @@ class Users_Model extends CI_Model {
 						"pincode" => $this->input->post('city', TRUE),
 						"lupdate" => date('Y-m-d H:i:s')
 				);
-			
+
 			$this->db->insert("users",$insert_to_login);
                         return true;
 		}
 	}*/
 
 /*****************************************************************************************************************/
-        
+
         public function check_channelpatner_exists($state,$district) {
 		$this->db->select('*');
 		$this->db->from('users');
@@ -816,66 +816,66 @@ class Users_Model extends CI_Model {
 		$this->db->where('district_name', $district);
 		$query = $this->db->get();
                 return $query;
-                
+
 	}
-	
+
 	public function update_agent_subscription_payu($user_id='')
 	{
 		$this->db->select('*');
-		$this->db->where('user_id', $user_id);		
-		$this->db->from('users');		
-		$query = $this->db->get()->row();		
+		$this->db->where('user_id', $user_id);
+		$this->db->from('users');
+		$query = $this->db->get()->row();
 		$agent_subscription_amt = $query->agent_subscription_amt;
 		$subscription_wallet_amt = $query->subscription_wallet_amt;
 		$wallet = $query->wallet;
 		$wallet = $wallet+$agent_subscription_amt+$subscription_wallet_amt;
-		
+
 		$array_cust["wallet"] = $wallet;
-		$array_cust["subscription_status"] = 1;		
-		$this->db->where('user_id', $user_id);								
-		$query = $this->db->update('users',$array_cust);							
-								
+		$array_cust["subscription_status"] = 1;
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->update('users',$array_cust);
+
 		return true;
 	}
-        
+
 	//Create channel partner here
 	public function create_user() {
-		
-		
+
+
 		$this->db->select('*');
-		$where1 = "FIND_IN_SET('2', avl_options)"; 
+		$where1 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where1 );
-		$where2 = "FIND_IN_SET('1', users)"; 
+		$where2 = "FIND_IN_SET('1', users)";
 		$this->db->where( $where2 );
 
 		//$this->db->where('promo_code', $this->input->post('promo_code'));
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
+
 		$this->db->from('joining_offers');
-		
+
 		$query = $this->db->get()->row();
-		
-		
-		
+
+
+
 		$mywallet = 0;
 		$offer_amt = $query->offer_amount;
 		$users_lists = $query->users;
 		$options = $query->avl_options;
-		
+
 		//echo $offer_amt."<br>";
 		//echo $users_lists."<br>";
 		//echo $options."<br>";
-		
+
 		$users_lists = explode(",",$users_lists);
 		$options = explode(",",$options);
-		
+
 		//print_r($users_lists)."<br>";
 		//print_r($options)."<br>";
-		
-		
+
+
 		//print_r($query);
-		
+
 		if(in_array(1,$users_lists))
 		{
 			if(in_array(2,$options))
@@ -883,14 +883,14 @@ class Users_Model extends CI_Model {
 				//$mywallet = $offer_amt;
 			}
 		}
-		
-		
-		
-		
+
+
+
+
 			//Creating channel partner user here
 			$password = md5($this->input->post('password'));
-			
-			$cities = explode("<=>",$this->input->post('city'));	
+
+			$cities = explode("<=>",$this->input->post('city'));
 			// echo "<pre>"; print_r($_POST);
 			$insert_to_login = array(
 						"email_id" => $this->input->post('email',TRUE),
@@ -908,29 +908,29 @@ class Users_Model extends CI_Model {
 						"lupdate" => date('Y-m-d H:i:s'),
                                                 "status"=>'0'
 				);
-			
+
 			$this->db->insert("users",$insert_to_login);
-			
+
 			////GENERATE CUSTOMER ID
 								$id = $this->db->insert_id();
 								$customer_id = "L-CNL-".$id;
-								$array_cust["customer_id"] = $customer_id;								
-								$this->db->where('user_id', $id);								
+								$array_cust["customer_id"] = $customer_id;
+								$this->db->where('user_id', $id);
 								$query = $this->db->update('users',$array_cust);
 								////GENERATE CUSTOMER ID
-								
+
 								//SMS
-								
+
 //Code using curl
 
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
 
 //Change your configurations here.
 //---------------------------------
 $uid="766172696e69696e666f"; //your uid
 $pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
 $sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
+$domain="smsalertbox.com"; // connecting url
 $route="5";// 0-Normal,1-Priority
 $method="POST";
 //---------------------------------
@@ -947,7 +947,7 @@ $method="POST";
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -967,70 +967,70 @@ $method="POST";
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
 								//SMD
                         return true;
-		
+
 	}
 
 	//Create Normal user here
 	public function create_normaluser($chp_id) {
 			//Create Normal user here
-			
-			
+
+
 			//print_r($_REQUEST);exit;
 			$password = md5($this->input->post('password'));
-			
-			
-			
+
+
+
 		$this->db->select('*');
-		$where1 = "FIND_IN_SET('2', avl_options)"; 
+		$where1 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where1 );
-		$where2 = "FIND_IN_SET('2', users)"; 
+		$where2 = "FIND_IN_SET('2', users)";
 		$this->db->where( $where2 );
 
 		//$this->db->where('promo_code', $this->input->post('promo_code'));
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
+
 		$this->db->from('joining_offers');
-		
+
 		$query = $this->db->get()->row();
-		
+
 		$mywallet = 0;
 		$offer_amt = $query->offer_amount;
 		$users_lists = $query->users;
 		$options = $query->avl_options;
-		
+
 		//echo $offer_amt."<br>";
 		//echo $users_lists."<br>";
 		//echo $options."<br>";
-		
+
 		$users_lists = explode(",",$users_lists);
 		$options = explode(",",$options);
-		
+
 		//print_r($users_lists)."<br>";
 		//print_r($options)."<br>";
-		
-		
+
+
 		//print_r($query);
-		
+
 		if(in_array(2,$users_lists))
 		{
 			if(in_array(2,$options))
 			{
 				$mywallet = $offer_amt;
 			}
-		}		
-		
-		
-		
+		}
+
+
+
 			// echo "<pre>"; print_r($_POST);
-			
+
 			$cities = explode("<=>",$this->input->post('city'));
 			$insert_to_user = array(
 						"email_id" => $this->input->post('email',TRUE),
@@ -1050,32 +1050,32 @@ $method="POST";
 				);
 			 //echo "<pre>"; print_r($insert_to_user); exit;
 			$this->db->insert("users",$insert_to_user);
-			
+
 			////GENERATE CUSTOMER ID
 								$id = $this->db->insert_id();
 								$customer_id = "L-USR-".$id;
-								$array_cust["customer_id"] = $customer_id;								
-								$this->db->where('user_id', $id);								
+								$array_cust["customer_id"] = $customer_id;
+								$this->db->where('user_id', $id);
 								$query = $this->db->update('users',$array_cust);
 								////GENERATE CUSTOMER ID
-								
-								
-								
+
+
+
 								//SMS
-								
-								
+
+
 								//SMS
-								
+
 //Code using curl
 
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
 
 //Change your configurations here.
 //---------------------------------
 $uid="766172696e69696e666f"; //your uid
 $pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
 $sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
+$domain="smsalertbox.com"; // connecting url
 $route="5";// 0-Normal,1-Priority
 $method="POST";
 //---------------------------------
@@ -1086,9 +1086,9 @@ $method="POST";
 	$name = $this->input->post('name',TRUE);
 
 	$message='Dear  '.$name.', You have successfully registered as   User with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
-	
+
 	$message='Dear  '.$name.', You have successfully registered as   User with LAABUS.COM, download app @ https://goo.gl/tjc8mr';
-	
+
 	//Dear  #VAL#, You have successfully registered as   #VAL# with LAABUS.COM, download app @ https://goo.gl/tjc8mr
 
 	//$uid=urlencode($uid);
@@ -1096,7 +1096,7 @@ $method="POST";
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1116,12 +1116,12 @@ $method="POST";
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
-								
+
 								//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
@@ -1132,7 +1132,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1152,13 +1152,13 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	//$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-								
+
 								//SMD
 	}
 
@@ -1166,41 +1166,41 @@ visit www.laabus.com for exiting offers.';
 	public function create_agent($chp_id) {
 		$password = md5($this->input->post('password'));
 			// echo "<pre>"; print_r($_POST);
-			
+
 		$this->db->select('*');
-		$where1 = "FIND_IN_SET('2', avl_options)"; 
+		$where1 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where1 );
-		$where2 = "FIND_IN_SET('1', users)"; 
+		$where2 = "FIND_IN_SET('1', users)";
 		$this->db->where( $where2 );
 
 		//$this->db->where('promo_code', $this->input->post('promo_code'));
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
+
 		$this->db->from('joining_offers');
-		
+
 		$query = $this->db->get()->row();
-		
-		
-		
+
+
+
 		$mywallet = 0;
 		$offer_amt = $query->offer_amount;
 		$users_lists = $query->users;
 		$options = $query->avl_options;
-		
+
 		//echo $offer_amt."<br>";
 		//echo $users_lists."<br>";
 		//echo $options."<br>";
-		
+
 		$users_lists = explode(",",$users_lists);
 		$options = explode(",",$options);
-		
+
 		//print_r($users_lists)."<br>";
 		//print_r($options)."<br>";
-		
-		
+
+
 		//print_r($query);
-		
+
 		if(in_array(1,$users_lists))
 		{
 			if(in_array(2,$options))
@@ -1208,14 +1208,14 @@ visit www.laabus.com for exiting offers.';
 				$mywallet = $offer_amt;
 			}
 		}
-		
-		
+
+
 		//echo "TT".$mywallet;
-		//exit;	
-		
+		//exit;
+
 		//$agent_sub_status_data = $this->db->query("SELECT * from agent_subscription_status order by id desc  ");
 		$this->db->select('*');
-		$this->db->from('agent_subscription_status');		
+		$this->db->from('agent_subscription_status');
 		$agent_sub_status_data = $this->db->get()->row();
 		//print_r($agent_sub_status_data);exit;
 		if( !empty($agent_sub_status_data->status) )
@@ -1244,8 +1244,8 @@ visit www.laabus.com for exiting offers.';
 			$subscription_status = 1;
 		}
 
-$cities = explode("<=>",$this->input->post('city'));		
-		
+$cities = explode("<=>",$this->input->post('city'));
+
 			$insert_to_agent = array(
 						"email_id" => $this->input->post('email',TRUE),
 						"name" => $this->input->post('name',TRUE),
@@ -1270,11 +1270,11 @@ $cities = explode("<=>",$this->input->post('city'));
 						"chp_id" => $chp_id,
 				);
                                 //print_r($insert_to_agent);exit;
-								
-								
+
+
 
                                 $this->db->insert("users",$insert_to_agent);
-								
+
 								////GENERATE CUSTOMER ID
 								$id = $this->db->insert_id();
 								if($subscription_status == 1 )
@@ -1285,28 +1285,28 @@ $cities = explode("<=>",$this->input->post('city'));
 								{
 									$txnid = $id;
 								}
-								
+
 								$customer_id = "L-AGT-".$id;
-								$array_cust["customer_id"] = $customer_id;								
-								$this->db->where('user_id', $id);								
+								$array_cust["customer_id"] = $customer_id;
+								$this->db->where('user_id', $id);
 								$query = $this->db->update('users',$array_cust);
 								////GENERATE CUSTOMER ID
-								
+
 								//SMS
-								
-								
+
+
 								//SMS
-								
+
 //Code using curl
 
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
 
 //Change your configurations here.
 //---------------------------------
 $uid="766172696e69696e666f"; //your uid
 $pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
 $sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
+$domain="smsalertbox.com"; // connecting url
 $route="5";// 0-Normal,1-Priority
 $method="POST";
 //---------------------------------
@@ -1323,7 +1323,7 @@ $method="POST";
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1343,12 +1343,12 @@ $method="POST";
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
-								
+
 								//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
@@ -1359,7 +1359,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1379,15 +1379,15 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-	
-	
-	
+
+
+
 	//ONE MORE SMS TO ADMIN FOR AGENT JOINING.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear  Admin,  '.$name.' is registered as new agent  with LAABUS.COM, Please review the details for approval.';
@@ -1398,7 +1398,7 @@ visit www.laabus.com for exiting offers.';
 	$mobile = "9989624611";//ADMIN NO.
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1418,19 +1418,19 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-								
+
 								//SMD
-			
+
                                // return true;
 							   return $txnid;
 	}
-        
+
         public function email_exists($role_id,$email_id) {
 		$this->db->select('count(email_id) as cnt');
 		$this->db->from('users');
@@ -1440,7 +1440,7 @@ visit www.laabus.com for exiting offers.';
 		// echo "<pre>"; print_r($query); exit;
   		return $query;
 	}
-	
+
 	public function mobile_exists($role_id,$mobile) {
 		$this->db->select('count(mobile) as cnt');
 		$this->db->from('users');
@@ -1450,9 +1450,9 @@ visit www.laabus.com for exiting offers.';
 		// echo "<pre>"; print_r($query); exit;
   		return $query;
 	}
-	
-	
-        
+
+
+
         public function get_user($email){
                 $this->db->select('*');
 		$this->db->from('users');
@@ -1462,7 +1462,7 @@ visit www.laabus.com for exiting offers.';
 		$query = $this->db->get();
   		return $query;
         }
-        
+
         public function checkOldPass($cur_password,$role_id,$email)
         {
             $this->db->where('email_id',$email);
@@ -1476,7 +1476,7 @@ visit www.laabus.com for exiting offers.';
             else
                 return 0;
         }
-        
+
         public function saveNewPass($new_pass,$email,$role_id){
             $array = array(
                 'password'=>md5($new_pass),
@@ -1491,22 +1491,22 @@ visit www.laabus.com for exiting offers.';
             }else{
                 return false;
             }
-        }  
-        
+        }
+
         public function getorders($user_id){
             $this->db->select('sales_id as oid,transaction_stage_time as created_date,'
                     . 'transaction_finished_time as closed_date,transaction_status_id as status,"Recharge" as service');
 		$this->db->from('va_sales_order');
                 $this->db->order_by('sales_id','DESC');
                 $this->db->where('user_id', $user_id);
-                
+
 		$query = $this->db->get()->result();
 		// echo "<pre>"; print_r($query); exit;
   		return $query;
         }
-        
+
         public function getuserin_profile($tablename,$user_id) {
-            
+
 		$this->db->select('*');
 		$this->db->from("".$tablename."");
 		$this->db->where('User_id', $user_id);
@@ -1517,14 +1517,14 @@ visit www.laabus.com for exiting offers.';
                 else
                     return 0;
 	}
-        
+
         public function insert_user_in_profile($tablename,$values){
                 $this->db->insert("".$tablename."",$values);
                 return true;
         }
-        
+
         public function update_user_in_profile($tablename,$values,$user_id){
-            
+
             $this->db->where('User_id', $user_id);
             $query = $this->db->update("".$tablename."",$values);
             if($query){
@@ -1533,7 +1533,7 @@ visit www.laabus.com for exiting offers.';
                 return false;
             }
         }
-        
+
         public function get_userprofile_info($tablename,$user_id){
 			    $this->db->select('*');
 		$this->db->from("".$tablename."");
@@ -1542,7 +1542,7 @@ visit www.laabus.com for exiting offers.';
 		// echo "<pre>"; print_r($query); exit;
   		return $query;
         }
-		
+
 		 public function get_user_info_only($tablename,$user_id){
                 $this->db->select('*');
 		$this->db->from("".$tablename."");
@@ -1551,7 +1551,7 @@ visit www.laabus.com for exiting offers.';
 		// echo "<pre>"; print_r($query); exit;
   		return $query;
         }
-        
+
         public function email_agentuser_exists($email_id,$role_id){
                 $this->db->select('count(email_id) as cnt');
 		$this->db->from('users');
@@ -1561,56 +1561,56 @@ visit www.laabus.com for exiting offers.';
 		// echo "<pre>"; print_r($query); exit;
   		return $query;
         }
-        
-        
+
+
         public function create_agentuser($role_id,$user_id,$chp_id) {
 		$password = md5($this->input->post('password'));
-		
-		
+
+
 		$this->db->select('*');
-		$where1 = "FIND_IN_SET('2', avl_options)"; 
+		$where1 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where1 );
-		$where2 = "FIND_IN_SET('3', users)"; 
+		$where2 = "FIND_IN_SET('3', users)";
 		$this->db->where( $where2 );
 
 		//$this->db->where('promo_code', $this->input->post('promo_code'));
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
+
 		$this->db->from('joining_offers');
-		
+
 		$query = $this->db->get()->row();
-		
+
 		$mywallet = 0;
 		$offer_amt = $query->offer_amount;
 		$users_lists = $query->users;
 		$options = $query->avl_options;
-		
+
 		//echo $offer_amt."<br>";
 		//echo $users_lists."<br>";
 		//echo $options."<br>";
-		
+
 		$users_lists = explode(",",$users_lists);
 		$options = explode(",",$options);
-		
+
 		//print_r($users_lists)."<br>";
 		//print_r($options)."<br>";
-		
-		
+
+
 		//print_r($query);
-		
+
 		if(in_array(3,$users_lists))
 		{
 			if(in_array(2,$options))
 			{
 				$mywallet = $offer_amt;
 			}
-		}	
-		
-		
+		}
+
+
 		$cities = explode("<=>",$this->input->post('city'));
-		
-		
+
+
 			// echo "<pre>"; print_r($_POST);
 			$insert_to_agent = array(
 						"email_id" => $this->input->post('email',TRUE),
@@ -1620,15 +1620,15 @@ visit www.laabus.com for exiting offers.';
 						"role_id" => $role_id,
 						"name" => $this->input->post('FirstName').' '.$this->input->post('LastName'),
 						"address" => $this->input->post('Address'),
-						
+
 						"country_name" => $this->input->post('country'),
 						"state_name" => $this->input->post('state'),
 						"district_name" => $this->input->post('district'),
 						"city_name" => $cities[0],
                         "pincode" => $cities[1],
-						
-						
-						
+
+
+
 						"lupdate" => date('Y-m-d H:i:s'),
 						"created_at" => date('Y-m-d H:i:s'),
 						"status" => 1,
@@ -1639,32 +1639,32 @@ visit www.laabus.com for exiting offers.';
                                 //print_r($insert_to_agent);exit;
 
                                 $this->db->insert("users",$insert_to_agent);
-								
-								
+
+
 								////GENERATE CUSTOMER ID
 								$id = $this->db->insert_id();
 								$customer_id = "Laa-U-".$id;
-								$array_cust["customer_id"] = $customer_id;								
-								$this->db->where('user_id', $id);								
+								$array_cust["customer_id"] = $customer_id;
+								$this->db->where('user_id', $id);
 								$query = $this->db->update('users',$array_cust);
 								////GENERATE CUSTOMER ID
-								
-								
+
+
 								//SMS
-								
-								
+
+
 								//SMS
-								
+
 //Code using curl
 
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
 
 //Change your configurations here.
 //---------------------------------
 $uid="766172696e69696e666f"; //your uid
 $pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
 $sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
+$domain="smsalertbox.com"; // connecting url
 $route="5";// 0-Normal,1-Priority
 $method="POST";
 //---------------------------------
@@ -1677,7 +1677,7 @@ $method="POST";
 
 	//$message='Dear  '.$name.', You have successfully registered as   User with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
 	//$message ='Dear '.$name.',You are registered by '.$agtname.' as an user with LAABUS.COM .now you can login with user ID '.$mobile.' and password '.$this->input->post('password').'  download app@ https://goo.gl/QWUiJB';
-	
+
 	$message ='Dear '.$name.',You are registered by '.$agtname.' as an user with LAABUS.COM .now you can login with user ID '.$mobile.' and password '.$this->input->post('password').'  download app@ https://goo.gl/tjc8mr';
 
 	//$uid=urlencode($uid);
@@ -1685,7 +1685,7 @@ $method="POST";
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1705,12 +1705,12 @@ $method="POST";
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
-								
+
 								//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
@@ -1721,7 +1721,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1741,17 +1741,17 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	//$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-	
-	
+
+
 	//////////////////
-	
-	
+
+
 	$mobile =  $this->session->userdata('Mobile');
 	$name = $this->session->userdata('name');
 
@@ -1762,7 +1762,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1782,12 +1782,12 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
-								
+
 								//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
@@ -1798,7 +1798,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -1818,20 +1818,20 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	//$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-								
+
 								//SMD
-								
-								
-								
+
+
+
                                 return true;
 	}
-        
+
         public function get_agent_today_earning($user_id)
 		{
 			date_default_timezone_set("Asia/Kolkata");
@@ -1849,7 +1849,7 @@ visit www.laabus.com for exiting offers.';
             //echo $this->db->last_query();exit;
             return $result;
 		}
-		
+
 		 public function get_agent_currentyear_earning($user_id)
 		{
 			date_default_timezone_set("Asia/Kolkata");
@@ -1858,7 +1858,7 @@ visit www.laabus.com for exiting offers.';
             //echo $this->db->last_query();exit;
             return $result;
 		}
-		
+
 		public function get_channelpart_currentyear_earning($user_id)
 		{
 			$date = 'Y-m-d';
@@ -1866,16 +1866,16 @@ visit www.laabus.com for exiting offers.';
             //echo $this->db->last_query();exit;
             return $result;
 		}
-		
+
 			 public function get_agent_thismonth_earning($user_id)
 		{
 			date_default_timezone_set("Asia/Kolkata");
 			$date = 'Y-m-d';
-			
+
 			$st_date = date('Y-m-01',strtotime(date('Y-m-d')));
 			$end_date =  date('Y-m-t',strtotime(date('Y-m-d')));
-  
-  
+
+
 			$result = $this->db->query("SELECT SUM(agent_comm+agent_ref_comm) as earnings FROM `transaction` WHERE transaction_status = 1 and (`end_user_id`= $user_id OR `agent_id`= $user_id)  and date(order_date) BETWEEN '$st_date' AND '$end_date'  " )->result_array();
             //echo $this->db->last_query();exit;
             return $result;
@@ -1883,21 +1883,21 @@ visit www.laabus.com for exiting offers.';
 		public function get_channelpart_thismonth_earning($user_id)
 		{
 			$date = 'Y-m-d';
-			
+
 			$st_date = date('Y-m-01',strtotime(date('Y-m-d')));
 			$end_date =  date('Y-m-t',strtotime(date('Y-m-d')));
-  
-  
+
+
 			$result = $this->db->query("SELECT SUM(channel_part_comm) as earnings FROM `transaction` WHERE transaction_status = 1 and (`channel_part_id`= $user_id)  and date(order_date) BETWEEN '$st_date' AND '$end_date'  " )->result_array();
             //echo $this->db->last_query();exit;
             return $result;
 		}
-		
-		
+
+
 		public function updateAgentUsers($data)
 		{
-			//$array_cust["customer_id"] = $customer_id;								
-			$this->db->where('user_id', $data["user_id"]);								
+			//$array_cust["customer_id"] = $customer_id;
+			$this->db->where('user_id', $data["user_id"]);
 			$query = $this->db->update('users',$data);
 			return true;
 		}
@@ -1909,52 +1909,52 @@ visit www.laabus.com for exiting offers.';
 			);
 		$this->db->insert('va_agent_user', $insert_agent_role);
 	}
-        
+
 	#--------------------------------------------------------------------
 	# function for get Agent User List based on Agent User Id
 	#---------------------------------------------------------------------
         public function get_users_list($user_id=0){
-			
+
             $result = $this->db->query("SELECT `user_id`, `customer_id`, `name`, `mobile`, `email_id`, `pincode`, `role_id`, `password`, `company_name`, `approve_id`, `security_pin`, `dob`, `address`, IF(`status`=1,'Active','Inactive') as status, `alias`, `role_based_id`, `agent_id`, `chp_id`, `smd_id`, `wallet`,DATE_FORMAT( `created_at` , '%d.%m.%Y %H:%i:%s' ) as doj,`lupdate` ,CONCAT(CONCAT('<a href=\http://laabus.com/agent/userview\/',`user_id`,'>View</a>'),'  ',CONCAT('<a href=\http://laabus.com/agent/edituser\/',`user_id`,'>Edit</a>')) as actions, `country_name`, `state_name`, `district_name`, `city_name` FROM `users` WHERE `agent_id`= '$user_id' AND  `role_id`=4 order by user_id desc ")->result_array();
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
+
 		 public function get_users_list_chnl($user_id){
             $result = $this->db->query("SELECT `user_id`, `customer_id`, `name`, `mobile`, `email_id`, `pincode`, `role_id`, `password`, `company_name`, `approve_id`, `security_pin`, `dob`, `address`, IF(`status`=1,'Active','Inactive') as status, `alias`, `role_based_id`, `agent_id`, `chp_id`, `smd_id`, `wallet`,DATE_FORMAT( `created_at` , '%d.%m.%Y %H:%i:%s' ) as doj,`lupdate` ,CONCAT(CONCAT('<a href=\http://laabus.com/agent/userview\/',`user_id`,'>View</a>'),'  ',CONCAT('<a href=\http://laabus.com/agent/edituser\/',`user_id`,'>Edit</a>')) as actions, `country_name`, `state_name`, `district_name`, `city_name` FROM `users` WHERE `chp_id`= $user_id AND  `role_id`=6 order by user_id desc ")->result_array();
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
-		
+
+
 		 public function get_users_list_part($user_id){
             $result = $this->db->query("SELECT * FROM `partners` WHERE `channel_part_id`= $user_id  ")->result_array();
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
+
 		public function get_serviceusers_list_chnl($user_id){
             $result = $this->db->query("SELECT `user_id`, `customer_id`, `name`, `mobile`, `email_id`, `pincode`, `role_id`, `password`, `company_name`, `approve_id`, `security_pin`, `dob`, `address`, IF(`status`=1,'Active','Inactive') as status, `alias`, `role_based_id`, `agent_id`, `chp_id`, `smd_id`, `wallet`,DATE_FORMAT( `created_at` , '%d.%m.%Y %H:%i:%s' ) as doj,`lupdate` ,CONCAT(CONCAT('<a href=\http://laabus.com/agent/userview\/',`user_id`,'>View</a>'),'  ',CONCAT('<a href=\http://laabus.com/agent/edituser\/',`user_id`,'>Edit</a>')) as actions, `country_name`, `state_name`, `district_name`, `city_name` FROM `users` WHERE `chp_id`= $user_id AND  `role_id`=3 order by user_id desc ")->result_array();
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
-		
+
+
 		 public function delete_users_list_by_id($user_id){
 			  $result = $this->db->query("delete FROM `users` WHERE `user_id`= $user_id");
 			  return true;
 		 }
-		
+
 		 public function get_users_list_by_id($user_id){
             $result = $this->db->query("SELECT `user_id`, `customer_id`, `wallet`, `name`, `mobile`, `email_id`, `pincode`, `role_id`, `password`, `company_name`, `approve_id`, `security_pin`, `dob`, `address`, IF(`status`=1,'Active','Inactive') as status, `alias`, `role_based_id`, `agent_id`, `chp_id`, `smd_id`, `wallet`,DATE_FORMAT( `created_at` , '%d.%m.%Y %H:%i:%s' ) as doj,`lupdate` ,'<a href=\"http://laabus.com/agent/userview\">View</a>   <a href=\"test.php\">Edit</a>  <a href=\"test.php\">Delete</a>' as actions, `country_name`, `state_name`, `district_name`, `city_name` FROM `users` WHERE `user_id`= $user_id")->result_array();
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
-		
-		
-		
-        
+
+
+
+
+
 	#--------------------------------------------------------------------
 	# function for get Agent User List based on Agent User Id
 	#---------------------------------------------------------------------
@@ -1963,9 +1963,9 @@ visit www.laabus.com for exiting offers.';
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
-	
-	
+
+
+
 	#--------------------------------------------------------------------
 	# function for get Wallet List of Users
 	#---------------------------------------------------------------------
@@ -1978,15 +1978,15 @@ visit www.laabus.com for exiting offers.';
 		{
 		$result = $this->db->query("select * FROM `wallet_history` a WHERE a.`user_id`=".$user_id)->result_array();
 		}*/
-                $query = "SELECT a.*, b.mobile as wt_mobile,b.comments as wt_comments FROM `wallet_history` as a 
+                $query = "SELECT a.*, b.mobile as wt_mobile,b.comments as wt_comments FROM `wallet_history` as a
 left join wallet_transfer as b on a.reference_number = b.wallet_transfer_id
 WHERE a.`user_id`=".$user_id;
 		$result = $this->db->query($query)->result_array();
 		//echo $this->db->last_query();exit;
 		return $result;
 	}
-	
-	
+
+
 	#--------------------------------------------------------------------
 	# function for get Wallet List of Users
 	#---------------------------------------------------------------------
@@ -1996,8 +1996,8 @@ WHERE a.`user_id`=".$user_id;
 		//echo $this->db->last_query();exit;
 		return $result;
 	}
-	
-	
+
+
 	#--------------------------------------------------------------------
 	# function for get Wallet List of Users Under Agent
 	#---------------------------------------------------------------------
@@ -2007,23 +2007,23 @@ WHERE a.`user_id`=".$user_id;
 		//echo $this->db->last_query();exit;
 		return $result;
 	}
-	
+
 	public function walletuserview($user_id){
 		//$result = $this->db->query("SELECT a.*,IF(credit_debit=1,'Credited',IF(credit_debit=2,'Need Approval','Debited')) as cr_dr,(SELECT `name` FROM `users` WHERE `user_id`=a.`user_id`) as name FROM `wallet_history` a WHERE a.`user_id`=".$user_id)->result_array();
 		$result = $this->db->query("select a.*,b.name as userfullname,b.customer_id as custid FROM `wallet_history` a LEFT JOIN  users b on a.user_id = b.user_id WHERE a.`wallet_history_id`=".$user_id)->result_array();
 		//echo $this->db->last_query();exit;
 		return $result;
 	}
-	
+
 	public function wallethistoryview($user_id){
 		//$result = $this->db->query("SELECT a.*,IF(credit_debit=1,'Credited',IF(credit_debit=2,'Need Approval','Debited')) as cr_dr,(SELECT `name` FROM `users` WHERE `user_id`=a.`user_id`) as name FROM `wallet_history` a WHERE a.`user_id`=".$user_id)->result_array();
 		$result = $this->db->query("select a.*,b.name as userfullname,b.customer_id as custid FROM `wallet_withdraw` a LEFT JOIN  users b on a.user_id = b.user_id WHERE a.`wallet_withdraw_id`=".$user_id)->result_array();
 		//echo $this->db->last_query();exit;
 		return $result;
 	}
-	
-	
-	
+
+
+
 	#--------------------------------------------------------------------
 	# function for get Wallet List of Users
 	#---------------------------------------------------------------------
@@ -2040,29 +2040,40 @@ WHERE a.`user_id`=".$user_id;
             //echo $this->db->last_query();exit;
             return $result['wallet'];
         }
-		
+
+		public function get_promo_wallet_amount($user_id=0,$role_id=0){
+            $result = $this->db->query("SELECT  `promotional_wallet` FROM `users` WHERE `user_id`='$user_id' and `role_id`='$role_id' ")->row_array();
+            //echo $this->db->last_query();exit;
+            return $result['promotional_wallet'];
+        }
+		public function get_cbk_usg_service($cbk_usg_service){
+            $result = $this->db->query("SELECT  * FROM `va_cashback_usage` WHERE `cbk_usg_service`='$cbk_usg_service'")->row_array();
+            //echo $this->db->last_query();exit;
+            return $result;
+        }
+
 		public function get_wallet_org_amount($user_id,$role_id){
             $result = $this->db->query("SELECT  SUM(`original_amount`) as original_amount  FROM `wallet_history` WHERE `payment_status` = 2 and `user_id`=$user_id and `role_id`=".$role_id.' group by user_id ')->row_array();
             //echo $this->db->last_query();exit;
             return $result['original_amount'];
         }
-		
+
 		 public function get_subscription_status($user_id,$role_id){
             $result = $this->db->query("SELECT  `subscription_status` FROM `users` WHERE `user_id`=$user_id and `role_id`=".$role_id)->row_array();
             //echo $this->db->last_query();exit;
             return $result['subscription_status'];
         }
-		
-		
-		
+
+
+
 		 public function get_subscription_amount($user_id,$role_id){
             $result = $this->db->query("SELECT  * FROM `users` WHERE `user_id`=$user_id and `role_id`=".$role_id)->row_array();
             //echo $this->db->last_query();exit;
             return $result;
         }
-		
-		
-		
+
+
+
 		  public function get_locking_amount(){
             $result = $this->db->query("SELECT  * FROM `locaking_amount` limit 1")->row_array();
             //echo $this->db->last_query();exit;
@@ -2076,46 +2087,46 @@ WHERE a.`user_id`=".$user_id;
             $result = $this->db->query("SELECT  `user_id`, `name`, `mobile`, `email_id`, `pincode`, `role_id`, `password`, `company_name`, `approve_id`, `security_pin`, `dob`, `address`, `status`, `alias`, `role_based_id`, `agent_id`, `chp_id`, `smd_id`, `wallet`, `lupdate`, `country_name`, `state_name`, `district_name`, `city_name` FROM `users` WHERE `user_id`=$user_id $where")->row_array();
             //echo $this->db->last_query();exit;
             return $result;
-        }		
-		
+        }
+
 public function create_agent_by_chnprtn($chp_id) {
 		$password = md5($this->input->post('password'));
 			// echo "<pre>"; print_r($_POST);
-			
+
 		$this->db->select('*');
-		$where1 = "FIND_IN_SET('2', avl_options)"; 
+		$where1 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where1 );
-		$where2 = "FIND_IN_SET('1', users)"; 
+		$where2 = "FIND_IN_SET('1', users)";
 		$this->db->where( $where2 );
 
 		//$this->db->where('promo_code', $this->input->post('promo_code'));
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
+
 		$this->db->from('joining_offers');
-		
+
 		$query = $this->db->get()->row();
-		
-		
-		
+
+
+
 		$mywallet = 0;
 		$offer_amt = $query->offer_amount;
 		$users_lists = $query->users;
 		$options = $query->avl_options;
-		
+
 		//echo $offer_amt."<br>";
 		//echo $users_lists."<br>";
 		//echo $options."<br>";
-		
+
 		$users_lists = explode(",",$users_lists);
 		$options = explode(",",$options);
-		
+
 		//print_r($users_lists)."<br>";
 		//print_r($options)."<br>";
-		
-		
+
+
 		//print_r($query);
-		
+
 		if(in_array(1,$users_lists))
 		{
 			if(in_array(2,$options))
@@ -2123,14 +2134,14 @@ public function create_agent_by_chnprtn($chp_id) {
 				$mywallet = $offer_amt;
 			}
 		}
-		
-		
+
+
 		//echo "TT".$mywallet;
-		//exit;	
-		
+		//exit;
+
 		//$agent_sub_status_data = $this->db->query("SELECT * from agent_subscription_status order by id desc  ");
 		$this->db->select('*');
-		$this->db->from('agent_subscription_status');		
+		$this->db->from('agent_subscription_status');
 		$agent_sub_status_data = $this->db->get()->row();
 		//print_r($agent_sub_status_data);exit;
 		if( !empty($agent_sub_status_data->status) )
@@ -2159,8 +2170,8 @@ public function create_agent_by_chnprtn($chp_id) {
 			$subscription_status = 1;
 		}
 
-$cities = explode("<=>",$this->input->post('city'));		
-		
+$cities = explode("<=>",$this->input->post('city'));
+
 			$insert_to_agent = array(
 						"email_id" => $this->input->post('email',TRUE),
 						"name" => $this->input->post('name',TRUE),
@@ -2168,7 +2179,7 @@ $cities = explode("<=>",$this->input->post('city'));
 						"password"	=>	$password,
 						"org_password"=>$this->input->post('password'),
 						"role_id" => 6,
-						"role_based_id" => '',						
+						"role_based_id" => '',
                         "pincode" => $this->input->post('pincode',TRUE),
 						"lupdate" => date('Y-m-d H:i:s'),
 						"status" => 0,
@@ -2181,11 +2192,11 @@ $cities = explode("<=>",$this->input->post('city'));
 						"chp_id" => $chp_id,
 				);
                                 //print_r($insert_to_agent);exit;
-								
-								
+
+
 
                                 $this->db->insert("users",$insert_to_agent);
-								
+
 								////GENERATE CUSTOMER ID
 								$id = $this->db->insert_id();
 								if($subscription_status == 1 )
@@ -2196,28 +2207,28 @@ $cities = explode("<=>",$this->input->post('city'));
 								{
 									$txnid = $id;
 								}
-								
+
 								$customer_id = "L-AGT-".$id;
-								$array_cust["customer_id"] = $customer_id;								
-								$this->db->where('user_id', $id);								
+								$array_cust["customer_id"] = $customer_id;
+								$this->db->where('user_id', $id);
 								$query = $this->db->update('users',$array_cust);
 								////GENERATE CUSTOMER ID
-								
+
 								//SMS
-								
-								
+
+
 								//SMS
-								
+
 //Code using curl
 
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
 
 //Change your configurations here.
 //---------------------------------
 $uid="766172696e69696e666f"; //your uid
 $pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
 $sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
+$domain="smsalertbox.com"; // connecting url
 $route="5";// 0-Normal,1-Priority
 $method="POST";
 //---------------------------------
@@ -2234,7 +2245,7 @@ $method="POST";
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -2254,12 +2265,12 @@ $method="POST";
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
-								
+
 								//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
@@ -2270,7 +2281,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -2290,15 +2301,15 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-	
-	
-	
+
+
+
 	//ONE MORE SMS TO ADMIN FOR AGENT JOINING.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear  Admin,  '.$name.' is registered as new agent  with LAABUS.COM, Please review the details for approval.';
@@ -2309,7 +2320,7 @@ visit www.laabus.com for exiting offers.';
 	$mobile = "9989624611";//ADMIN NO.
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -2329,58 +2340,58 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-								
+
 								//SMD
-			
+
                                // return true;
 							   return $txnid;
-	
+
 }
 
 public function create_sp_by_chnprtn($chp_id) {
 		$password = md5($this->input->post('password'));
 			// echo "<pre>"; print_r($_POST);
-			
+
 		$this->db->select('*');
-		$where1 = "FIND_IN_SET('2', avl_options)"; 
+		$where1 = "FIND_IN_SET('2', avl_options)";
 		$this->db->where( $where1 );
-		$where2 = "FIND_IN_SET('6', users)"; 
+		$where2 = "FIND_IN_SET('6', users)";
 		$this->db->where( $where2 );
 
 		//$this->db->where('promo_code', $this->input->post('promo_code'));
-		$where3 = "NOW() BETWEEN st_date AND end_date";  
+		$where3 = "NOW() BETWEEN st_date AND end_date";
 		$this->db->where( $where3 );
-		
+
 		$this->db->from('joining_offers');
-		
+
 		$query = $this->db->get()->row();
-		
-		
-		
+
+
+
 		$mywallet = 0;
 		$offer_amt = $query->offer_amount;
 		$users_lists = $query->users;
 		$options = $query->avl_options;
-		
+
 		//echo $offer_amt."<br>";
 		//echo $users_lists."<br>";
 		//echo $options."<br>";
-		
+
 		$users_lists = explode(",",$users_lists);
 		$options = explode(",",$options);
-		
+
 		//print_r($users_lists)."<br>";
 		//print_r($options)."<br>";
-		
-		
+
+
 		//print_r($query);
-		
+
 		if(in_array(6,$users_lists))
 		{
 			if(in_array(2,$options))
@@ -2388,14 +2399,14 @@ public function create_sp_by_chnprtn($chp_id) {
 				$mywallet = $offer_amt;
 			}
 		}
-		
-		
+
+
 		//echo "TT".$mywallet;
-		//exit;	
-		
+		//exit;
+
 		//$agent_sub_status_data = $this->db->query("SELECT * from agent_subscription_status order by id desc  ");
 		$this->db->select('*');
-		$this->db->from('agent_subscription_status');		
+		$this->db->from('agent_subscription_status');
 		$agent_sub_status_data = $this->db->get()->row();
 		//print_r($agent_sub_status_data);exit;
 		if( !empty($agent_sub_status_data->status) )
@@ -2424,8 +2435,8 @@ public function create_sp_by_chnprtn($chp_id) {
 			$subscription_status = 1;
 		}
 
-$cities = explode("<=>",$this->input->post('city'));		
-		
+$cities = explode("<=>",$this->input->post('city'));
+
 			$insert_to_agent = array(
 						"email_id" => $this->input->post('email',TRUE),
 						"name" => $this->input->post('name',TRUE),
@@ -2433,7 +2444,7 @@ $cities = explode("<=>",$this->input->post('city'));
 						"password"	=>	$password,
 						"org_password"=>$this->input->post('password'),
 						"role_id" => 3,
-						"role_based_id" => '',						
+						"role_based_id" => '',
                         "pincode" => $this->input->post('pincode',TRUE),
 						"lupdate" => date('Y-m-d H:i:s'),
 						"status" => 0,
@@ -2446,11 +2457,11 @@ $cities = explode("<=>",$this->input->post('city'));
 						"chp_id" => $chp_id,
 				);
                                 //print_r($insert_to_agent);exit;
-								
-								
+
+
 
                                 $this->db->insert("users",$insert_to_agent);
-								
+
 								////GENERATE CUSTOMER ID
 								$id = $this->db->insert_id();
 								if($subscription_status == 1 )
@@ -2461,28 +2472,28 @@ $cities = explode("<=>",$this->input->post('city'));
 								{
 									$txnid = $id;
 								}
-								
+
 								$customer_id = "L-AGT-".$id;
-								$array_cust["customer_id"] = $customer_id;								
-								$this->db->where('user_id', $id);								
+								$array_cust["customer_id"] = $customer_id;
+								$this->db->where('user_id', $id);
 								$query = $this->db->update('users',$array_cust);
 								////GENERATE CUSTOMER ID
-								
+
 								//SMS
-								
-								
+
+
 								//SMS
-								
+
 //Code using curl
 
-//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application. 
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
 
 //Change your configurations here.
 //---------------------------------
 $uid="766172696e69696e666f"; //your uid
 $pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
 $sender="LAABUS"; // approved sender id
-$domain="smsalertbox.com"; // connecting url 
+$domain="smsalertbox.com"; // connecting url
 $route="5";// 0-Normal,1-Priority
 $method="POST";
 //---------------------------------
@@ -2499,7 +2510,7 @@ $method="POST";
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -2519,12 +2530,12 @@ $method="POST";
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
 
-								
+
 								//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
@@ -2535,7 +2546,7 @@ visit www.laabus.com for exiting offers.';
 	//$sender=urlencode($sender);
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -2555,15 +2566,15 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-	
-	
-	
+
+
+
 	//ONE MORE SMS TO ADMIN FOR AGENT JOINING.*/
 								/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
 								$message='Dear  Admin,  '.$name.' is registered as new agent  with LAABUS.COM, Please review the details for approval.';
@@ -2574,7 +2585,7 @@ visit www.laabus.com for exiting offers.';
 	$mobile = "9989624611";//ADMIN NO.
 	$message=urlencode($message);
 	//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
-	
+
 	$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
 
 	$url="http://$domain/api/sms.php";
@@ -2594,24 +2605,38 @@ visit www.laabus.com for exiting offers.';
 		curl_setopt($ch, CURLOPT_URL, $get_url);
 	}
 
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
 	$return_val = curl_exec($ch);
-	
+
 	//var_dump($return_val);exit;
-								
+
 								//SMD
-			
+
                                // return true;
 							   return $txnid;
-	
+
 }
 
-  public function create_partners_by_chnprtn($data) {			
+  public function create_partners_by_chnprtn($data) {
 		$this->db->insert('partners', $data);
 	}
-	
-	
-	
+	public function saveCashbackHistory($data) {
+		$this->db->insert('va_cashback_offers_history', $data);
+        return $this->db->insert_id();
+	}
+	public function updatePromotionalWallet($userId , $amount) {
+		$query = $this->db->get_where('users', array("user_id" => $userId));
+        $users = $query->result_array();
+        $user = $users[0];
+        print_r($user);
+        /*$promotional_wallet = $user['promotional_wallet'] + $amount;
+        $data =array("promotional_wallet" => $promotional_wallet)
+		$this->db->where('user_id', $userId);
+        $query = $this->db->update('users', $data);*/
+        return $userId;
+	}
+
+
 }

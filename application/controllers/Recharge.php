@@ -563,6 +563,7 @@ class Recharge extends Template{
 					$wallet_amount = $this->users->get_wallet_amount($user_id,$role_id);
 					$rcAmount = $this->input->post_get('rcAmount');
 					$amt = ($this->input->post_get('payment')=="Payu")?(($rcAmount>$wallet_amount)?$this->input->post_get('payamount'):$rcAmount):$this->input->post_get('payamount');
+					$usable_promo_wallet = ($this->input->post_get('promo_wallet')?$this->input->post_get('promo_wallet') : 0);
 					//$wamt = ($rcAmount>$wallet_amount)?"0":($wallet_amount-$rcAmount);
                                         $wamt = ($this->input->post_get('walamount')=="1")?(($rcAmount>$wallet_amount)?"0":($wallet_amount-$rcAmount)):$wallet_amount;
                                         //echo $wamt;exit;
@@ -578,7 +579,8 @@ class Recharge extends Template{
 						'coupon_amount' => $this->input->post_get('coupon_amount'),
 						'payable_amount' => ($this->input->post_get('rcAmount') - $this->input->post_get('coupon_amount')),
 						'purchase_value' => $this->input->post_get('rcAmount'),
-						'operator_circle' =>$this->input->post_get('operator_circle')
+						'operator_circle' =>$this->input->post_get('operator_circle'),
+						'useable_promo_wallet' => $usable_promo_wallet
 					);
 					$this->session->set_userdata($arr);
                                         //print_r($this->session->userdata);echo $this->session->userdata('operator');

@@ -38,13 +38,29 @@
 				$user_id=$this->session->userdata('user_id');
 				$role_id=$this->session->userdata('role_id');
 				$wallet_amount = $this->users->get_wallet_amount($user_id,$role_id);
+				$promo_wallet_amount = $this->users->get_promo_wallet_amount($user_id,$role_id);
+//				$promo_wallet_amount = 500;//$this->users->get_promo_wallet_amount($user_id,$role_id);
+			  	//get cash back useage
+			  $cbk_usg_service = 'Recharge';
+			  $cbk_usg_service_obj = $this->users->get_cbk_usg_service($cbk_usg_service);
+
+//			  var_dump($cbk_usg_service_obj);
+
 
 				if($this->session->userdata('rcAmount')!=''){
 				$amount = $this->session->userdata('rcAmount');
 				}else if($this->session->userdata('totalAmount')!=''){
 				$amount = $this->session->userdata('totalAmount');
 				}
-
+			  $is_promo_wallet = FALSE;
+			  if($promo_wallet_amount > 0 && count($cbk_usg_service_obj) > 0)
+			  {
+				  if($amount >= $cbk_usg_service_obj['cbk_usg_min_amount'])
+				  {
+					$useable_promo_wallet = $promo_wallet_amount*$cbk_usg_service_obj['cbk_usg_amount_percentage']/100;
+					$is_promo_wallet = true;
+				  }
+			  }
                 $waldiv = "";
 				if($wallet_amount>=$amount &&  $this->session->userdata('rcAmount') <  $netamt ){
 					$waldis = "";
@@ -85,17 +101,17 @@
                         if($this->session->userdata('role_id') == 6){
 			if($this->session->userdata('rcAmount')!=''){
 			?>
-			<p class="well-sm">aaaaaaaTotal Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision 	)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
+			<p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision 	)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
 			<?php
 			}else if($this->session->userdata('totalAmount')!=''){
 			?>
 				<?php /*?><p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."/-"?></b></p><?php */?>
-                <p class="well-sm">bbbbbbbbbTotal Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
+                <p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
 			<?php
 			}
                         }else{
                             ?>
-                            <p class="well-sm">cccccccccccTotal Payment to be made : <b>RS. <?php echo $amount; ?></b></p>
+                            <p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount; ?></b></p>
                             <?php
                         }
 			?>
@@ -106,6 +122,12 @@
 				<div>
 				<p class="well-sm"><input type="checkbox" <?php echo $walchk;?> name="payment" onclick="showpaymodes('walletMode')" id="walletpay" value="Wallet">&emsp;Use LAABUS Wallet(<?php echo $wallet_amount;?>)</p>
 				</div>
+				<?php if($is_promo_wallet){ ?>
+				<div>
+				<p class="well-sm"><input type="checkbox" name="promo_wallet" id="promoWallet" value="<?php echo $useable_promo_wallet ?>">&emsp;Use LAABUS Promotional Wallet(<?php echo $useable_promo_wallet;?>)</p>
+
+				</div>
+				<?php } ?>
 				<div id="walletMode" style="<?php echo $waldiv;?>">
 				<p class="well-sm"><?php
 				if( $waldis != 'disabled' )
@@ -137,7 +159,7 @@
 			</div>
 			<div class="text-left col-md-12" style="display:block" >
 				<div style=""  id="payuMode">
-					<p class="well-sm"><input type="checkbox" <?php echo $payuchk;?> name="payment" id="payupay" value="Payu">&emsp;<button <?php echo $payudis;?> type="submit" class="btn btn-info" id="payuproceed">&emsp;<!--<img src="<?php echo base_url();?>images/payu.jpg" title="Payu" alt="Payu">-->PAY BY ATOMaaaaaaaaaa</button></p>
+					<p class="well-sm"><input type="checkbox" <?php echo $payuchk;?> name="payment" id="payupay" value="Payu">&emsp;<button <?php echo $payudis;?> type="submit" class="btn btn-info" id="payuproceed">&emsp;<!--<img src="<?php echo base_url();?>images/payu.jpg" title="Payu" alt="Payu">-->PAY BY ATOM</button></p>
 				</div>
 			</div>
           </form>
@@ -177,4 +199,19 @@ function showpaymodes(id){
 		$("#walamount").val("0");
 	}
 }
+	$("#promoWallet").click(function(){
+		if($("#promoWallet").is(":checked"))
+		{
+			<?php if($amount>$useable_promo_wallet){?>
+				$("#payamount").val("<?php echo ($amount-$useable_promo_wallet);?>");
+			<?php }else{?>
+				$("#payamount").val("<?php echo ($amount);?>");
+			<?php }?>
+		}
+		else
+		{
+			$("#payamount").val("<?php echo ($amount);?>");
+		}
+
+	});
 </script>
