@@ -375,12 +375,12 @@ $tot_W_a = $wallet_amount+$totamount;
 			$this->users->saveCashbackHistory($user_array1);
 			$this->users->updatePromotionalWallet($userId, $amt,"sub");
 		}
-		$couponCode = $this->session->userdata('couponCode')
+		$couponCode = $this->session->userdata('couponCode');
 		if($couponCode){
 			$cashback_offers = $this->cashback_model->getCashbackOffer($couponCode);
 			$cbk_offer = $cashback_offers[0];
 			$totalAmount_paid = $this->session->userdata('rcAmount');
-			if($cbk_offer["cbk_mode"] == "PER") {
+			if($cbk_offer["cbk_mode"] == "PEC") {
 				$amount = round(($cbk_offer['cbk_amount_percentage']/$totalAmount_paid) * 100);
 			}else {
 				$amount = $cbk_offer['cbk_amount_percentage'];
