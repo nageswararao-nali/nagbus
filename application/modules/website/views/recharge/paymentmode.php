@@ -53,6 +53,7 @@
 				$amount = $this->session->userdata('totalAmount');
 				}
 			  $is_promo_wallet = FALSE;
+			  $useable_promo_wallet = 0;
 			  if($promo_wallet_amount > 0 && count($cbk_usg_service_obj) > 0)
 			  {
 				  if($amount >= $cbk_usg_service_obj['cbk_usg_min_amount'])
@@ -96,22 +97,25 @@
             <input type="hidden"  name="mark_credit" value="<?=$this->session->userdata('mark_credit')?>" />
             <input type="hidden"  name="mark_credit_text" value="<?=$this->session->userdata('mark_credit_text')?>" />
 			<input type="hidden" name="totalAmount" value="<?=$this->session->userdata('totalAmount')?>"/>
+			<input type="hidden" name="couponCode" value="<?=$this->session->userdata('couponCode')?>"/>
+			<input type="hidden" name="iscashback" value="<?=$this->session->userdata('iscashback')?>"/>
+			<span class="paydata" style="dispaly:none;" userType="<?php echo $this->session->userdata('role_id'); ?>" amount="<?php echo $amount; ?>" wallet_amount="<?php echo $wallet_amount; ?>" netcomm="<?php echo $netcomm; ?>" useable_promo_wallet="<?php echo $useable_promo_wallet; ?>" ></span>
 			<div  class="text-left col-md-12">
 			<?php
                         if($this->session->userdata('role_id') == 6){
 			if($this->session->userdata('rcAmount')!=''){
 			?>
-			<p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision 	)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
+			<p class="well-sm paydatares">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm ?>(Commision 	)<?php echo ($is_promo_wallet?'&nbsp;-&nbsp;'.$useable_promo_wallet."(Promotional Wallet)":'') ?>&emsp;=&nbsp;<?=$is_promo_wallet ? $this->session->userdata('rcAmount') - $netcomm - $useable_promo_wallet : $this->session->userdata('rcAmount') - $netcomm ?></b></p>
 			<?php
 			}else if($this->session->userdata('totalAmount')!=''){
 			?>
 				<?php /*?><p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."/-"?></b></p><?php */?>
-                <p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision)&emsp;=&nbsp;<?=$this->session->userdata('rcAmount') - $netcomm?></b></p>
+                <p class="well-sm paydatares">Total Payment to be made : <b>RS. <?php echo $amount."&nbsp;-&nbsp;".$netcomm?>(Commision)<?php echo ($is_promo_wallet?'&nbsp;-&nbsp;'.$useable_promo_wallet."(Promotional Wallet)":'') ?>&emsp;=&nbsp;<?=$is_promo_wallet ? $this->session->userdata('rcAmount') - $netcomm - $useable_promo_wallet :$this->session->userdata('rcAmount') - $netcomm?></b></p>
 			<?php
 			}
                         }else{
                             ?>
-                            <p class="well-sm">Total Payment to be made : <b>RS. <?php echo $amount; ?></b></p>
+                            <p class="well-sm paydatares">Total Payment to be made : <b>RS. <?php echo $amount-$useable_promo_wallet; ?></b></p>
                             <?php
                         }
 			?>
@@ -124,7 +128,7 @@
 				</div>
 				<?php if($is_promo_wallet){ ?>
 				<div>
-				<p class="well-sm"><input type="checkbox" name="promo_wallet" id="promoWallet" value="<?php echo $useable_promo_wallet ?>">&emsp;Use LAABUS Promotional Wallet(<?php echo $useable_promo_wallet;?>)</p>
+				<p class="well-sm"><input type="checkbox" checked name="promo_wallet" id="promoWallet" value="<?php echo $useable_promo_wallet ?>">&emsp;Use LAABUS Promotional Wallet(<?php echo $useable_promo_wallet;?>)</p>
 
 				</div>
 				<?php } ?>
@@ -135,7 +139,7 @@
 				if($amount>$wallet_amount ){
 				echo $amount."&nbsp;-&nbsp;".$wallet_amount."&nbsp;-&nbsp;".$netcomm."&emsp;=&nbsp;".($amount-$wallet_amount);
 				}else{
-					echo $wallet_amount."&nbsp;-&nbsp;".$amount.(($this->session->userdata('role_id') == 6) ? "&nbsp;+&nbsp;".$netcomm : '');
+					echo "<span class='paynow_bal'>".$wallet_amount." - ".($amount-$netcomm-$useable_promo_wallet)."</span>";
 					}
 				}
 				else
@@ -148,10 +152,10 @@
 						{
                                             if($this->session->userdata('role_id') == 6){
 					?>
-				<p class="well-sm">Remaining Balance&emsp;<?php echo ($amount>$wallet_amount)? $amount - $wallet_amount:($wallet_amount-$amount+$netcomm);?></p>
+				<p class="well-sm remaining_bal_str">Remaining Balance&emsp;<?php echo ($amount>$wallet_amount)? $amount - $wallet_amount+$useable_promo_wallet:($wallet_amount-$amount+$netcomm+$useable_promo_wallet);?></p>
                                             <?php }else{
                                                 ?>
-                                                <p class="well-sm">Remaining Balance&emsp;<?php echo ($amount>$wallet_amount)? $amount - $wallet_amount:($wallet_amount-$amount);?></p>
+                                                <p class="well-sm remaining_bal_str">Remaining Balance&emsp;<?php echo ($amount>$wallet_amount)? $amount - $wallet_amount+$useable_promo_wallet:($wallet_amount-$amount+$useable_promo_wallet);?></p>
                                                 <?php
                                             }
                                             } ?>
@@ -200,18 +204,42 @@ function showpaymodes(id){
 	}
 }
 	$("#promoWallet").click(function(){
+
+
+		var role = $(".paydata").attr("userType");
+		var amount = parseFloat($(".paydata").attr("amount"));
+		var netcomm = parseFloat($(".paydata").attr("netcomm"));
+		var use_promo_wallet = parseFloat($(".paydata").attr("useable_promo_wallet"));
+		var wallet_amount = parseFloat($(".paydata").attr("wallet_amount"));
+		var paydataString = '';
+		var remaining_bal_str = '';
 		if($("#promoWallet").is(":checked"))
 		{
-			<?php if($amount>$useable_promo_wallet){?>
-				$("#payamount").val("<?php echo ($amount-$useable_promo_wallet);?>");
-			<?php }else{?>
-				$("#payamount").val("<?php echo ($amount);?>");
-			<?php }?>
+			var paynow_bal = wallet_amount +" - "+ (amount - netcomm - use_promo_wallet);
+			if(role == 6) {
+				var calRes = amount - netcomm - use_promo_wallet;
+				paydataString = 'Total Payment to be made : <b> RS. ' + amount + '-' + netcomm + '(Commision ) - '+ use_promo_wallet +'(Promotional Wallet) = ' + calRes + '</b>';
+				remaining_bal_str = (amount > wallet_amount)? amount - wallet_amount + use_promo_wallet:wallet_amount - amount + netcomm+use_promo_wallet;
+			}else {
+				paydataString = 'Total Payment to be made : <b> RS. ' + amount + '</b>';
+				remaining_bal_str = (amount>wallet_amount)? amount - wallet_amount+use_promo_wallet:(wallet_amount-amount+use_promo_wallet);
+
+			}
+		}else {
+			var paynow_bal = wallet_amount +" -  "+ (amount - netcomm );
+			if(role == 6) {
+				var calRes = amount - netcomm;
+				paydataString = 'Total Payment to be made : <b> RS. ' + amount + '-' + netcomm + '(Commision ) = ' + calRes + '</b>';
+				remaining_bal_str = (amount>wallet_amount)? amount - wallet_amount:wallet_amount-amount+netcomm;
+			}else {
+				paydataString = 'Total Payment to be made : <b> RS. ' + amount + '</b>';
+				remaining_bal_str = (amount>wallet_amount)? amount - wallet_amount-use_promo_wallet:(wallet_amount-amount-use_promo_wallet);
+			}
 		}
-		else
-		{
-			$("#payamount").val("<?php echo ($amount);?>");
-		}
+		console.log(paydataString);
+		$(".paydatares").html(paydataString);
+		$(".paynow_bal").html(paynow_bal);
+		$(".remaining_bal_str").html("Remaining Balance&emsp;"+remaining_bal_str);
 
 	});
 </script>
