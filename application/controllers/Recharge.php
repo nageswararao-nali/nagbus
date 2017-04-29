@@ -580,6 +580,8 @@ class Recharge extends Template{
 						'payable_amount' => ($this->input->post_get('rcAmount') - $this->input->post_get('coupon_amount')),
 						'purchase_value' => $this->input->post_get('rcAmount'),
 						'operator_circle' =>$this->input->post_get('operator_circle'),
+						 'couponCode' =>$this->input->post_get('couponCode'),
+						 'iscashback' =>$this->input->post_get('iscashback'),
 						'useable_promo_wallet' => $usable_promo_wallet
 					);
 					$this->session->set_userdata($arr);
@@ -595,7 +597,7 @@ class Recharge extends Template{
 							$arrayData=array(
 								'user_id'=>$user_id,
 								'transaction_id'=>$sales_id,
-								'amount'=>$amt,
+								'amount'=>$usable_promo_wallet > 0 ? $amt-$usable_promo_wallet : $amt,
 								'service_type'=>"Recharge",
 								'pay_mode'=>1,
 								'lupdate'=>date("Y-m-d H:i:s"),
@@ -668,7 +670,7 @@ Amount
 </td>
 <td>:</td>
 <td>
-<input type="text" name="amount" value="'.$payamt.'" />
+<input type="text" name="amount" value="'.($usable_promo_wallet>0 && $payamt > $usable_promo_wallet? $payamt-$usable_promo_wallet : $payamt).'" />
 </td>
 </tr>
 

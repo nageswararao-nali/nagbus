@@ -67,7 +67,7 @@
                         }
                         ?>
                             <hr/>
-                            <div class="row">
+                            <!--<div class="row">
                                 <input type="checkbox" id="coupon">
                                 <label>I have a coupon code (optional)</label>
                                 <div class="row couponcode" style="display:none">
@@ -76,17 +76,17 @@
                                     </div>
                                     <button type="button" class="btn btn-success col-md-2">Apply coupon</button>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <?php
 				//echo "<pre>";
 				//print_r($this->session->userdata("onword"));
 				//echo "</pre>";
-							
-							 $onword = $this->session->userdata("onword");                  
-                                $return = $this->session->userdata("return");   
-								
-							
+
+							 $onword = $this->session->userdata("onword");
+                                $return = $this->session->userdata("return");
+
+
 							if( $commision_amt[0]->mark_comm_type == "INR" )
 				{
 					 $markup = $commision_amt[0]->mark_comm_value;
@@ -96,7 +96,7 @@
 					 $markup = $onword['amount']*$commision_amt[0]->mark_comm_value/100;
 				}
 				$markup = 0;
-                                              
+
                      //exit;
                             ?>
                                 <div class="row">
@@ -126,9 +126,9 @@
         </div>
     </div>
     <div class="col-md-4">
-        <?php 
-		
-        if(isset($onword) && $onword!=''){  
+        <?php
+
+        if(isset($onword) && $onword!=''){
 
 
 if( $commision_amt[0]->mark_comm_type == "INR" )
@@ -139,7 +139,7 @@ if( $commision_amt[0]->mark_comm_type == "INR" )
 				{
 					 $markup = $onword['amount']*$commision_amt[0]->mark_comm_value/100;
 				}
-$markup = 0;				
+$markup = 0;
         ?>
 
             <div class="well">
@@ -173,8 +173,8 @@ $markup = 0;
             </div>
             <?php
         }
-                 
-        if(isset($return) && $return!=''){   
+
+        if(isset($return) && $return!=''){
 if( $commision_amt[0]->mark_comm_type == "INR" )
 				{
 					 $markup = $commision_amt[0]->mark_comm_value;
@@ -183,7 +183,7 @@ if( $commision_amt[0]->mark_comm_type == "INR" )
 				{
 					 $markup = $return['amount']*$commision_amt[0]->mark_comm_value/100;
 				}
-$markup =0;				
+$markup =0;
         ?>
 
                 <div class="well">
@@ -204,7 +204,7 @@ $markup =0;
                         Return Fare : Rs.
                         <?=$return['amount']+$markup?>/-
                     </p>
-                    <p> 
+                    <p>
                         <?=$return['bpname']?> -
                             <?=$return['bptime']?>
                     </p>
