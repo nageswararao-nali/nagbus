@@ -312,22 +312,17 @@ $tot_W_a = $wallet_amount+$totamount;
                 
 	}
 	function payment_failure(){
-		/*$obj = new Transaction_stages();
+		$obj = new Transaction_stages();
 		$obj->eighth_stage();
 		$obj->update_transaction_status();
 		//print_r($_POST);
 		//echo "Failed";
-		redirect('/');*/
+		redirect('/');
 
-		$obj = new Transaction_stages();
+		/*$obj = new Transaction_stages();
 		$obj->tenth_stage();
-		//$obj->update_transaction_finished($_POST['txnid']);
 		$obj->update_transaction_finished($this->session->userdata('txnid'));
-		/*if($this->session->userdata('iscashback')) {
-			$this->update_cashback_success();
-		}*/
-               // $this->recharge_success($_POST);
-			   $this->recharge_success_new($_POST);
+	    $this->recharge_success_new($_POST);*/
 	}
 	function subscription_failure(){
 		$obj = new Transaction_stages();

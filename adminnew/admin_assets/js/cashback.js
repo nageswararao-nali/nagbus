@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// var base_url = 'http://localhost/laabus/adminnew';
-	var base_url = 'http://laabus.com/nag/laabus/adminnew';
+	var base_url = 'http://laabus.com/adminnew';
 	$(".activate_cashback_offer").on("click",function() {
 		var cbk_id = $(this).attr('custdata');
 		var cbk_isActive = $(this).attr('custisActive');
