@@ -59,9 +59,9 @@
                             <label class="col-lg-4 control-label">Cashback to</label>
                             <div class="col-lg-8">
 							
-                               	<input type="checkbox" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent']) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
-							    <input type="checkbox" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser']) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" value="1" name="cbk_isAgentUSer" <?php if($cashback_offer['cbk_isAgentUSer']) echo "checked";?>> User Under Agent 
+                               	<input type="checkbox" class="isCheck" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent']) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="checkbox" class="isCheck" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser']) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" class="isCheck" value="1" name="cbk_isAgentUSer" <?php if($cashback_offer['cbk_isAgentUser']) echo "checked";?>> User Under Agent 
                             </div>
                         </div>
 			            <hr>
@@ -69,9 +69,9 @@
                             <label class="col-lg-4 control-label">Services</label>
                             <div class="col-lg-8">
 							
-                               	<input type="checkbox" value="1" name="cbk_isBus" <?php if($cashback_offer['cbk_isBus']) echo "checked";?>> Bus &nbsp;&nbsp;&nbsp;&nbsp;
-							    <input type="checkbox" value="1" name="cbk_isRecharge" <?php if($cashback_offer['cbk_isRecharge']) echo "checked";?>> Recharge &nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" value="1" name="cbk_isProduct" <?php if($cashback_offer['cbk_isProduct']) echo "checked";?>> Product 
+                               	<input type="checkbox" class="isCheck" value="1" name="cbk_isBus" <?php if($cashback_offer['cbk_isBus']) echo "checked";?>> Bus &nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="checkbox" class="isCheck" value="1" name="cbk_isRecharge" <?php if($cashback_offer['cbk_isRecharge']) echo "checked";?>> Recharge &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" class="isCheck" value="1" name="cbk_isProduct" <?php if($cashback_offer['cbk_isProduct']) echo "checked";?>> Product 
                             </div>
                         </div>
 			            <hr>
@@ -262,7 +262,14 @@ function isNumber(evt, element) {
 
 <script>
 $(document).ready(function(){
-	
+	$('.isCheck').click(function(){
+            if($(this).is(":checked")){             
+			   $(this).val(1)			   
+            }else{
+            	$(this).val(0)
+            }
+            
+        });
 	 /*$('.chkall').click(function(){
             if($(this).is(":checked")){             
 			   $(".chksubcat").prop('checked', true);			   
