@@ -15,7 +15,7 @@ class cashback_model extends CI_Model {
 		$this->db->from('va_cashback_offers');
 
 
-		$where = "cbk_promo_code ='".$cashBackCode."'";
+		$where = "cbk_status=1 and cbk_promo_code ='".$cashBackCode."'";
 
 		$this->db->where($where);
 

@@ -157,7 +157,8 @@ function checkCachbackCode(){
 //	alert($("#couponCode").val());
 	var couponCode= $("#couponCode").val();
 	var qData = {
-		cachback_code : couponCode
+		cachback_code : couponCode,
+		service:'Recharge'
 	}
 	if(couponCode != '') {
 		$.ajax({

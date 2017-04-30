@@ -110,7 +110,8 @@
 //	alert($("#couponCode").val());
 		var couponCode= $("#couponCode").val();
 		var qData = {
-			cachback_code : couponCode
+			cachback_code : couponCode,
+			service:'Bus'
 		}
 		if(couponCode != '') {
 			$.ajax({
