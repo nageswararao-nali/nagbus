@@ -466,7 +466,7 @@ class Common extends CI_Controller {
 	public function isCachBackCodeAvailable()
 	{
 		$cashback_code = $this->input->post('cachback_code');
-		$service = 'cbk_is'.$this->input->post('cachback_code');
+		$service = 'cbk_is'.$this->input->post('service');
 		$role_id = $this->session->userdata('role_id');
 		$role_name = $this->cashback_model->getRoleNameByRoleId($role_id);
 		$details = $this->cashback_model->getCashBackCodeDetails($cashback_code);
