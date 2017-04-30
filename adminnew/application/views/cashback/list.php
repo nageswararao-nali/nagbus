@@ -42,7 +42,7 @@
 								?> 
 								<tr id="a<?php echo $cbOffer["cbk_id"]?>" >
 					   				<td ><a href='javascript:;' data-content='<?php echo $cbOffer["title"]?>' class='descclass'><?php echo $cbOffer["cbk_title"]?></a></td>
-									<td><?php echo $cbOffer["cbk_promo_code"]?></td>
+									<td><?php echo $cbOffer["cbk_promo_code"]; ?></td>
 									<td><?php echo $cbOffer["cbk_amount_percentage"] . ' ' . $cbOffer["cbk_mode"]; ?></td>
 					                <td><?php echo $cbOffer["cbk_min_purchase"]; ?></td>     
 					                <td><?php echo $cbOffer["cbk_isAgent"] ? "YES" : "No"; ?></td>
