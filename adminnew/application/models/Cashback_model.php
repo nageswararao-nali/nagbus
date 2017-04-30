@@ -24,6 +24,8 @@ class cashback_model extends CI_Model {
         return $query->result_array();
     }
     public function update($data) {
+        var_dump($data);
+        exit;
         $this->db->where('cbk_id', $data['cbk_id']);
         $query = $this->db->update('va_cashback_offers', $data);
         //$query->result_array();

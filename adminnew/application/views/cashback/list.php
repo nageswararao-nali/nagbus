@@ -42,12 +42,12 @@
 								?> 
 								<tr id="a<?php echo $cbOffer["cbk_id"]?>" >
 					   				<td ><a href='javascript:;' data-content='<?php echo $cbOffer["title"]?>' class='descclass'><?php echo $cbOffer["cbk_title"]?></a></td>
-									<td><?php echo $cbOffer["cbk_promo_code"]?></td>
+									<td><?php echo $cbOffer["cbk_promo_code"]; ?></td>
 									<td><?php echo $cbOffer["cbk_amount_percentage"] . ' ' . $cbOffer["cbk_mode"]; ?></td>
 					                <td><?php echo $cbOffer["cbk_min_purchase"]; ?></td>     
-					                <td><?php echo $cbOffer["cbk_isAgent"] ? "YES" : "No"; ?></td>
-					                <td><?php echo $cbOffer["cbk_isUser"] ? "YES" : "No"; ?></td>
-					                <td><?php echo $cbOffer["cbk_isAgentUser"] ? "YES" : "No"; ?></td>
+					                <td><?php echo $cbOffer["cbk_isAgent"] == 1 ? "YES" : "No"; ?></td>
+					                <td><?php echo $cbOffer["cbk_isUser"] == 1 ? "YES" : "No"; ?></td>
+					                <td><?php echo $cbOffer["cbk_isAgentUser"] == 1 ? "YES" : "No"; ?></td>
 					                <td><?php echo date("d/m/Y",strtotime($cbOffer["cbk_st_date"])) ." to ".date("d/m/Y",strtotime($cbOffer["cbk_end_date"]));?></td>
 					                <td>
 					                	<a href='javascript:;' custdata="<?php echo $cbOffer["cbk_id"]?>" custisActive="<?php echo $cbOffer['cbk_status'] ? 'InActive' : 'Active'; ?>" class="activate_cashback_offer btn btn-primary btn-xs dim"><?php echo $cbOffer['cbk_status'] ? 'InActive' : 'Active'; ?></a>
