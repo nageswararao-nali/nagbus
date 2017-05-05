@@ -1007,6 +1007,8 @@ $url .="&number_of_packs=100&typeofplan=mobile&api_user_id=".$api_user_id;
                 'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
                 'cbk_his_service' => 'Recharge',
                 'cbk_his_info' => 'promotional walet usage',
+                'cbk_his_cashback_status' => 'Success',
+                'cbk_his_create_date' => date('Y-m-d H:i:s'),
                 'cbk_his_cbk_amount' => $this->session->userdata('useable_promo_wallet')
             );
             $amt = $this->session->userdata('useable_promo_wallet');
@@ -1032,6 +1034,9 @@ $url .="&number_of_packs=100&typeofplan=mobile&api_user_id=".$api_user_id;
                     'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
                     'cbk_his_service' => 'Recharge',
                     'cbk_his_info' => 'Cashback',
+                    'cbk_his_cashback_status' => 'Success',
+                    'cbk_his_create_date' => date('Y-m-d H:i:s'),
+                    'cbk_his_coupon_code' => $couponCode,
                     'cbk_his_cbk_amount' => $amount
                 );
             $this->users->saveCashbackHistory($user_array);

@@ -53,5 +53,14 @@ class cashback_model extends CI_Model {
 		$query = $this->db->get_where('va_cashback_offers', array("cbk_isBus" => 1, "cbk_status" => 1));
         return $query->result_array();
 	}
+	public function get_cashback_history($user_id, $service) {
+		$this->db->select('*');
+		$this->db->from('va_cashback_offers_history ch');
+		$this->db->join('va_sales_order', 'ch.cbk_his_txnid = va_sales_order.sales_id', 'left'); 
+		$this->db->where('ch.cbk_his_user_id', $user_id);
+		$this->db->where('ch.cbk_his_service', $service);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 
 }
