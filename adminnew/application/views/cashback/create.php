@@ -20,7 +20,7 @@
 			   <div class="ibox-content">	
 				
 				
-				<?php	  $attributes = array('class' => 'form-horizontal', 'id' => 'update_category');
+				<?php	  $attributes = array('class' => 'form-horizontal', 'id' => 'update_cashback');
 						 // echo form_open('Offer/update_offeramountnew',$attributes);
 					echo form_open_multipart('Cashback/add_cashback',$attributes);						 
 				?>
@@ -34,7 +34,7 @@
                             </div>
                         </div>-->
 						
-						<input type="hidden" name="cbk_id" value="<?php echo $cashback_offer['cbk_id']; ?>">
+						<input type="hidden" name="cbk_id" class="cbk_id" value="<?php echo $cashback_offer['cbk_id']; ?>">
 						
 						<div class="form-group" style="margin-top:16px">
                             <label class="col-lg-4 control-label">Add Cashback Amount </label>
@@ -59,9 +59,9 @@
                             <label class="col-lg-4 control-label">Cashback to</label>
                             <div class="col-lg-8">
 							
-                               	<input type="checkbox" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent']) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
-							    <input type="checkbox" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser']) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" value="1" name="cbk_isAgentUSer" <?php if($cashback_offer['cbk_isAgentUSer']) echo "checked";?>> User Under Agent 
+                               	<input type="checkbox" class="isCheck" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent'] == 1) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="checkbox" class="isCheck" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser'] == 1) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" class="isCheck" value="1" name="cbk_isAgentUser" <?php if($cashback_offer['cbk_isAgentUser'] == 1) echo "checked";?>> User Under Agent 
                             </div>
                         </div>
 			            <hr>
@@ -69,9 +69,9 @@
                             <label class="col-lg-4 control-label">Services</label>
                             <div class="col-lg-8">
 							
-                               	<input type="checkbox" value="1" name="cbk_isBus" <?php if($cashback_offer['cbk_isBus']) echo "checked";?>> Bus &nbsp;&nbsp;&nbsp;&nbsp;
-							    <input type="checkbox" value="1" name="cbk_isRecharge" <?php if($cashback_offer['cbk_isRecharge']) echo "checked";?>> Recharge &nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" value="1" name="cbk_isProduct" <?php if($cashback_offer['cbk_isProduct']) echo "checked";?>> Product 
+                               	<input type="checkbox" class="isCheck" value="1" name="cbk_isBus" <?php if($cashback_offer['cbk_isBus'] == 1) echo "checked";?>> Bus &nbsp;&nbsp;&nbsp;&nbsp;
+							    <input type="checkbox" class="isCheck" value="1" name="cbk_isRecharge" <?php if($cashback_offer['cbk_isRecharge'] == 1) echo "checked";?>> Recharge &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="checkbox" class="isCheck" value="1" name="cbk_isProduct" <?php if($cashback_offer['cbk_isProduct'] == 1) echo "checked";?>> Product 
                             </div>
                         </div>
 			            <hr>
@@ -94,7 +94,8 @@
  						<div class="form-group">
 				 			<div  class="col-lg-4" ><label class="col-lg-12 control-label"><span style='color:green'>Promo Code</label></div>
 			                <div class="col-lg-8">
-				  				<input type="text" name="cbk_promo_code"  value="<?php echo $cashback_offer['cbk_promo_code'] ? $cashback_offer['cbk_promo_code'] : $promocode; ?>" style="width:200px">
+				  				<input type="text" name="cbk_promo_code" class="cbk_promo_code"  value="<?php echo $cashback_offer['cbk_promo_code'] ? $cashback_offer['cbk_promo_code'] : $promocode; ?>" style="width:200px" <?php echo $cashback_offer['cbk_id'] != "" ? "readonly" : ""; ?>>
+				  				<span id="promo_error" style="color: red;">Promo code exists!</span>
 			                </div>	
 						</div>
  						<div class="form-group">
@@ -127,62 +128,32 @@
         </div>
     </div>
 </div>
-<script>
 
-function isNumber(evt, element) {
-
-        var charCode = (evt.which) ? evt.which : event.keyCode
-
-        if (
-            (charCode != 45 || $(element).val().indexOf('-') != -1) &&      // “-” CHECK MINUS, AND ONLY ONE.
-            (charCode != 46 || $(element).val().indexOf('.') != -1) &&      // “.” CHECK DOT, AND ONLY ONE.
-            (charCode < 48 || charCode > 57) && (charCode != 8))
-            return false;
-			
-			
-			 else {
-    var len = $(element).val().length;
-    var index = $(element).val().indexOf('.');
-    if (index > 0 && charCode == 46) {
-      return false;
-    }
-    if (index > 0) {
-      var CharAfterdot = (len + 1) - index;
-      if (CharAfterdot > 3) {
-        return false;
-      }
-    }
-
-  }
-
-        return true;
-    } 
-
-
-
-	
-
-
-
-    /*$(document).on('click', '#flat_apply_comm_submit', function() {
-		$(this).hide();
-        $.ajax({
-            url: baseurl + 'Offer/update_walletofferamountnew',
-            data: $("#update_category").serialize(),
-            type: 'POST',
-            cache: false,
-            success: function(res) {
-               // $("#create_supportmatrix").trigger("reset");
-			   //console.log(res);
-			  location.reload();
-            }
-        })
-        return false;
-    })*/
-</script>
 <script>
     $(document).ready(function() {
-		
+    	$("#promo_error").hide();
+		$("#flat_apply_comm_submit").on('click', function(e) {
+			e.preventDefault();
+			if($(".cbk_id").val() == "") {
+				var qData = {
+					cbk_promo_code : $(".cbk_promo_code").val()
+				}
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo base_url(); ?>' + 'cashback/isPromocodeCodeAvailable',
+					data: qData,
+					dataType: "text",
+					success: function (resultData) {
+						if(!resultData) {
+							$("#promo_error").hide();
+							$("#update_cashback").submit();
+						}else {
+							$("#promo_error").show();
+						}						
+					}
+				});
+			}
+		})
 		/*$(document).on('click', '.descclass', function() {
 	
 	desc = $(this).data('content');
@@ -192,139 +163,4 @@ function isNumber(evt, element) {
 })
 
 
-			 $(document).on('click', '.deleteme', function() {
-       /* $.ajax({
-            url: baseurl + 'Offer/update_offeramountnew',
-            data: $(this).serialize(),
-            type: 'POST',
-            cache: false,
-            success: function(res) {
-               // $("#create_supportmatrix").trigger("reset");
-			   //console.log(res);
-			  location.reload();
-            }
-        })*/
-			
-			/*if(confirm('Are you sure want to delete this record?'))
-			{
-				id = $(this).attr("custdata");				
-				$.ajax({
-				url: baseurl + 'Offer/delete_wallet_offer',
-				data: {id:id},
-				type: 'POST',
-				cache: false,
-				success: function(res) {              
-				  $("#a"+id).remove();
-				  alert('Record Deleted Successfully')
-				}
-			})
-			
-			}
-			return false;
-    })
-	
-	
-
-		$('.groupOfTexbox').keypress(function (event) {
-            return isNumber(event, this)
-        });*/
-		
-		
-        /*$("#update_category").validate({
-            rules: {
-                role_id: {
-                    required: true,
-                },
-				support_type: {
-                    required: true,
-                },
-				contact_no: {
-                    required: true,
-                },
-				timings: {
-                    required: true,
-                },
-                email: {
-                    required: true,
-                },
-				 comments: {
-                    required: true,
-                }
-            }
-        });*/
-		
-		
-    });
-
-
-</script>
-
-
-<script>
-$(document).ready(function(){
-	
-	 /*$('.chkall').click(function(){
-            if($(this).is(":checked")){             
-			   $(".chksubcat").prop('checked', true);			   
-            }
-            else if($(this).is(":not(:checked)")){
-                 $(".chksubcat").prop('checked', false);
-            }
-        });
-		
-			 $(document).on('change','.chksubcat', function(event){	
-			 if($(this).is(":checked"))
-			 {
-				chkall = 1;				 
-			 }
-			 else
-			 {
-				 chkall = 0;				
-			 }
-			 
-           $( '.chksubcat' ).each(function( index ) {			
-			if($(this).is(":checked")){
-				chkall = 1;	
-			}
-			else
-			{
-				 chkall = 0;
-				 return  false;
-			}			
-			});
-			if(chkall == 0)				
-				{
-					$(".chkall").prop('checked', false);
-				}
-				else
-				{
-					$(".chkall").prop('checked', true);
-				}
-        });*/
-		
-		
-		
-		
-		
-	/*$(document).on('change','#sel_cat_id', function(event){	
-	catid = $(this).val();
-	if(catid == 2 )
-	{
-		catid = 22;
-	}
-		$.ajax({
-		  url:"populat_sub_cat" ,
-		  data:{catid:catid},
-		  success:function(data) {
-			 //return data; 
-			 $("#subcatdiv").html(data);
-			 $(".subcathide").show();
-			 if(data == '' )
-			 {
-				 alert("No Sub category found...")
-			 }
-		  }
-	   });
-	})*/
-})
 </script>

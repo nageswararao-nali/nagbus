@@ -228,7 +228,8 @@ else
       <button class="btn btn-primary btn-xs mt15 waves-effect dropdown-toggle" type="button" data-toggle="dropdown">
 	  <a href='<?php echo base_url()?>agent/Orders' style='color:#fff'>Reports </a><span class="caret"></span></button>
      <ul class="dropdown-menu">
-	 <li><a href="<?php echo base_url()?>agent/Orders">Orders Reports</a></li>
+   <li><a href="<?php echo base_url()?>agent/Orders">Orders Reports</a></li>
+	 <li><a href="<?php echo base_url()?>agent/Cashback">Cashback Reports</a></li>
          <!-- <li><a href="<?php echo base_url()?>Index/agent/daily_report">Daily Report</a></li>
       <li><a href="<?php echo base_url()?>Index/agent/monthly_report">Monthly Report</a></li>
         <li><a href="<?php echo base_url()?>Index/agent/sp_report">service Provider</a></li>

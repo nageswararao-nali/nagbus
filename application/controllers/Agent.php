@@ -15,13 +15,13 @@ class Agent extends CI_Controller {
         $this->load->model('Category_model', 'Cat', TRUE);
         $this->load->model('users_model', 'users', TRUE);
         $this->load->model('supportmatrix_model', 'supportmatrix_model', TRUE);
-        $this->load->model(array('common_model', 'Va_Commisions_model', 'categories_model', 'Sub_categories_model'));
+        $this->load->model(array('common_model', 'Va_Commisions_model', 'categories_model', 'Sub_categories_model', 'cashback_model'));
         //$this->load->model(array('common_model','Va_commisions_model','categories_model','Sub_categories_model'));
 		
 		 $this->load->model('users_ticket', 'ticket', TRUE);
 		$this->load->model('bus_booking', 'ticketDeatils', TRUE);
 		
-		
+
         //start get agent today earnings.
         $todayearning_arr = $this->users->get_agent_today_earning($this->session->userdata('user_id'));
         //print_r($todayearning);exit;
@@ -200,6 +200,20 @@ class Agent extends CI_Controller {
 
         $this->load->view('website_template/header', $data);
         $this->load->view('website/agent/orders', $data1);
+        $this->load->view('website_template/footer');
+    }
+    public function Cashback() {
+        $data['category'] = $this->Cat->get_category();
+        $data['roles'] = $this->users->get_roles();
+        $user_id = $this->session->userdata('user_id');
+
+        $data1['cashback_history_bus'] = $this->cashback_model->get_cashback_history($user_id, 'Bus');
+        $data1['cashback_history_recharge'] = $this->cashback_model->get_cashback_history($user_id, 'Recharge');
+        $data1['user_info'] = $this->users->get_user_info_only('users', $user_id);
+        // var_dump($data1['cashback_history']);
+        // exit;
+        $this->load->view('website_template/header', $data);
+        $this->load->view('website/agent/cashback', $data1);
         $this->load->view('website_template/footer');
     }
 

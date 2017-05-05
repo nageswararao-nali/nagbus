@@ -2040,6 +2040,12 @@ WHERE a.`user_id`=".$user_id;
             //echo $this->db->last_query();exit;
             return $result['wallet'];
         }
+
+		public function get_promo_wallet_amount($user_id=0,$role_id=0){
+            $result = $this->db->query("SELECT  `promotional_wallet` FROM `users` WHERE `user_id`='$user_id' and `role_id`='$role_id' ")->row_array();
+            //echo $this->db->last_query();exit;
+            return $result['promotional_wallet'];
+        }
 		public function get_cbk_usg_service($cbk_usg_service){
             $result = $this->db->query("SELECT  * FROM `va_cashback_usage` WHERE `cbk_usg_service`='$cbk_usg_service'")->row_array();
             //echo $this->db->last_query();exit;
@@ -2620,12 +2626,12 @@ visit www.laabus.com for exiting offers.';
 		$this->db->insert('va_cashback_offers_history', $data);
         return $this->db->insert_id();
 	}
-	public function updatePromotionalWallet($userId , $amount) {
+	public function updatePromotionalWallet($userId , $amount, $type) {
 		$query = $this->db->get_where('users', array("user_id" => $userId));
         $users = $query->result_array();
         $user = $users[0];
-        $promotional_wallet = $user['promotional_wallet'] + $amount;
-        $data = array("promotional_wallet" => $promotional_wallet);
+        $promotional_wallet = $type == "add" ? $user['promotional_wallet'] + $amount : $user['promotional_wallet'] - $amount;
+        $data =array("promotional_wallet" => $promotional_wallet);
 		$this->db->where('user_id', $userId);
         $query = $this->db->update('users', $data);
         return $userId;

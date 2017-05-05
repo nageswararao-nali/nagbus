@@ -5,7 +5,7 @@ class Recharge extends Template{
 		parent::__construct();
 		$this->load->model('Category_Model', 'Cat', TRUE );
 		$this->load->model('users_model', 'users', TRUE );
-//		$this->load->model('cashback_model' );
+		$this->load->model('cashback_model' );
                 $this->load->model('Sale/Salemodel');
                 $this->load->model(array('common_model'));
 	}
@@ -127,6 +127,7 @@ class Recharge extends Template{
 			if($this->form_validation->run() == FALSE)
 			{
 
+
 				//Field validation failed.  User redirected to login page
 				if(!$this->input->is_ajax_request()){
                                         $this->load->view('website_template/header', $data);
@@ -208,6 +209,7 @@ class Recharge extends Template{
 			}
 			else
 			{
+				$data['cashback_offers'] = $this->cashback_model->getRechargeOffers();
                                 //echo "helo11111";
 				$this->load->library('encrypt');
 				$msg = $_POST['operator_name'].$_POST['mobile_no'];
@@ -563,6 +565,7 @@ class Recharge extends Template{
 					$wallet_amount = $this->users->get_wallet_amount($user_id,$role_id);
 					$rcAmount = $this->input->post_get('rcAmount');
 					$amt = ($this->input->post_get('payment')=="Payu")?(($rcAmount>$wallet_amount)?$this->input->post_get('payamount'):$rcAmount):$this->input->post_get('payamount');
+					$usable_promo_wallet = ($this->input->post_get('promo_wallet')?$this->input->post_get('promo_wallet') : 0);
 					//$wamt = ($rcAmount>$wallet_amount)?"0":($wallet_amount-$rcAmount);
                                         $wamt = ($this->input->post_get('walamount')=="1")?(($rcAmount>$wallet_amount)?"0":($wallet_amount-$rcAmount)):$wallet_amount;
                                         //echo $wamt;exit;
@@ -578,7 +581,10 @@ class Recharge extends Template{
 						'coupon_amount' => $this->input->post_get('coupon_amount'),
 						'payable_amount' => ($this->input->post_get('rcAmount') - $this->input->post_get('coupon_amount')),
 						'purchase_value' => $this->input->post_get('rcAmount'),
-						'operator_circle' =>$this->input->post_get('operator_circle')
+						'operator_circle' =>$this->input->post_get('operator_circle'),
+						 'couponCode' =>$this->input->post_get('couponCode'),
+						 'iscashback' =>$this->input->post_get('iscashback'),
+						'useable_promo_wallet' => $usable_promo_wallet
 					);
 					$this->session->set_userdata($arr);
                                         //print_r($this->session->userdata);echo $this->session->userdata('operator');
@@ -604,7 +610,8 @@ class Recharge extends Template{
 							);
                                                         //echo "<pre>";print_r($this->session->userdata);print_r($arrayData);exit;
 							$orders=$this->common_model->commonInsert("orders",$arrayData);
-                                                        redirect('Payment/wallet_recharge/'.$sales_id);
+                            $this->update_cashback_success();
+                            redirect('Payment/wallet_recharge/'.$sales_id);
 						}else{
 							//redirect('Payment?txnid='.$sales_id);  //New Payment Integration with ATOM....
 							$this->session->set_userdata("txnid", $sales_id);
@@ -618,7 +625,7 @@ class Recharge extends Template{
 <INPUT TYPE="hidden" NAME="clientcode" value="007">
 <INPUT TYPE="hidden" NAME="AccountNo" value="1234567890">
 
-<INPUT TYPE="hidden" NAME="ru" value="http://laabus.com/nag/laabus/merchant/service_response.php">
+<INPUT TYPE="hidden" NAME="ru" value="http://laabus.com/merchant/service_response.php">
 <input type="hidden" name="bookingid" value="100001"/>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -666,7 +673,7 @@ Amount
 </td>
 <td>:</td>
 <td>
-<input type="text" name="amount" value="'.$payamt.'" />
+<input type="text" name="amount" value="'.($usable_promo_wallet>0 && $payamt > $usable_promo_wallet? $payamt-$usable_promo_wallet : $payamt).'" />
 </td>
 </tr>
 
@@ -990,4 +997,50 @@ $url .="&number_of_packs=100&typeofplan=mobile&api_user_id=".$api_user_id;
 		echo $details[0]->$filed;
 		exit;
 	}*/
+	function update_cashback_success() {
+        if($this->session->userdata('useable_promo_wallet')){
+            $user_array1 = array(
+                'cbk_his_user_id' => $userId,
+                'cbk_his_txnid' => $this->session->userdata('txnid'),
+                'cbk_his_name' => $this->session->userdata('name'),
+                'cbk_his_mobile' => $this->session->userdata('mobile_no'),
+                'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
+                'cbk_his_service' => 'Recharge',
+                'cbk_his_info' => 'promotional walet usage',
+                'cbk_his_cashback_status' => 'Success',
+                'cbk_his_create_date' => date('Y-m-d H:i:s'),
+                'cbk_his_cbk_amount' => $this->session->userdata('useable_promo_wallet')
+            );
+            $amt = $this->session->userdata('useable_promo_wallet');
+            $this->users->saveCashbackHistory($user_array1);
+            $this->users->updatePromotionalWallet($userId, $amt,"sub");
+        }
+        $couponCode = $this->session->userdata('couponCode');
+        if($couponCode){
+            $cashback_offers = $this->cashback_model->getCashbackOffer($couponCode);
+            $cbk_offer = $cashback_offers[0];
+            $totalAmount_paid = $this->session->userdata('rcAmount');
+            if($cbk_offer["cbk_mode"] == "PEC") {
+                $amount = round(($cbk_offer['cbk_amount_percentage']/$totalAmount_paid) * 100);
+            }else {
+                $amount = $cbk_offer['cbk_amount_percentage'];
+            }
+            $userId = $this->session->userdata('user_id');
+            $user_array = array(
+                    'cbk_his_user_id' => $userId,
+                    'cbk_his_txnid' => $this->session->userdata('txnid'),
+                    'cbk_his_name' => $this->session->userdata('name'),
+                    'cbk_his_mobile' => $this->session->userdata('mobile_no'),
+                    'cbk_his_amount_paid' => $this->session->userdata('rcAmount'),
+                    'cbk_his_service' => 'Recharge',
+                    'cbk_his_info' => 'Cashback',
+                    'cbk_his_cashback_status' => 'Success',
+                    'cbk_his_create_date' => date('Y-m-d H:i:s'),
+                    'cbk_his_coupon_code' => $couponCode,
+                    'cbk_his_cbk_amount' => $amount
+                );
+            $this->users->saveCashbackHistory($user_array);
+            $this->users->updatePromotionalWallet($userId, $amount,"add");
+        }
+    }
 }

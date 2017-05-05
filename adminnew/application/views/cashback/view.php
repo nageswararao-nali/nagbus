@@ -40,7 +40,7 @@
                         <div class="col-lg-8">
                            	<input type="checkbox" value="1" name="cbk_isAgent" <?php if($cashback_offer['cbk_isAgent']) echo "checked";?>> Agent &nbsp;&nbsp;&nbsp;&nbsp;
 						    <input type="checkbox" value="1" name="cbk_isUser" <?php if($cashback_offer['cbk_isUser']) echo "checked";?>> User &nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" value="1" name="cbk_isAgentUSer" <?php if($cashback_offer['cbk_isAgentUSer']) echo "checked";?>> User Under Agent 
+							<input type="checkbox" value="1" name="cbk_isAgentUser" <?php if($cashback_offer['cbk_isAgentUSer']) echo "checked";?>> User Under Agent 
                         </div>
                     </div>
 		            <hr>

@@ -35,6 +35,7 @@ class Cashback extends CI_Controller {
 
 	public function add_cashback() {
 		$data = $this->input->post();
+
 		$data['cbk_create_date'] = date('Y-m-d H:i:s');
 		$data['cbk_st_date'] = date('Y-m-d', strtotime($this->input->post('cbk_st_date')));
 		$data['cbk_end_date'] = date('Y-m-d', strtotime($this->input->post('cbk_end_date')));
@@ -47,6 +48,12 @@ class Cashback extends CI_Controller {
 			}
 		}
 		if($data['cbk_id']) {
+			$data['cbk_isAgent'] = $data['cbk_isAgent'] ? 1 : 0;
+			$data['cbk_isUser'] = $data['cbk_isUser'] ? 1 : 0;
+			$data['cbk_isAgentUser'] = $data['cbk_isAgentUser'] ? 1 : 0;
+			$data['cbk_isBus'] = $data['cbk_isBus'] ? 1 : 0;
+			$data['cbk_isRecharge'] = $data['cbk_isRecharge'] ? 1 : 0;
+			$data['cbk_isProduct'] = $data['cbk_isProduct'] ? 1 : 0;
 			$cbk_id = $this->cashback_model->update($data);
 		}else {
 			$cbk_id = $this->cashback_model->save($data);
@@ -125,5 +132,10 @@ class Cashback extends CI_Controller {
 		$data = $this->input->post();
 		$isActive = $this->cashback_model->activateCashbackOfer($data);
 		echo $isActive;
+	}
+	public function isPromocodeCodeAvailable() {
+		$promocode = $this->input->post("cbk_promo_code");
+		$isExists = $this->cashback_model->isPromocodeExists($promocode);
+		echo $isExists;
 	}
 }
