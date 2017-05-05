@@ -571,6 +571,7 @@ class Buses extends Template {
                      redirect('website/buses/proceed');
 					//$this->load->view('website/buses/proceed');
 				}else if(!$this->input->is_ajax_request()){
+                    $data['cashback_offers'] = $this->cashback_model->getBusCashbackOffers();
                                     //echo "faill";
                                         $this->load->view('website_template/header', $data);
                                         //$this->load->view('website/buses/proceed');
@@ -580,7 +581,7 @@ class Buses extends Template {
                                         }
                                         else
                                         {
-                                            $this->load->view('website/buses/proceed');
+                                            $this->load->view('website/buses/proceed', $data);
                                         }
                                         $this->load->view('website_template/footer');
 				}

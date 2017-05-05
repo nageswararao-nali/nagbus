@@ -54,4 +54,8 @@ class cashback_model extends CI_Model {
         //$query->result_array();
         return $data['cbk_usg_id'];
     }
+    public function isPromocodeExists($promocode) {
+        $query = $this->db->get_where('va_cashback_offers', array("cbk_promo_code" => $promocode));
+        return $query->num_rows() ? true : false ;
+    }
 }

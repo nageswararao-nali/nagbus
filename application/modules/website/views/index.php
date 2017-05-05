@@ -141,10 +141,38 @@ if($this->session->userdata("role_id")!=2)
 
 
 <span class="login_show"></span>
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+        <div class="modal-body">
+          <img src="<?php echo base_url(); ?>adminnew/admin_assets/cb_img/cash_back_offer.JPG" />
+        </div>
+      </div>
+      
+    </div>
+  </div>
+<style>
 
-
+.modal-dialog{
+    position: relative;
+    display: table; //This is important 
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;   
+}
+</style>
 <script src="<?=base_url('web_assets/scripts/recharge.js')?>"></script>
 <script>
+$(window).on('load',function(){
+        $('#myModal').modal('show');
+    });
 $(".operators2").hide();
 function checkplans(){
     var mbnum = $("#mobile_no").val();

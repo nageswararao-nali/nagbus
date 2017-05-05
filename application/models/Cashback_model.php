@@ -45,6 +45,13 @@ class cashback_model extends CI_Model {
         $query = $this->db->get_where('va_cashback_offers', array("cbk_promo_code" => $couponCode));
         return $query->result_array();
 	}
-
+	public function getRechargeOffers() {
+		$query = $this->db->get_where('va_cashback_offers', array("cbk_isRecharge" => 1, "cbk_status" => 1));
+        return $query->result_array();
+	}
+	public function getBusCashbackOffers() {
+		$query = $this->db->get_where('va_cashback_offers', array("cbk_isBus" => 1, "cbk_status" => 1));
+        return $query->result_array();
+	}
 
 }

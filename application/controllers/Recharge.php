@@ -127,6 +127,7 @@ class Recharge extends Template{
 			if($this->form_validation->run() == FALSE)
 			{
 
+
 				//Field validation failed.  User redirected to login page
 				if(!$this->input->is_ajax_request()){
                                         $this->load->view('website_template/header', $data);
@@ -208,6 +209,7 @@ class Recharge extends Template{
 			}
 			else
 			{
+				$data['cashback_offers'] = $this->cashback_model->getRechargeOffers();
                                 //echo "helo11111";
 				$this->load->library('encrypt');
 				$msg = $_POST['operator_name'].$_POST['mobile_no'];

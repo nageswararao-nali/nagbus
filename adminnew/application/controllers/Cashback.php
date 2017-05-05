@@ -133,4 +133,9 @@ class Cashback extends CI_Controller {
 		$isActive = $this->cashback_model->activateCashbackOfer($data);
 		echo $isActive;
 	}
+	public function isPromocodeCodeAvailable() {
+		$promocode = $this->input->post("cbk_promo_code");
+		$isExists = $this->cashback_model->isPromocodeExists($promocode);
+		echo $isExists;
+	}
 }

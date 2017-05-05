@@ -85,7 +85,12 @@
 <!--              <p style="z-index:99999999999999; position:absolute; top:08px; left:75%; cursor:pointer" id="apply" onclick="javascript:$('#promo_error').show()">Apply</p>-->
               <p style="z-index:99999999999999; position:absolute; top:08px; left:75%; cursor:pointer" id="apply" onclick="javascript:checkCachbackCode()">Apply</p>
             </div>
-            <div class="col-md-3 text-right">
+            <?php if(count($cashback_offers)) {
+			?>
+			<div class="text-center col-md-1" style="cursor: pointer;"><a data-toggle="modal" data-target="#myModal">Browse Offers</a></div>
+
+			<?php	} ?>
+            <div class="col-md-2 text-right">
             	<button type="submit" class="btn btn-info" id="proceed">Proceed to pay Rs. <?=$this->session->userdata('rcAmount')?></button>
             </div>
             <?php $role_id=$this->session->userdata('role_id');
@@ -141,7 +146,38 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+        <div class="modal-body">
+          <table>
+          	<?php foreach($cashback_offers as $offer) { ?>
+          		<tr>
+          			<td><?php echo $offer["cbk_title"]; ?></td>
+          			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          			<td><b><a class="promo_code_list"><?php echo $offer["cbk_promo_code"]; ?></a></b></td>
+          		</tr>
+
+          	<?php	} ?>
+          	
+          </table>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <script>
+$(document).ready(function(){
+	$(".promo_code_list").click(function() {
+		var pcode = $(this).text();
+		$("#couponCode").val(pcode)
+	})
+})
 $('.credit').click(function(){
 	if ($(this).is(':checked')){
 	$(".Comments").show()
