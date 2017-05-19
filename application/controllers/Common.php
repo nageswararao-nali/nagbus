@@ -35,8 +35,8 @@ class Common extends CI_Controller {
 		$cur_password=$this->input->post('current_password');
 		$new_password=$this->input->post('new_password');
 		$confirm_password=$this->input->post('confirm_password');
-                $role_id=$this->session->userdata('role_id');
-                $email_id=$this->session->userdata('email_id');
+		$role_id=$this->session->userdata('role_id');
+		$email_id=$this->session->userdata('email_id');
 
 		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required');
    		$this->form_validation->set_rules('new_password', 'New password', 'trim|required|matches[confirm_password]');
@@ -45,19 +45,21 @@ class Common extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE) {
 
-                    $data['category'] = $this->Cat->get_category();
-                    $data['roles'] = $this->users->get_roles();
-                    $data['country'] = $this->users->get_country();
-                    $this->load->view('website_template/header', $data);
-                    if($role_id=='4'){
-                        //$this->load->view('website/user/change_password', $data);
-						redirect('user/change_password');
-                    }else if($role_id=='6'){
-                        //$this->load->view('website/agent/change_password', $data);
-						 redirect('agent/profile');
-                    }
+			$data['category'] = $this->Cat->get_category();
+			$data['roles'] = $this->users->get_roles();
+			$data['country'] = $this->users->get_country();
+			$this->load->view('website_template/header', $data);
+			if($role_id=='4'){
+				//$this->load->view('website/user/change_password', $data);
+				redirect('user/change_password');
+			}else if($role_id=='6'){
+				//$this->load->view('website/agent/change_password', $data);
+				 redirect('agent/profile');
+			}else if($role_id=='5'){
+				 redirect('smd/profile');
+			}
 
-                    $this->load->view('website_template/footer');
+			$this->load->view('website_template/footer');
 
 		} else {
 			 $query = $this->users->checkOldPass($cur_password,$role_id,$email_id);
@@ -69,17 +71,21 @@ class Common extends CI_Controller {
                                     redirect('user/change_password');
                                  }else if($role_id=='6'){
                                       redirect('agent/profile');
+                                 }else if($role_id=='5'){
+                                      redirect('smd/profile');
                                  }
                              }
                          }else{
                              $this->session->set_flashdata('msg', 'Incorrect Old Password ,Please check.');
 							  if($role_id=='4'){
-                        //$this->load->view('website/user/change_password', $data);
-						redirect('user/change_password');
-                    }else if($role_id=='6'){
-                        //$this->load->view('website/agent/change_password', $data);
-						 redirect('agent/profile');
-                    }
+								//$this->load->view('website/user/change_password', $data);
+								redirect('user/change_password');
+							  }else if($role_id=='6'){
+								//$this->load->view('website/agent/change_password', $data);
+								 redirect('agent/profile');
+								}else if($role_id=='5'){
+									 redirect('smd/profile');
+								}
                          }
 
 		}
@@ -123,6 +129,8 @@ class Common extends CI_Controller {
                         $this->load->view('website/user/profile', $data);
                     }else if($role_id=='6'){
                         $this->load->view('website/agent/profile', $data);
+                    }else if($role_id=='5'){
+                        $this->load->view('website/smd_new/profile', $data);
                     }
 
                     $this->load->view('website_template/footer');
@@ -152,6 +160,8 @@ class Common extends CI_Controller {
                                             redirect('user/profile');
                                         }elseif($role_id==6){
                                             redirect('agent/profile');
+                                        }elseif($role_id==5){
+                                            redirect('smd/profile');
                                         }
                                     }
 
@@ -175,6 +185,8 @@ class Common extends CI_Controller {
                                             redirect('user/profile');
                                         }elseif($role_id==6){
                                             redirect('agent/profile');
+                                        }elseif($role_id==5){
+                                            redirect('smd/profile');
                                         }
                                  }
 
@@ -289,6 +301,8 @@ class Common extends CI_Controller {
                                             redirect('user/profile');
                                         }elseif($role_id==6){
                                             redirect('agent/profile');
+                                        }elseif($role_id==5){
+                                            redirect('smd/profile');
                                         }
                                     }
 
@@ -355,6 +369,8 @@ class Common extends CI_Controller {
                                             redirect('user/profile');
                                         }elseif($role_id==6){
                                             redirect('agent/profile');
+                                        }elseif($role_id==5){
+                                            redirect('smd/profile');
                                         }
                                  }
 
@@ -385,6 +401,8 @@ class Common extends CI_Controller {
                                             redirect('user/profile');
                                         }elseif($role_id==6){
                                             redirect('agent/profile');
+                                        }elseif($role_id==5){
+                                            redirect('smd/profile');
                                         }
                                     }
 
@@ -408,6 +426,8 @@ class Common extends CI_Controller {
                                             redirect('user/profile');
                                         }elseif($role_id==6){
                                             redirect('agent/profile');
+                                        }elseif($role_id==5){
+                                            redirect('smd/profile');
                                         }
                                  }
                              }

@@ -1,15 +1,18 @@
 <?php $this->load->view('website_template/head.php');
 $role_id=$this->session->userdata('role_id');
 if($role_id=='2'){
-                            $account_url='channel_partner/profile';
-                            $dash_url='channel_partner/dashboard';
-                        }else if($role_id=='4'){
-                            $account_url='user/profile';
-                            $dash_url='user/dashboard';
-                        }else if($role_id=='6'){
-                            $account_url='agent/profile';
-                            $dash_url='agent/dashboard';
-                        } 
+	$account_url='channel_partner/profile';
+	$dash_url='channel_partner/dashboard';
+}else if($role_id=='4'){
+	$account_url='user/profile';
+	$dash_url='user/dashboard';
+}else if($role_id=='6'){
+	$account_url='agent/profile';
+	$dash_url='agent/dashboard';
+}else if($role_id=='5'){
+	$account_url='smd/profile';
+	$dash_url='smd/dashboard';
+}
 
 ?>
 <body id="app" class="app off-canvas theme-four theme-zero">
@@ -21,7 +24,7 @@ if($role_id=='2'){
    <li class="hidden-lg hidden-md hidden-sm"> <a href="javascript:;" class="nav-trigger ion ion-drag"></a> </li>
     <!-- #end nav-trigger -->
     <!--<li class="notify-drop hidden-xs"> <a href="<?php echo base_url()?>" class="l"><i class="ion ion-home"></i></a> </li>-->
-    
+
     <!-- Search box -->
    <!-- <li>
       <div class="form-search hidden-xs">
@@ -31,9 +34,9 @@ if($role_id=='2'){
         </form>
       </div>
     </li>-->
-    <!-- #end search-box --> 
-    
-    
+    <!-- #end search-box -->
+
+
 <script>
  $(function() {
 	var availableTutorials = [
@@ -43,7 +46,7 @@ if($role_id=='2'){
 	   "C++",
 	   "Ecommerce",
 	   "Jquery",
-	   "Groovy", 
+	   "Groovy",
 	   "Java",
 	   "JavaScript",
 	   "Lua",
@@ -62,29 +65,29 @@ if($role_id=='2'){
 	   "january"
 	];
 	$( "#automplete-3" ).autocomplete({
-	   minLength:1,   
-	   delay:100,   
+	   minLength:1,
+	   delay:100,
 	   source: availableTutorials,
 	   open: function () {
 			$(this).autocomplete('widget').zIndex(999999);
 		}
 	});
-	
+
  });
 </script>
-  
-  
+
+
     <!-- site-logo for mobile nav -->
     <li>
       <div class="visible-xs"> <a href="http://laabus.com/" class="text-uppercase h3"> <span class="text"><img alt="Laabus" src="http://laabus.com/images/small_logo.png"</span> </a> </div>
     </li>
-    
-    <!-- #end site-logo --> 
-    
+
+    <!-- #end site-logo -->
+
     <!-- fullscreen -->
    <!-- <li class="fullscreen hidden-xs"> <a href="javascript:;"><i class="ion ion-qr-scanner"></i></a> </li>-->
     <!-- #end fullscreen -->
-    
+
   </ul>
 
 
@@ -94,9 +97,9 @@ if($role_id=='2'){
 <?php if($this->session->userdata('user_id')==''){?>
   <li><a style="color:#000" href="<?php echo base_url('login')?>"><img alt="login" src="http://laabus.com/images/user_login.png"></a> &nbsp;  &nbsp; <a style="color:#000" href="<?php echo base_url()?>Welcome/signup"><img alt="login" src="http://laabus.com/images/new_user.png"></a></li>
 <?php }?>
-  
+
     <!-- profile drop -->
-    <li class="profile-drop dropdown"> 
+    <li class="profile-drop dropdown">
         <?php if($this->session->userdata('user_id')!=''){?>
 <!--        <a href="javascript:;" data-toggle="dropdown"> <img src="<?php echo base_url()?>web_assets/images/admin.jpg" alt="admin-pic"> </a>-->
         <a href="javascript:;" data-toggle="dropdown"><span class="ion ion-person"></span></a>
@@ -130,18 +133,18 @@ if($role_id=='2'){
 -->        <li><a href="<?php echo base_url()?>welcome/Logout"><span class="ion ion-power">&nbsp;&nbsp;</span>Logout</a></li>
       </ul>
     </li>
-    <!-- #end profile-drop --> 
+    <!-- #end profile-drop -->
   </ul>
-    
+
     <?php if($this->session->userdata('user_id')!=''){?>
   <ul class="list-unstyled right-elems">
     <li class="hidden-xs"><h4 style="color:#FFF; padding-right:10px;">Welcome </h4></li>
     <li class="hidden-xs"><h6 style="color:#FFF; padding-right:10px;"><?php echo $this->session->userdata('email_id')?></h6></li>
   </ul>
     <?php }?>
-  
-  
-  
+
+
+
 </header>
 <!-- #end header -->
 <?php $this->load->view('website_template/menubar.php');?>

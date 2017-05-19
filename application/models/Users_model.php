@@ -14,7 +14,7 @@ class Users_Model extends CI_Model {
 		$this->db->from('roles');
 
 
-		$where = "role_id in(2,4,6)";
+		$where = "role_id in(2,4,5,6)";
 
 		$this->db->where($where);
 
@@ -186,6 +186,10 @@ class Users_Model extends CI_Model {
 			$usertype = 2;
 		}
 		if($role_id == 6 )
+		{
+			$usertype = 1;
+		}
+		if($role_id == 5 )
 		{
 			$usertype = 1;
 		}
@@ -380,6 +384,10 @@ class Users_Model extends CI_Model {
 		{
 			$usertype = 1;
 		}
+		if($role_id == 5 )
+		{
+			$usertype = 1;
+		}
 		if($role_id == 44 )
 		{
 			$usertype = 3;
@@ -437,6 +445,10 @@ class Users_Model extends CI_Model {
 			$usertype = 2;
 		}
 		if($role_id == 6 )
+		{
+			$usertype = 1;
+		}
+		if($role_id == 5 )
 		{
 			$usertype = 1;
 		}
@@ -1048,6 +1060,10 @@ $method="POST";
 						"wallet" => $mywallet,
                                                 "chp_id"=>$chp_id
 				);
+		if( $this->input->post('smd_id') && $this->users->isSmdUser($this->input->post('smd_id')) )
+		{
+			$insert_to_user['smd_id'] = $this->input->post('smd_id');
+		}
 			 //echo "<pre>"; print_r($insert_to_user); exit;
 			$this->db->insert("users",$insert_to_user);
 
@@ -1429,6 +1445,119 @@ visit www.laabus.com for exiting offers.';
 
                                // return true;
 							   return $txnid;
+	}
+
+	//Create SMD here
+	public function create_smd() {
+		$chp_id = 0;
+		$password = md5($this->input->post('password'));
+
+		$this->db->select('*');
+		$where1 = "FIND_IN_SET('2', avl_options)";
+		$this->db->where( $where1 );
+		$where2 = "FIND_IN_SET('1', users)";
+		$this->db->where( $where2 );
+		$where3 = "NOW() BETWEEN st_date AND end_date";
+		$this->db->where( $where3 );
+		$this->db->from('joining_offers');
+		$query = $this->db->get()->row();
+
+		$mywallet = 0;
+		$offer_amt = $query->offer_amount;
+		$users_lists = $query->users;
+		$options = $query->avl_options;
+
+		$users_lists = explode(",",$users_lists);
+		$options = explode(",",$options);
+
+		if(in_array(1,$users_lists))
+		{
+			if(in_array(2,$options))
+			{
+				$mywallet = $offer_amt;
+			}
+		}
+
+		$cities = explode("<=>",$this->input->post('city'));
+
+		$insert_to_smd = array(
+				"email_id" => $this->input->post('email',TRUE),
+				"name" => $this->input->post('name',TRUE),
+				"mobile"	=>	$this->input->post('mobile',TRUE),
+				"password"	=>	$password,
+				"role_id" => $this->input->post('usertype', TRUE),
+				"country_name" => $this->input->post('country'),
+				"state_name" => $this->input->post('state'),
+				"district_name" => $this->input->post('district'),
+				"city_name" => $cities[0],
+				"pincode" => $cities[1],
+				"lupdate" => date('Y-m-d H:i:s'),
+				"status" =>'1' ,
+				"wallet" => $mywallet,
+				"chp_id"=>$chp_id
+		);
+
+		$this->db->insert("users",$insert_to_smd);
+
+		////GENERATE CUSTOMER ID
+		$id = $this->db->insert_id();
+
+		$customer_id = "L-SMD-".$id;
+		$array_cust["customer_id"] = $customer_id;
+		$this->db->where('user_id', $id);
+		$query = $this->db->update('users',$array_cust);
+
+		//SMS
+
+		//Code using curl
+
+		//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
+
+		//Change your configurations here.
+		//---------------------------------
+		$uid="766172696e69696e666f"; //your uid
+		$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
+		$sender="LAABUS"; // approved sender id
+		$domain="smsalertbox.com"; // connecting url
+		$route="5";// 0-Normal,1-Priority
+		$method="POST";
+		//---------------------------------
+
+		$mobile = $this->input->post('mobile',TRUE);
+		$name = $this->input->post('name',TRUE);
+
+		$message='Dear  '.$name.', You have successfully registered as   SMD with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
+
+		//$uid=urlencode($uid);
+		//$pin=urlencode($pin);
+		//$sender=urlencode($sender);
+		$message=urlencode($message);
+		//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+
+		$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+		$url="http://$domain/api/sms.php";
+
+		$ch = curl_init($url);
+
+		if($method=="POST")
+		{
+			curl_setopt($ch, CURLOPT_POST,1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+		}
+		else
+		{
+			$get_url=$url."?".$parameters;
+
+			curl_setopt($ch, CURLOPT_POST,0);
+			curl_setopt($ch, CURLOPT_URL, $get_url);
+		}
+
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+		$return_val = curl_exec($ch);
+		return $id;
 	}
 
         public function email_exists($role_id,$email_id) {
@@ -1832,6 +1961,275 @@ visit www.laabus.com for exiting offers.';
                                 return true;
 	}
 
+	public function create_smduser($role_id,$user_id,$chp_id) {
+		$password = md5($this->input->post('password'));
+
+
+		$this->db->select('*');
+		$where1 = "FIND_IN_SET('2', avl_options)";
+		$this->db->where( $where1 );
+		$where2 = "FIND_IN_SET('3', users)";
+		$this->db->where( $where2 );
+
+		//$this->db->where('promo_code', $this->input->post('promo_code'));
+		$where3 = "NOW() BETWEEN st_date AND end_date";
+		$this->db->where( $where3 );
+
+		$this->db->from('joining_offers');
+
+		$query = $this->db->get()->row();
+
+		$mywallet = 0;
+		$offer_amt = $query->offer_amount;
+		$users_lists = $query->users;
+		$options = $query->avl_options;
+
+		//echo $offer_amt."<br>";
+		//echo $users_lists."<br>";
+		//echo $options."<br>";
+
+		$users_lists = explode(",",$users_lists);
+		$options = explode(",",$options);
+
+		//print_r($users_lists)."<br>";
+		//print_r($options)."<br>";
+
+
+		//print_r($query);
+
+		if(in_array(3,$users_lists))
+		{
+			if(in_array(2,$options))
+			{
+				$mywallet = $offer_amt;
+			}
+		}
+
+
+		$cities = explode("<=>",$this->input->post('city'));
+
+
+		// echo "<pre>"; print_r($_POST);
+		$insert_to_agent = array(
+				"email_id" => $this->input->post('email',TRUE),
+				"mobile"	=>	$this->input->post('mobile',TRUE),
+				"password"	=>	$password,
+				"org_password"=>$this->input->post('password'),
+				"role_id" => $role_id,
+				"name" => $this->input->post('FirstName').' '.$this->input->post('LastName'),
+				"address" => $this->input->post('Address'),
+
+				"country_name" => $this->input->post('country'),
+				"state_name" => $this->input->post('state'),
+				"district_name" => $this->input->post('district'),
+				"city_name" => $cities[0],
+				"pincode" => $cities[1],
+
+
+
+				"lupdate" => date('Y-m-d H:i:s'),
+				"created_at" => date('Y-m-d H:i:s'),
+				"status" => 1,
+				"wallet" => $mywallet,
+				"smd_id" => $user_id,
+				"chp_id" => $chp_id,
+		);
+		//print_r($insert_to_agent);exit;
+
+		$this->db->insert("users",$insert_to_agent);
+
+
+		////GENERATE CUSTOMER ID
+		$id = $this->db->insert_id();
+		$customer_id = "Laa-U-".$id;
+		$array_cust["customer_id"] = $customer_id;
+		$this->db->where('user_id', $id);
+		$query = $this->db->update('users',$array_cust);
+		////GENERATE CUSTOMER ID
+
+
+		//SMS
+
+
+		//SMS
+
+//Code using curl
+
+//API stands for Application Programming Integration which is widely used to integrate and enable interaction with other software, much in the same way as a user interface facilitates interaction between humans and computers. Our API codes can be easily integrated to any web or software application.
+
+//Change your configurations here.
+//---------------------------------
+		$uid="766172696e69696e666f"; //your uid
+		$pin="ccdb37d4de7737d75924ab4507e03303"; //your api pin
+		$sender="LAABUS"; // approved sender id
+		$domain="smsalertbox.com"; // connecting url
+		$route="5";// 0-Normal,1-Priority
+		$method="POST";
+//---------------------------------
+
+
+
+		$mobile = $this->input->post('mobile',TRUE);
+		$name = $this->input->post('FirstName').' '.$this->input->post('LastName');
+		$smdname = $this->session->userdata('name');
+
+		//$message='Dear  '.$name.', You have successfully registered as   User with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
+		//$message ='Dear '.$name.',You are registered by '.$agtname.' as an user with LAABUS.COM .now you can login with user ID '.$mobile.' and password '.$this->input->post('password').'  download app@ https://goo.gl/QWUiJB';
+
+		$message ='Dear '.$name.',You are registered by '.$smdname.' as an user with LAABUS.COM .now you can login with user ID '.$mobile.' and password '.$this->input->post('password').'  download app@ https://goo.gl/tjc8mr';
+
+		//$uid=urlencode($uid);
+		//$pin=urlencode($pin);
+		//$sender=urlencode($sender);
+		$message=urlencode($message);
+		//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+
+		$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+		$url="http://$domain/api/sms.php";
+
+		$ch = curl_init($url);
+
+		if($method=="POST")
+		{
+			curl_setopt($ch, CURLOPT_POST,1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+		}
+		else
+		{
+			$get_url=$url."?".$parameters;
+
+			curl_setopt($ch, CURLOPT_POST,0);
+			curl_setopt($ch, CURLOPT_URL, $get_url);
+		}
+
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+		$return_val = curl_exec($ch);
+
+
+		//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
+		/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
+		$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
+visit www.laabus.com for exiting offers.';
+
+		//$uid=urlencode($uid);
+		//$pin=urlencode($pin);
+		//$sender=urlencode($sender);
+		$message=urlencode($message);
+		//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+
+		$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+		$url="http://$domain/api/sms.php";
+
+		$ch = curl_init($url);
+
+		if($method=="POST")
+		{
+			curl_setopt($ch, CURLOPT_POST,1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+		}
+		else
+		{
+			$get_url=$url."?".$parameters;
+
+			curl_setopt($ch, CURLOPT_POST,0);
+			curl_setopt($ch, CURLOPT_URL, $get_url);
+		}
+
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+		//$return_val = curl_exec($ch);
+
+		//var_dump($return_val);exit;
+
+
+		//////////////////
+
+
+		$mobile =  $this->session->userdata('Mobile');
+		$name = $this->session->userdata('name');
+
+		$message='Dear  '.$name.', You have successfully registered as   User with LAABUS.COM, download app @ https://goo.gl/QWUiJB';
+
+		//$uid=urlencode($uid);
+		//$pin=urlencode($pin);
+		//$sender=urlencode($sender);
+		$message=urlencode($message);
+		//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+
+		$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+		$url="http://$domain/api/sms.php";
+
+		$ch = curl_init($url);
+
+		if($method=="POST")
+		{
+			curl_setopt($ch, CURLOPT_POST,1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+		}
+		else
+		{
+			$get_url=$url."?".$parameters;
+
+			curl_setopt($ch, CURLOPT_POST,0);
+			curl_setopt($ch, CURLOPT_URL, $get_url);
+		}
+
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+		$return_val = curl_exec($ch);
+
+
+		//ONE MORE SMS TO AGENT WHILE JOING THAT ADMIN WILL APPROVE IT.*/
+		/*$message='Dear  '.$name.', You have successfully registered as   Agent with LAABUS.COM, download app @ https://goo.gl/QWUiJB';*/
+		$message='Dear '.$name.' your request has been sent to admin successfully, waiting for admin approval.
+visit www.laabus.com for exiting offers.';
+
+		//$uid=urlencode($uid);
+		//$pin=urlencode($pin);
+		//$sender=urlencode($sender);
+		$message=urlencode($message);
+		//$message = "Dear%20%23VAL%23%2C%20You%20have%20successfully%20%20recharges%20%20INR%20%23VAL%23.%20with%20www.laabus.com%20download%20%20app%20%40%20https%3A%2F%2Fgoo.gl%2FQWUiJB";
+
+		$parameters="uid=$uid&pin=$pin&sender=$sender&route=$route&tempid=2&mobile=$mobile&message=$message&pushid=1";
+
+		$url="http://$domain/api/sms.php";
+
+		$ch = curl_init($url);
+
+		if($method=="POST")
+		{
+			curl_setopt($ch, CURLOPT_POST,1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
+		}
+		else
+		{
+			$get_url=$url."?".$parameters;
+
+			curl_setopt($ch, CURLOPT_POST,0);
+			curl_setopt($ch, CURLOPT_URL, $get_url);
+		}
+
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+		curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+		//$return_val = curl_exec($ch);
+
+		//var_dump($return_val);exit;
+
+		//SMD
+
+
+
+		return true;
+	}
+
         public function get_agent_today_earning($user_id)
 		{
 			date_default_timezone_set("Asia/Kolkata");
@@ -1908,6 +2306,15 @@ visit www.laabus.com for exiting offers.';
 				"creation_date" => date('Y-m-d H:i:s')
 			);
 		$this->db->insert('va_agent_user', $insert_agent_role);
+	}
+
+	public function insertsmd_user($agent_user_id, $user_user_id) {
+			$insert_agent_role = array(
+				"smd_user_id" => $agent_user_id,
+				"user_user_id" => $user_user_id,
+				"creation_date" => date('Y-m-d H:i:s')
+			);
+		$this->db->insert('va_smd_user', $insert_agent_role);
 	}
 
 	#--------------------------------------------------------------------
@@ -2637,5 +3044,29 @@ visit www.laabus.com for exiting offers.';
         return $userId;
 	}
 
+
+	#--------------------------------------------------------------------
+	# function for get SMD User List based on Agent User Id
+	#---------------------------------------------------------------------
+	public function get_smd_users_list($user_id=0){
+
+		$result = $this->db->query("SELECT `user_id`, `customer_id`, `name`, `mobile`, `email_id`, `pincode`, `role_id`, `password`, `company_name`, `approve_id`, `security_pin`, `dob`, `address`, IF(`status`=1,'Active','Inactive') as status, `alias`, `role_based_id`, `agent_id`, `chp_id`, `smd_id`, `wallet`,DATE_FORMAT( `created_at` , '%d.%m.%Y %H:%i:%s' ) as doj,`lupdate` ,CONCAT(CONCAT('<a href=\http://laabus.com/nag/laabus/smd/userview\/',`user_id`,'>View</a>'),'  ',CONCAT('<a href=\http://laabus.com/nag/laabus/smd/edituser\/',`user_id`,'>Edit</a>')) as actions, `country_name`, `state_name`, `district_name`, `city_name` FROM `users` WHERE `smd_id`= '$user_id' AND  `role_id`=4 order by user_id desc ")->result_array();
+		//echo $this->db->last_query();exit;
+		return $result;
+	}
+
+	public function updateUsers($data)
+	{
+		//$array_cust["customer_id"] = $customer_id;
+		$this->db->where('user_id', $data["user_id"]);
+		$query = $this->db->update('users',$data);
+		return true;
+	}
+
+	public function isSmdUser($user_id)
+	{
+		$result = $this->db->query("SELECT `user_id` FROM `users` WHERE `user_id`= '$user_id'")->result_array();
+		return count($result) > 0 ? TRUE : FALSE;
+	}
 
 }

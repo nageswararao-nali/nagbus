@@ -1,12 +1,12 @@
 <!-- main-navigation -->
 
 <aside class="nav-wrap" id="site-nav" data-perfect-scrollbar>
-  <div class="nav-head"> 
-    <!-- site logo --> 
+  <div class="nav-head">
+    <!-- site logo -->
     <a href="<?php echo base_url()?>" class="site-logo text-uppercase"> <img src="<?php echo base_url()?>images/logo_laabus3.png" alt="Laabus"><span class="text"></span> </a> </div>
-  
+
   <!-- Site nav (vertical) -->
-  
+
   <nav class="site-nav clearfix">
     <div class="profile clearfix mb15">
     	<img src="<?php echo base_url()?>web_assets/images/admin.jpg" alt="admin" class="hidden-xs">
@@ -14,7 +14,7 @@
             <h5 class="name"></h5>
             <small class="desig text-uppercase">PHP Developer</small> </div>
         </div>
-    
+
     <!-- navigation -->
     <ul class="list-unstyled clearfix nav-list mb15">
     <?php
@@ -27,17 +27,17 @@
     ?>
 
 
-       
+
        <?php
-	   if($this->session->userdata("role_id") != 2)
+	   if($this->session->userdata("role_id") != 2 && $this->session->userdata("role_id") != 5)
 	   {
 	   ?>
         <li class=" waves-effect"> <a href="/recharge" class="l"> <i class="recharge-icon"></i> <span class="text">MOBILE RECHARGE </span></a> </li>
-		
+
 		 <li class=" waves-effect"> <a href="<?php echo base_url()?>buses/buses" class="l"> <i class="bus-icon"></i> <span class="text">BUS TICKETS</span></a> </li>
-		 
+
 		  <!--<li class=" waves-effect"> <a href="/Comingsoon" class="l"> <i class="flight-icon"></i> <span class="text">FLIGHT TICKETS</span></a> </li>
-    
+
 
         <li class=" waves-effect"> <a href="/Comingsoon" class="l"> <i class="home-repair-icon"></i> <span class="text">HOME REPAIR</span></a> </li>
         <li class=" waves-effect"> <a href="/Comingsoon" class="l"> <i class="e-shope-icon"></i> <span class="text">E-SHOP</span></a> </li>-->
@@ -46,8 +46,8 @@
 
 
     </ul>
-    <!-- #end navigation --> 
+    <!-- #end navigation -->
   </nav>
-  
+
 </aside>
-<!-- #end main-navigation --> 
+<!-- #end main-navigation -->

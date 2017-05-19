@@ -25,12 +25,12 @@
 
     <div class="form-container">
         <!--Welcome/register  onkeyup="checkEmail(this.value)"-->
-       
+
     <?php echo form_open('Welcome/register','method="post" id="register_form" class="form-horizontal"')?>
           <div class="form-group">
             <select class="form-control" name="usertype"  id="usertype">
                 <option value="">Please Select Your Role</option>
-                <?php foreach($roles as $row) { if($row->enable == 1) { 
+                <?php foreach($roles as $row) { if($row->enable == 1) {
                     if($row->role_id == $this->input->post('usertype')){
                         $selected = " selected=selected ";
                     } else {
@@ -42,13 +42,13 @@
               <?php } ?>
             </select>
           </div>
-		  
-		  
+
+
 		  <div class="form-group">
             <input type="hidden" value="" name="token" />
             <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" value="<?php echo set_value('name'); ?>"/>
           </div>
-        
+
           <div class="form-group">
             <input type="hidden" value="" name="token" />
             <input type="email" class="form-control" name="email" id="email" placeholder="Email Id" value="<?php echo set_value('email'); ?>"/>
@@ -65,8 +65,8 @@
           <div class="form-group">
             <select class="form-control" name="country" id="ccountry" onChange="getStates(this.value)">
                 <option value="" selected="selected">Please Select Your Country</option>
-                <?php foreach($country as $c) { if($c->Country_Code == IN) { 
-                    
+                <?php foreach($country as $c) { if($c->Country_Code == IN) {
+
                         if($c->Country_Code == $this->input->post('country')){
                         $selected = " selected=selected ";
                         } else {
@@ -103,15 +103,15 @@
           <!-- <div class="form-group">
             <input type="text" class="form-control num_only" name="postal_code" placeholder="Zip-code" required/>
           </div> -->
-		  
-		  
-		  
-           
+
+
+
+
             <input type="hidden" class="form-control" name="promo_code" id="promo_code" placeholder="Promo Code" value=""/>
-      
-		  
-		  
-		  
+
+            <input type="hidden" name="smd_id" value="<? echo ($this->input->post())? set_value('smd_id'): $smd_user_id ?>"/>
+
+
           <div class="form-group mt10">
             <div class="ui-checkbox ui-checkbox-primary text-left">
               <label>
@@ -125,7 +125,7 @@
           </form>
         </div>
   </div>
-  <!-- #end signin-container --> 
+  <!-- #end signin-container -->
 </div>
 <script>
 $(document).ready(function(){
@@ -134,8 +134,8 @@ $(document).ready(function(){
 	  details: "form",
 	  types: ["geocode", "establishment"],
 	});
-        
-        
+
+
         $("#register_form").validate({
                     rules: {
                             //usertype: {required: {depends: function(element) {return $("#usertype").val() == '';}}},
@@ -150,7 +150,7 @@ $(document).ready(function(){
                             district:{required:true},
                             city:{required:true},
                             agree:"required"
-                          
+
                             },
                     messages: {
 							usertype:{required:"Please enter your full name "},
@@ -164,17 +164,17 @@ $(document).ready(function(){
                             district:{required: "Please select district"},
                             city:{required: "Please select city"},
                             agree: "Please accept our policy"
-                            
+
                             },
-                            
+
                 submitHandler: function(form) {
                     form.submit();
                 }
-                        
-                            
+
+
         });
-        
-        
+
+
 });
 
 function getStates(id) {

@@ -13,11 +13,11 @@ class Welcome extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('Category_model', 'Cat', TRUE );
 		$this->load->model('users_model', 'users', TRUE );
-        //$this->load->library('Busses');		
+        //$this->load->library('Busses');
 	}
-	
+
 	/**
-	
+
 	//require_once '/hello.php';
 //include_once 'seatseller/index.php';
 //include_once '/seatseller/BuServiceList.php';
@@ -37,16 +37,16 @@ class Welcome extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index() {
-        //$this->myclass->hello();   
+        //$this->myclass->hello();
         //sayHello();
 		//echo "Welcome";
-		
+
 			$data['offers'] = $this->users->getoffers();
 		$data['offerswallet'] = $this->users->getofferswallet();
-		
-				
-				
-				
+
+
+
+
 				// print_r($usertypes);
 				$role_id = $this->session->userdata('role_id');
 				if($this->session->userdata('user_id') && $role_id ==4  )
@@ -61,12 +61,12 @@ class Welcome extends CI_Controller {
 					{
 						$role_id =44;
 					}
-				}		
+				}
 		$data['offers'] = $this->users->getalloffers($role_id);
 		$data["offerswallet"] = $this->users->getallofferswallet($role_id);
-		
-		
-		
+
+
+
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
 		$data['folder'] ='';
@@ -104,14 +104,14 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules('agree', 'agree', 'trim|required');
 		$usertype = $this->input->post('usertype');
 		if($this->form_validation->run() == FALSE) {
-                    
+
                                             $data['category'] = $this->Cat->get_category();
                                             $data['roles'] = $this->users->get_roles();
                                             $data['country'] = $this->users->get_country();
                                             $this->load->view('website_template/header', $data);
                                             $this->load->view('website/user/register', $data);
                                             $this->load->view('website_template/footer');
-			
+
 		} else {
 			//Channel Partner register here
 			if($usertype == 2) {
@@ -119,7 +119,7 @@ class Welcome extends CI_Controller {
                             $state=$this->input->post('state');
                             $district = $this->input->post('district');
                             $checkuser=$this->users->check_channelpatner_exists($state,$district);
-                            
+
                             if($checkuser->num_rows() > 0){
                                 $this->session->set_flashdata('msg', 'Channel Partner already exists with this district. Please try to add with different district.');
                                 redirect('Welcome/signup');
@@ -132,7 +132,7 @@ class Welcome extends CI_Controller {
                                    redirect('Welcome/signup');
 				}
                             }
-				
+
 			}
 			//Service Provider register here
 			if($usertype == 3) {
@@ -143,9 +143,9 @@ class Welcome extends CI_Controller {
 				$userrole = $this->session->userdata('usertype');
 				$this->users->addRoleBased($getchannel);
 				$chrole = $this->users->getChannelRole($getchannel);
-				
-                                     
-                                     
+
+
+
                                 if($this->users->create_service($chrole)) {
                                     $this->session->set_flashdata('msg', 'Registration Successfull Please Login');
                                      redirect('login');
@@ -153,7 +153,7 @@ class Welcome extends CI_Controller {
 					$this->session->set_flashdata('msg', 'Registration Failed.');
                                         redirect('Welcome/signup');
 				}
-                                     
+
 				/*if($this->users->create_service($chrole)) {
 					if(!$this->input->is_ajax_request()) {
 						$data['category'] = $this->Cat->get_category();
@@ -175,7 +175,7 @@ class Welcome extends CI_Controller {
 			//Normal user register here
 			if($usertype == 4) {
                                 $pincode = $this->input->post('city');
-				$country=$this->input->post('country');
+								$country=$this->input->post('country');
                                 $state=$this->input->post('state');
                                 $district = $this->input->post('district');
                                 $checkuser=$this->users->check_channelpatner_exists($state,$district);
@@ -185,27 +185,33 @@ class Welcome extends CI_Controller {
                                 }else{
                                     $chp_id='0';
                                 }
-                                
+
                             $this->users->create_normaluser($chp_id);
                             $this->session->set_flashdata('msg', 'Registration Successfull Please Login');
                             redirect('login');
 			}
-                        
-                        
+
+			//SMD User Register here
+			if($usertype == 5) {
+				$txnid = $this->users->create_smd();
+				$this->session->set_flashdata('msg', 'Registration Successfull Please Login');
+				redirect('login');
+			}
+
 			//Agent Register here
 			if($usertype == 6) {
 				$pincode = $this->input->post('city');
 				$country=$this->input->post('country');
-                                $state=$this->input->post('state');
-                                $district = $this->input->post('district');
-                                $checkuser=$this->users->check_channelpatner_exists($state,$district);
-                                if($checkuser->num_rows() > 0){
-                                    $ch_data=$checkuser->row();
-                                    $chp_id=$ch_data->user_id;
-                                }else{
-                                    $chp_id='0';
-                                }
-                                
+				$state=$this->input->post('state');
+				$district = $this->input->post('district');
+				$checkuser=$this->users->check_channelpatner_exists($state,$district);
+				if($checkuser->num_rows() > 0){
+					$ch_data=$checkuser->row();
+					$chp_id=$ch_data->user_id;
+				}else{
+					$chp_id='0';
+				}
+
                                 /*if($this->users->create_agent($chp_id)) {
                                         $this->session->set_flashdata('msg', 'Agent Registered Successfully Please wait for channel partner approval');
                                         redirect('login');
@@ -213,26 +219,26 @@ class Welcome extends CI_Controller {
                                         $this->session->set_flashdata('msg', 'Failed to register the agent.Please retry.');
                                          redirect('Welcome/signup');
                                     }*/
-                                 $txnid = $this->users->create_agent($chp_id);
-                                if(!empty($txnid)) {										
-                                        $this->session->set_flashdata('msg', 'You have successfully Registered as Agent. Please select below option for subscription');
-                                       // redirect('login');
-									    redirect('Welcome/agentsubscription?txnid='.$txnid);
-                                    }else{
-                                        //$this->session->set_flashdata('msg', 'Failed to register the agent.Please retry.');
-                                         //redirect('Welcome/signup');
-										$this->session->set_flashdata('msg', 'You have successfully Registered as Agent. Please wait for Admin Approval');
-										redirect('login');
-                                    }   
-                                    		
+				$txnid = $this->users->create_agent($chp_id);
+				if(!empty($txnid)) {
+						$this->session->set_flashdata('msg', 'You have successfully Registered as Agent. Please select below option for subscription');
+					   // redirect('login');
+						redirect('Welcome/agentsubscription?txnid='.$txnid);
+					}else{
+						//$this->session->set_flashdata('msg', 'Failed to register the agent.Please retry.');
+						 //redirect('Welcome/signup');
+						$this->session->set_flashdata('msg', 'You have successfully Registered as Agent. Please wait for Admin Approval');
+						redirect('login');
+					}
+
                                /*
                                 * $getdist = $this->users->getDistrictPin($pincode);
                                 $getchannel = $this->users->getAgentChannelRole($getdist);
                                 *  if($getchannel){
-                                    
+
                                     $dpin = $this->users->getdpin($getchannel);
                                     $userrole = $this->input->post('usertype');
-                                    
+
                                 if($dpin){
                                         //Inserting Agent related channel partner id and pincode into agent table
                                     foreach ($getchannel as $gch) {
@@ -266,14 +272,14 @@ class Welcome extends CI_Controller {
                                     }
                                 }else{
                                           $this->session->set_flashdata('msg', 'Sry');
-                                          redirect('Welcome/signup');          
+                                          redirect('Welcome/signup');
                                 }
-             
+
                 }else{
                     $this->session->set_flashdata('msg', 'Sorry!!! no channel partners are avialable for this district,Please try with another district.');
                     redirect('Welcome/signup');
                 }*/
-				
+
 				/*if($this->users->create_agent($datar)) {
                                        // redirect('login');
 					if(!$this->input->is_ajax_request()) {
@@ -339,7 +345,7 @@ class Welcome extends CI_Controller {
 				$this->users->addRoleBased($getchannel);
 				$chrole = $this->users->getChannelRole($getchannel);
 				// echo "<pre>"; print_r($chrole); exit;
-                                
+
                                 if($this->users->create_delivery($chrole)) {
 					$this->session->set_flashdata('msg', 'Registraion Successfull Please Login');
                                         redirect('login');
@@ -347,7 +353,7 @@ class Welcome extends CI_Controller {
 					$this->session->set_flashdata('msg', 'User already registered');
                                     redirect('Welcome/signup');
 				}
-                                
+
 				/*if($this->users->create_delivery($chrole)) {
 					if(!$this->input->is_ajax_request()) {
 						$data['category'] = $this->Cat->get_category();
@@ -397,6 +403,14 @@ class Welcome extends CI_Controller {
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
 		$data['country'] = $this->users->get_country();
+		if($this->uri->segment(3))
+		{
+			$is_smd_user = $this->users->isSmdUser($this->uri->segment(3));
+			if($is_smd_user)
+			{
+				$data[ 'smd_user_id' ] = $this->uri->segment( 3 );
+			}
+		}
 		$this->load->view('website_template/header', $data);
 		$this->load->view('website/user/register', $data);
 		$this->load->view('website_template/footer');
@@ -426,22 +440,22 @@ class Welcome extends CI_Controller {
 		$data['folder'] ='';
 		$data['body'] = 'index';
                 if(!$this->input->is_ajax_request()) {
-                   
+
                     $this->load->view('website_template/header', $data);
                     $this->load->view('website/recharge/index', $data);
                     $this->load->view('website_template/footer');
                 }else{
                     $this->load->view('website/recharge/index', $data);
-                    
+
                 }
-		
+
 	}
 
-	public function buses() {	
+	public function buses() {
 		$this->session->unset_userdata('busSearchResult');
-		
+
 		$data['cities'] =  getSourcesAsDropDownList();
-		
+
 		//$data['cities'] = $this->busses->citieslist();
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
@@ -510,8 +524,8 @@ class Welcome extends CI_Controller {
 		$data['folder'] ='';
 		$data['body'] = 'index';
 		$this->load->view('website/services/index', $data);
-		
-		
+
+
 	}
 public function e_com() {
 		$data['category'] = $this->Cat->get_category();
@@ -520,16 +534,16 @@ public function e_com() {
 		$data['body'] = 'index';
 		$this->load->view('website/e_com/index', $data);
 	}
-        
+
     public function logout(){
         $this->session->unset_userdata('role_id');
-        $this->session->unset_userdata('email_id');      
+        $this->session->unset_userdata('email_id');
         $this->session->sess_destroy();
         redirect('','refresh');
     }
-    
+
     //Checking Email Exists
-    
+
     public function check_email_role_exists($password) {
         $email = $this->input->post('email');
         $role_id = $this->input->post('usertype');
@@ -540,7 +554,7 @@ public function e_com() {
                 $this->form_validation->set_message('check_email_role_exists', 'Email Id already exists with this role.');
 		return false;
             }
-        
+
 	}
 	 public function check_mobile_role_exists($password) {
         $mobile= $this->input->post('mobile');
@@ -552,12 +566,12 @@ public function e_com() {
                 $this->form_validation->set_message('check_mobile_role_exists', 'Mobile number already exists with this role.');
 		return false;
             }
-        
+
 	}
-	
-	
-	
-	
+
+
+
+
 	public function agentsubscription() {
 		$data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
@@ -567,7 +581,7 @@ public function e_com() {
 		$this->load->view('website/user/agentsubscription', $data);
 		$this->load->view('website_template/footer');
 	}
-	
+
 	public function subscriptionaction()
 	{
 		if($_REQUEST["sub_type"] == 1 )
@@ -580,23 +594,22 @@ public function e_com() {
 			$this->session->set_flashdata('msg', 'Registraion Successfull Please Login');
 			redirect('welcome/done');
 		}
-		
+
 	}
-	
+
 	public function done()
 	{
-		
-		$this->session->set_flashdata('msg', 'Registraion Successfull Please wait for Admin Approval');        
+
+		$this->session->set_flashdata('msg', 'Registraion Successfull Please wait for Admin Approval');
 		$this->load->view('website_template/header');
 		$this->load->view('website/user/done');
 		$this->load->view('website_template/footer');
 	}
-	
-										
-    
-     
+
+
+
+
 }
 
 
-  
- 
+

@@ -12,7 +12,7 @@ class Login extends CI_Controller {
 		$this->load->model('Category_model', 'Cat', TRUE );
 		$this->load->model('users_model', 'users', TRUE );
 	}
-	
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -30,7 +30,7 @@ class Login extends CI_Controller {
 	 */
 	public function index() {
            //print_r($this->session->userdata());
-	
+
         $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
 		$this->load->view('website_template/header', $data);
@@ -46,10 +46,10 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
    		$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
    		if($this->form_validation->run() == FALSE) {
-                    
+
 			//Field validation failed.  User redirected to login page
-                           $this->index();     
-		 	
+                           $this->index();
+
 		} else {
                     if($this->session->userdata('login_from')=='recharge'){
                          redirect('recharge/proceed');
@@ -69,14 +69,16 @@ class Login extends CI_Controller {
                             redirect('user/dashboard');
                         }else if($role_id=='6'){
                             redirect('agent/dashboard');
-                        } 
+                        }else if($role_id=='5'){
+                            redirect('smd/dashboard');
+                        }
                     }
-			
+
 		}
 	}
-        
+
         public function check_database($password) {
-			
+
 		$username = $this->input->post('username');
 		//$usertype = $this->input->post('usertype');
 		// $result = $this->admin->login_validate($username, $password);
@@ -84,34 +86,34 @@ class Login extends CI_Controller {
 		$this->db->where('status','1');
 		$this->db->where('email_id', $username);
 		//$this->db->or_where('mobile', $username);
-        $this->db->where('password', md5($password));       
-        
+        $this->db->where('password', md5($password));
+
         // Run the query
         $query = $this->db->get('users');
 		 if($query->num_rows()>0) {
 		 }
 		 else
 		 {
-			$this->db->where('status','1');		
+			$this->db->where('status','1');
 			$this->db->where('mobile', $username);
 			$this->db->where('password', md5($password));
-			$query = $this->db->get('users');			 
-		 }		
-		
-        
+			$query = $this->db->get('users');
+		 }
+
+
         // Run the query
         //$query = $this->db->get('users');
-		
+
 		//echo $this->db->last_query();;
-		
+
 		//var_dump($query);
 		//exit('123Here');
-        
+
         // Let's check if there are any results
         if($query->num_rows()>0) {
             // If there is a user, then create session data
             $row = $query->row();
-           // echo "<pre>"; print_r($row); exit;		
+           // echo "<pre>"; print_r($row); exit;
             $data = array(
                     'user_id' => $row->user_id,
                     'name' => $row->name,
@@ -124,7 +126,7 @@ class Login extends CI_Controller {
                     );
             $this->session->set_userdata($data);
             return true;
-			
+
         }
         // If the previous process did not validate
         // then return false.
@@ -132,18 +134,17 @@ class Login extends CI_Controller {
         return false;
 	}
 
-        
+
         function dashboard(){
             $data['category'] = $this->Cat->get_category();
 		$data['roles'] = $this->users->get_roles();
                 $this->load->view('website_template/header', $data);
 		$this->load->view('website/user/dashboard');
 		$this->load->view('website_template/footer');
-            
+
         }
-        
+
 }
 
 
-  
- 
+
