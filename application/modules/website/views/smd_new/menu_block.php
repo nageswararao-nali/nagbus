@@ -283,11 +283,11 @@ else
       <a href="<?php echo base_url('smd/offers')?>" type="button"  class="btn btn-purple btn-xs mt15 waves-effect"><img src="http://laabus.com/images/star4_e0.gif"> Offers</a>
     </div>
   </div>
-  <!--<div class="col-md-2 text-center">
+  <div class="col-md-2 text-center">
     <div class="panel mb20 panel-default panel-hovered"> <i class="ion ion-ios-chatboxes-outline text-purple"></i> <strong></strong><br/>
-      <a href="<?php /*echo base_url('smd/promotions')*/?>" type="button"  class="btn btn-purple btn-xs mt15 waves-effect"><img src="http://laabus.com/images/star4_e0.gif"> Promotions</a>
+      <a href="<?php echo base_url('smd/promotions')?>" type="button"  class="btn btn-purple btn-xs mt15 waves-effect"><img src="http://laabus.com/images/star4_e0.gif"> Promotions</a>
     </div>
-  </div>-->
+  </div>
 </div>
 
 <script>
